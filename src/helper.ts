@@ -1,4 +1,7 @@
-import { Chicken } from './sprites/Chicken';
+import { CategoryModel, ItemModel } from './model/Item.model';
+import { Chicken } from './services/Chicken';
+import GIFT_BOX01 from '/images/gift-box01.png';
+
 import {
   BRICK_IMAGES,
   LEVEL,
@@ -9,6 +12,10 @@ import {
   BRICK_PADDING,
   BRICK_ENERGY
 } from './setup';
+import { ItemSupport } from './services/Item';
+import { Vector } from './types';
+import { Context } from './strategy/context';
+import { FireStrategy } from './strategy/FireStrategy';
 
 export function createChickens(): Chicken[] {
   return LEVEL.reduce((ack, element, i) => {
@@ -31,4 +38,58 @@ export function createChickens(): Chicken[] {
       )
     ];
   }, [] as Chicken[]);
+}
+
+export function getRandomInt(max: number) {
+  return Math.floor(Math.random() * max);
+}
+export function listCategoryItem(): CategoryModel[] {
+
+  let categorys: CategoryModel[] = [];
+  const category1: CategoryModel = {Id: 1, Name: "FireBullets", Type: "bullet"};
+  const category2: CategoryModel = {Id: 2, Name: "IceBullets", Type: "bullet"};
+  const category3: CategoryModel = {Id: 3, Name: "LightBullets", Type: "bullet"};
+  const category4: CategoryModel = {Id: 4, Name: "LeafBullets", Type: "bullet"};
+  const category5: CategoryModel = {Id: 5, Name: "WaterBullets", Type: "bullet"};
+
+  const category6: CategoryModel = {Id: 6, Name: "ChickenThighsSmall", Type: "meat"};
+  const category7: CategoryModel = {Id: 7, Name: "ChickenThighsMedium", Type: "meat"};
+  const category8: CategoryModel = {Id: 8, Name: "ChickenThighsLarge", Type: "meat"};
+
+  const category9: CategoryModel = {Id: 9, Name: "Heart", Type: "level"};
+  const category10: CategoryModel = {Id: 10, Name: "Money", Type: "money"};
+
+  categorys.push(category1);
+  categorys.push(category2);
+  categorys.push(category3);
+  categorys.push(category4);
+  categorys.push(category5);
+  categorys.push(category6);
+  categorys.push(category7);
+  categorys.push(category8);
+  categorys.push(category9);
+  categorys.push(category10);
+
+  return categorys;
+
+}
+
+export function getItemSupport(posX: number, posY: number): ItemSupport {
+  const categorys = listCategoryItem();
+  const randomNumber = getRandomInt(5);
+
+  const vector: Vector = {x: posX, y: posY}
+  const model: ItemModel = {
+    speed: 1,
+    size: 50, 
+    image: GIFT_BOX01,
+    type: categorys[randomNumber]
+  }
+
+  let item: any;
+  if(randomNumber === 1) {
+    const context = new Context(new FireStrategy());
+    item = context.doBusinessLogicItem(model, vector);
+  }
+  return item;
 }

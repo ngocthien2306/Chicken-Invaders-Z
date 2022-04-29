@@ -1,11 +1,14 @@
 
 import { BulletModel } from "~/model/Bullet.model";
-import { Bullet } from "~/sprites/Bullet";
-import { StarShip } from "~/sprites/StarShip";
+import { ItemModel } from "~/model/Item.model";
+import { Bullet } from "~/services/Bullet";
+import { ItemSupport } from "~/services/Item";
+import { StarShip } from "~/services/StarShip";
 import { Vector } from "~/types";
 
 export interface Strategy {
-  doDamage(data: BulletModel, pos: Vector): Bullet;
+  doChangeInfoBullet(data: BulletModel, pos: Vector): Bullet;
+  doChangeTypeItem(data: ItemModel, pos: Vector): ItemSupport;
 }
 export class Context {
 
@@ -23,8 +26,11 @@ export class Context {
 
 
   public doBusinessLogicBullet(data: BulletModel, pos: Vector): Bullet {
-
-    return this.strategy.doDamage(data, pos);
-
+    return this.strategy.doChangeInfoBullet(data, pos);
   }
+
+  doBusinessLogicItem(data: ItemModel, pos: Vector): ItemSupport {
+    return this.strategy.doChangeTypeItem(data, pos);
+  }
+
 }

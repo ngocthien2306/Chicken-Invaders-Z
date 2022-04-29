@@ -1,6 +1,7 @@
-import { Chicken } from "~/sprites/Chicken";
-import { Bullet } from "~/sprites/Bullet";
-import { StarShip } from "~/sprites/StarShip";
+import { Chicken } from "~/services/Chicken";
+import { Bullet } from "~/services/Bullet";
+import { StarShip } from "~/services/StarShip";
+import { ItemSupport } from "~/services/Item";
 
 export class CanvasView {
   canvas: HTMLCanvasElement;
@@ -32,7 +33,7 @@ export class CanvasView {
     if(this.info) this.info.innerHTML = txt;
   }
 
-  drawSprite(frame: Chicken | StarShip | Bullet): void {
+  drawSprite(frame: Chicken | StarShip | Bullet | ItemSupport): void {
     if(!frame) return;
     this.context?.drawImage(
       frame.image,

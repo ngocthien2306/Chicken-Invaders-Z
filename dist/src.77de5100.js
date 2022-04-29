@@ -265,9 +265,38 @@ var LEVEL = [0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2
 // ];
 
 exports.LEVEL = LEVEL;
-},{"./images/chicken_red.png":"images/chicken_red.png","./images/chicken_blue.png":"images/chicken_blue.png"}],"images/ball.png":[function(require,module,exports) {
-module.exports = "/ball.96931fde.png";
-},{}],"sprites/Bullet.ts":[function(require,module,exports) {
+},{"./images/chicken_red.png":"images/chicken_red.png","./images/chicken_blue.png":"images/chicken_blue.png"}],"strategy/context.ts":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Context = void 0;
+
+var Context =
+/** @class */
+function () {
+  function Context(strategy) {
+    this.strategy = strategy;
+  }
+
+  Context.prototype.setStrategy = function (strategy) {
+    this.strategy = strategy;
+  };
+
+  Context.prototype.doBusinessLogicBullet = function (data, pos) {
+    return this.strategy.doChangeInfoBullet(data, pos);
+  };
+
+  Context.prototype.doBusinessLogicItem = function (data, pos) {
+    return this.strategy.doChangeTypeItem(data, pos);
+  };
+
+  return Context;
+}();
+
+exports.Context = Context;
+},{}],"services/Bullet.ts":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -275,49 +304,35 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Bullet = void 0;
 
-var _setup = require("~/setup");
-
-var _ball = _interopRequireDefault(require("/images/ball.png"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 var Bullet =
 /** @class */
 function () {
-  function Bullet(speed, ballSize, position, image, damage) {
-    var _this = this;
-
-    this.ballSize = ballSize;
+  function Bullet(speed, bulletSize, position, image, damage) {
+    this.bulletSize = bulletSize;
     this.position = position;
-    this.ballImage = new Image();
-
-    this.handleKeySpace = function (e) {
-      if (e.code === 'a' || e.key === 'a') _this.shoting = true;
-    };
-
-    this.ballSize = ballSize;
+    this.bulletImage = new Image();
+    this.bulletSize = bulletSize;
     this.position = position;
     this.speed = {
       x: speed,
       y: -speed
     };
-    this.ballImage.src = image;
+    this.bulletImage.src = image;
     this.shoting = false;
-    this.damage = damage;
-    document.addEventListener('keydown', this.handleKeySpace);
+    this.damage = damage; //document.addEventListener('keydown', this.handleKeySpace);
   }
 
   Object.defineProperty(Bullet.prototype, "width", {
     // Getters
     get: function get() {
-      return this.ballSize;
+      return this.bulletSize;
     },
     enumerable: false,
     configurable: true
   });
   Object.defineProperty(Bullet.prototype, "height", {
     get: function get() {
-      return this.ballSize;
+      return this.bulletSize;
     },
     enumerable: false,
     configurable: true
@@ -338,7 +353,7 @@ function () {
   });
   Object.defineProperty(Bullet.prototype, "image", {
     get: function get() {
-      return this.ballImage;
+      return this.bulletImage;
     },
     enumerable: false,
     configurable: true
@@ -356,8 +371,8 @@ function () {
   };
 
   Bullet.prototype.changeYODirection = function () {
-    this.pos.y = -10;
-    this.pos.x = -10;
+    this.pos.y = -20;
+    this.pos.x = -20;
   };
 
   Bullet.prototype.changeXDirection = function () {
@@ -373,67 +388,125 @@ function () {
     this.pos.x = 0;
   };
 
-  Bullet.prototype.drawBullet = function () {
-    var bullet = new Bullet(_setup.BALL_SPEED, _setup.BALL_SIZE, {
-      x: _setup.BALL_STARTX,
-      y: _setup.BALL_STARTY
-    }, _ball.default, 2);
-  };
-
   return Bullet;
 }();
 
 exports.Bullet = Bullet;
-},{"~/setup":"setup.ts","/images/ball.png":"images/ball.png"}],"strategy/context.ts":[function(require,module,exports) {
+},{}],"services/Item.ts":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Context = void 0;
+exports.ItemSupport = void 0;
 
-var Context =
+var ItemSupport =
 /** @class */
 function () {
-  function Context(strategy) {
-    this.strategy = strategy;
+  function ItemSupport(speed, itemSize, position, image, typeItem) {
+    this.itemSize = itemSize;
+    this.position = position;
+    this.itemImage = new Image();
+    this.itemSize = itemSize;
+    this.position = position;
+    this.speed = {
+      x: speed,
+      y: -speed
+    };
+    this.itemImage.src = image;
+    this.typeItem = typeItem;
   }
 
-  Context.prototype.setStrategy = function (strategy) {
-    this.strategy = strategy;
+  Object.defineProperty(ItemSupport.prototype, "typeGift", {
+    get: function get() {
+      return this.typeItem;
+    },
+    enumerable: false,
+    configurable: true
+  });
+  Object.defineProperty(ItemSupport.prototype, "width", {
+    get: function get() {
+      return this.itemSize;
+    },
+    enumerable: false,
+    configurable: true
+  });
+  Object.defineProperty(ItemSupport.prototype, "height", {
+    get: function get() {
+      return this.itemSize;
+    },
+    enumerable: false,
+    configurable: true
+  });
+  Object.defineProperty(ItemSupport.prototype, "pos", {
+    get: function get() {
+      return this.position;
+    },
+    enumerable: false,
+    configurable: true
+  });
+  Object.defineProperty(ItemSupport.prototype, "image", {
+    get: function get() {
+      return this.itemImage;
+    },
+    enumerable: false,
+    configurable: true
+  });
+
+  ItemSupport.prototype.changeYDirection = function () {
+    this.speed.y = -this.speed.y;
   };
 
-  Context.prototype.doBusinessLogicBullet = function (data, pos) {
-    return this.strategy.doDamage(data, pos);
+  ItemSupport.prototype.changeXDirection = function () {
+    this.speed.x = -this.speed.x;
   };
 
-  return Context;
+  ItemSupport.prototype.changeDirectionWhenConfict = function () {
+    this.pos.y = -100;
+    this.pos.x = -100;
+  };
+
+  ItemSupport.prototype.moveItemSupport = function () {
+    //console.log(this.pos.x, this.pos.y);
+    //this.pos.x += this.speed.x;
+    this.pos.y -= this.speed.y;
+  };
+
+  return ItemSupport;
 }();
 
-exports.Context = Context;
-},{}],"strategy/FireBulletStrategy.ts":[function(require,module,exports) {
+exports.ItemSupport = ItemSupport;
+},{}],"images/gift-box01.png":[function(require,module,exports) {
+module.exports = "/gift-box01.a43581b7.png";
+},{}],"strategy/FireStrategy.ts":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.FireBulletStrategy = void 0;
+exports.FireStrategy = void 0;
 
 var _setup = require("~/setup");
 
-var _Bullet = require("~/sprites/Bullet");
+var _Bullet = require("~/services/Bullet");
 
-var FireBulletStrategy =
+var _Item = require("~/services/Item");
+
+var _giftBox = _interopRequireDefault(require("/images/gift-box01.png"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var FireStrategy =
 /** @class */
 function () {
-  function FireBulletStrategy() {}
+  function FireStrategy() {}
 
-  FireBulletStrategy.prototype.doDamage = function (data, pos) {
+  FireStrategy.prototype.doChangeInfoBullet = function (data, pos) {
     var fireBullet = {
-      speed: data.speed + 15,
-      size: data.size - 5,
+      speed: data.speed - 4,
+      size: data.size + 5,
       image: data.image,
-      damage: data.damage + 1
+      damage: data.damage + 3
     };
     var bullet = new _Bullet.Bullet(fireBullet.speed, fireBullet.size, {
       x: pos.x + (_setup.PADDLE_WIDTH / 2 - fireBullet.size / 2),
@@ -442,11 +515,82 @@ function () {
     return bullet;
   };
 
-  return FireBulletStrategy;
+  FireStrategy.prototype.doChangeTypeItem = function (data, pos) {
+    var fireItem = {
+      speed: data.speed,
+      size: data.size,
+      image: _giftBox.default,
+      type: data.type
+    };
+    var item = new _Item.ItemSupport(fireItem.speed, fireItem.size, {
+      x: pos.x,
+      y: pos.y
+    }, fireItem.image, fireItem.type.Id);
+    return item;
+  };
+
+  return FireStrategy;
 }();
 
-exports.FireBulletStrategy = FireBulletStrategy;
-},{"~/setup":"setup.ts","~/sprites/Bullet":"sprites/Bullet.ts"}],"sprites/StarShip.ts":[function(require,module,exports) {
+exports.FireStrategy = FireStrategy;
+},{"~/setup":"setup.ts","~/services/Bullet":"services/Bullet.ts","~/services/Item":"services/Item.ts","/images/gift-box01.png":"images/gift-box01.png"}],"strategy/IceStrategy.ts":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.IceStrategy = void 0;
+
+var _setup = require("~/setup");
+
+var _Bullet = require("~/services/Bullet");
+
+var _Item = require("~/services/Item");
+
+var _giftBox = _interopRequireDefault(require("/images/gift-box01.png"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var IceStrategy =
+/** @class */
+function () {
+  function IceStrategy() {}
+
+  IceStrategy.prototype.doChangeInfoBullet = function (data, pos) {
+    var iceBullet = {
+      speed: data.speed + 10,
+      size: data.size,
+      image: data.image,
+      damage: data.damage + 1
+    };
+    var bullet = new _Bullet.Bullet(iceBullet.speed, iceBullet.size, {
+      x: pos.x + (_setup.PADDLE_WIDTH / 2 - iceBullet.size / 2),
+      y: pos.y
+    }, iceBullet.image, iceBullet.damage);
+    return bullet;
+  };
+
+  IceStrategy.prototype.doChangeTypeItem = function (data, pos) {
+    var fireItem = {
+      speed: data.speed,
+      size: data.size,
+      image: _giftBox.default,
+      type: data.type
+    };
+    var item = new _Item.ItemSupport(fireItem.speed, fireItem.size, {
+      x: pos.x,
+      y: pos.y
+    }, fireItem.image, fireItem.type.Id);
+    return item;
+  };
+
+  return IceStrategy;
+}();
+
+exports.IceStrategy = IceStrategy;
+},{"~/setup":"setup.ts","~/services/Bullet":"services/Bullet.ts","~/services/Item":"services/Item.ts","/images/gift-box01.png":"images/gift-box01.png"}],"images/ball.png":[function(require,module,exports) {
+module.exports = "/ball.96931fde.png";
+},{}],"services/StarShip.ts":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -458,7 +602,9 @@ var _setup = require("~/setup");
 
 var _context = require("~/strategy/context");
 
-var _FireBulletStrategy = require("~/strategy/FireBulletStrategy");
+var _FireStrategy = require("~/strategy/FireStrategy");
+
+var _IceStrategy = require("~/strategy/IceStrategy");
 
 var _ball = _interopRequireDefault(require("/images/ball.png"));
 
@@ -467,7 +613,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var StarShip =
 /** @class */
 function () {
-  function StarShip(speed, paddleWidth, paddleHeight, position, image) {
+  function StarShip(speed, paddleWidth, paddleHeight, position, image, level, typeBullet) {
     var _this = this;
 
     this.speed = speed;
@@ -542,7 +688,9 @@ function () {
     this.moveDown = false;
     this.moveUp = false;
     this.shooting = false;
-    this.paddleImage.src = image; // Event Listeners
+    this.paddleImage.src = image;
+    this.level = level;
+    this.typeBullet = typeBullet; // Event Listeners
 
     document.addEventListener('keydown', this.handleKeyRight);
     document.addEventListener('keyup', this.handleKeyLeft);
@@ -566,6 +714,13 @@ function () {
   Object.defineProperty(StarShip.prototype, "pos", {
     get: function get() {
       return this.position;
+    },
+    enumerable: false,
+    configurable: true
+  });
+  Object.defineProperty(StarShip.prototype, "typeOfBullet", {
+    get: function get() {
+      return this.typeBullet;
     },
     enumerable: false,
     configurable: true
@@ -594,6 +749,13 @@ function () {
   Object.defineProperty(StarShip.prototype, "isShooting", {
     get: function get() {
       return this.moveRight;
+    },
+    enumerable: false,
+    configurable: true
+  });
+  Object.defineProperty(StarShip.prototype, "heart", {
+    get: function get() {
+      return this.level;
     },
     enumerable: false,
     configurable: true
@@ -627,102 +789,30 @@ function () {
       image: _ball.default,
       damage: 1
     };
-    var context = new _context.Context(new _FireBulletStrategy.FireBulletStrategy());
     var bullet;
     var pos = {
       x: this.pos.x,
       y: this.pos.y
     };
 
-    if (true) {
+    if (this.typeOfBullet === 1) {
+      var context = new _context.Context(new _FireStrategy.FireStrategy());
       bullet = context.doBusinessLogicBullet(bulletModel, pos);
-    }
+    } else if (this.typeOfBullet === 2) {
+      var context = new _context.Context(new _IceStrategy.IceStrategy());
+      bullet = context.doBusinessLogicBullet(bulletModel, pos);
+    } //console.log(this.typeOfBullet);
+
 
     this.bullets.push(bullet);
+    return this.bullets;
   };
 
   return StarShip;
 }();
 
 exports.StarShip = StarShip;
-},{"~/setup":"setup.ts","~/strategy/context":"strategy/context.ts","~/strategy/FireBulletStrategy":"strategy/FireBulletStrategy.ts","/images/ball.png":"images/ball.png"}],"Colision.ts":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Collision = void 0;
-
-var Collision =
-/** @class */
-function () {
-  function Collision() {}
-
-  Collision.prototype.checkBallCollision = function (bullet, starShip, view) {
-    // 1. Check ball collision with paddle
-    if (bullet.pos.x + bullet.width > starShip.pos.x && bullet.pos.x < starShip.pos.x + starShip.width && bullet.pos.y + bullet.height === starShip.pos.y) {
-      bullet.changeYDirection();
-    } // 2. Check ball collision with walls
-    // Ball movement X constraints
-
-
-    if (bullet.pos.x > view.canvas.width - bullet.width || bullet.pos.x < 0) {
-      bullet.changeXDirection();
-    } // Ball movement Y constraints
-
-
-    if (bullet.pos.y < 0) {
-      bullet.changeYDirection();
-    }
-  };
-
-  Collision.prototype.checkStarshipColliding = function (chickens, starShip) {
-    var colliding = false;
-    chickens.forEach(function (chicken, i) {
-      if (starShip.pos.x + starShip.width > chicken.pos.x && starShip.pos.x < chicken.pos.x + chicken.width && starShip.pos.y + starShip.height === chicken.pos.y) {
-        colliding = true;
-      }
-    });
-    return colliding;
-  };
-
-  Collision.prototype.isCollidingChicken = function (bullet, chicken) {
-    if (bullet.pos.x < chicken.pos.x + chicken.width && bullet.pos.x + bullet.width > chicken.pos.x && bullet.pos.y < chicken.pos.y + chicken.height && bullet.pos.y + bullet.height > chicken.pos.y) {
-      return true;
-    }
-
-    return false;
-  }; // Check ball collision with bricks
-
-
-  Collision.prototype.isCollidingChickens = function (bullet, chickens) {
-    var _this = this;
-
-    var colliding = false;
-    chickens.forEach(function (chicken, i) {
-      if (_this.isCollidingChicken(bullet, chicken)) {
-        bullet.changeYODirection(); //console.log(chicken.energy);
-        //chicken.energy -= bullet.damage;
-
-        if (chicken.energy <= 0) {
-          chickens.splice(i, 1);
-        } else {
-          chicken.energy -= bullet.damage;
-        }
-
-        colliding = true;
-      }
-    });
-    return colliding;
-  };
-
-  return Collision;
-}();
-
-exports.Collision = Collision;
-},{}],"images/spaceship.png":[function(require,module,exports) {
-module.exports = "/spaceship.d28724db.png";
-},{}],"sprites/Chicken.ts":[function(require,module,exports) {
+},{"~/setup":"setup.ts","~/strategy/context":"strategy/context.ts","~/strategy/FireStrategy":"strategy/FireStrategy.ts","~/strategy/IceStrategy":"strategy/IceStrategy.ts","/images/ball.png":"images/ball.png"}],"services/Chicken.ts":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -795,10 +885,21 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.createChickens = createChickens;
+exports.getRandomInt = getRandomInt;
+exports.listCategoryItem = listCategoryItem;
+exports.getItemSupport = getItemSupport;
 
-var _Chicken = require("./sprites/Chicken");
+var _Chicken = require("./services/Chicken");
+
+var _giftBox = _interopRequireDefault(require("/images/gift-box01.png"));
 
 var _setup = require("./setup");
+
+var _context = require("./strategy/context");
+
+var _FireStrategy = require("./strategy/FireStrategy");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var __spreadArrays = void 0 && (void 0).__spreadArrays || function () {
   for (var s = 0, i = 0, il = arguments.length; i < il; i++) {
@@ -827,20 +928,225 @@ function createChickens() {
     }, _setup.BRICK_ENERGY[element], _setup.BRICK_IMAGES[element])]);
   }, []);
 }
-},{"./sprites/Chicken":"sprites/Chicken.ts","./setup":"setup.ts"}],"index.ts":[function(require,module,exports) {
+
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
+
+function listCategoryItem() {
+  var categorys = [];
+  var category1 = {
+    Id: 1,
+    Name: "FireBullets",
+    Type: "bullet"
+  };
+  var category2 = {
+    Id: 2,
+    Name: "IceBullets",
+    Type: "bullet"
+  };
+  var category3 = {
+    Id: 3,
+    Name: "LightBullets",
+    Type: "bullet"
+  };
+  var category4 = {
+    Id: 4,
+    Name: "LeafBullets",
+    Type: "bullet"
+  };
+  var category5 = {
+    Id: 5,
+    Name: "WaterBullets",
+    Type: "bullet"
+  };
+  var category6 = {
+    Id: 6,
+    Name: "ChickenThighsSmall",
+    Type: "meat"
+  };
+  var category7 = {
+    Id: 7,
+    Name: "ChickenThighsMedium",
+    Type: "meat"
+  };
+  var category8 = {
+    Id: 8,
+    Name: "ChickenThighsLarge",
+    Type: "meat"
+  };
+  var category9 = {
+    Id: 9,
+    Name: "Heart",
+    Type: "level"
+  };
+  var category10 = {
+    Id: 10,
+    Name: "Money",
+    Type: "money"
+  };
+  categorys.push(category1);
+  categorys.push(category2);
+  categorys.push(category3);
+  categorys.push(category4);
+  categorys.push(category5);
+  categorys.push(category6);
+  categorys.push(category7);
+  categorys.push(category8);
+  categorys.push(category9);
+  categorys.push(category10);
+  return categorys;
+}
+
+function getItemSupport(posX, posY) {
+  var categorys = listCategoryItem();
+  var randomNumber = getRandomInt(5);
+  var vector = {
+    x: posX,
+    y: posY
+  };
+  var model = {
+    speed: 1,
+    size: 50,
+    image: _giftBox.default,
+    type: categorys[randomNumber]
+  };
+  var item;
+
+  if (randomNumber === 1) {
+    var context = new _context.Context(new _FireStrategy.FireStrategy());
+    item = context.doBusinessLogicItem(model, vector);
+  }
+
+  return item;
+}
+},{"./services/Chicken":"services/Chicken.ts","/images/gift-box01.png":"images/gift-box01.png","./setup":"setup.ts","./strategy/context":"strategy/context.ts","./strategy/FireStrategy":"strategy/FireStrategy.ts"}],"Colision.ts":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Collision = void 0;
+
+var _Item = require("./services/Item");
+
+var _giftBox = _interopRequireDefault(require("/images/gift-box01.png"));
+
+var _helper = require("./helper");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Collision =
+/** @class */
+function () {
+  function Collision() {
+    this.gifts = [];
+  }
+
+  Collision.prototype.checkStarshipColliding = function (chickens, starShip) {
+    var colliding = false;
+    chickens.forEach(function (chicken, i) {
+      if (starShip.pos.x + starShip.width > chicken.pos.x && starShip.pos.x < chicken.pos.x + chicken.width && starShip.pos.y + starShip.height === chicken.pos.y) {
+        colliding = true;
+      }
+    });
+    return colliding;
+  };
+
+  Collision.prototype.isCollidingChicken = function (bullet, chicken) {
+    if (bullet.pos.x < chicken.pos.x + chicken.width && bullet.pos.x + bullet.width > chicken.pos.x && bullet.pos.y < chicken.pos.y + chicken.height && bullet.pos.y + bullet.height > chicken.pos.y) {
+      return true;
+    }
+
+    return false;
+  }; // Check ball collision with bricks
+
+
+  Collision.prototype.isCollidingChickens = function (bullet, chickens) {
+    var _this = this;
+
+    var colliding = false;
+    chickens.forEach(function (chicken, i) {
+      if (_this.isCollidingChicken(bullet, chicken)) {
+        bullet.changeYODirection(); //console.log(chicken.energy);
+        //chicken.energy -= bullet.damage;
+
+        if (chicken.energy <= 0) {
+          var randomNumber = (0, _helper.getRandomInt)(10);
+
+          if (randomNumber > 8) {
+            var gift = new _Item.ItemSupport(1, 50, {
+              x: chicken.pos.x,
+              y: chicken.pos.y
+            }, _giftBox.default, 1);
+
+            _this.gifts.push(gift);
+          }
+
+          chickens.splice(i, 1);
+        } else {
+          chicken.energy -= bullet.damage;
+        }
+
+        colliding = true;
+      }
+    });
+    return colliding;
+  };
+
+  Collision.prototype.checkCollidingStarshipWithChicken = function (chicken, starShip) {
+    if (chicken.pos.x + chicken.width > starShip.pos.x && chicken.pos.x < starShip.pos.x + starShip.width && chicken.pos.y < starShip.pos.y + starShip.height && chicken.pos.y + chicken.height > starShip.pos.y) {
+      return true;
+    }
+
+    return false;
+  };
+
+  Collision.prototype.checkCollidingStarshipWithChickens = function (chickens, starShip) {
+    var _this = this;
+
+    var colliding = false;
+    chickens.forEach(function (chicken, i) {
+      if (_this.checkCollidingStarshipWithChicken(chicken, starShip)) {
+        chickens.splice(i, 1);
+
+        if (starShip.heart === 0) {
+          colliding = true;
+        } else {
+          starShip.level -= 1;
+        }
+      }
+    });
+    return colliding;
+  };
+
+  Collision.prototype.checkCollidingItem = function (item, starShip) {
+    var isConflicking = false;
+
+    if (item.pos.x + item.width > starShip.pos.x && item.pos.x < starShip.pos.x + starShip.width && item.pos.y + item.height > starShip.pos.y && item.pos.y < starShip.pos.y + starShip.height) {
+      item.changeDirectionWhenConfict();
+      isConflicking = true;
+    }
+
+    return isConflicking;
+  };
+
+  return Collision;
+}();
+
+exports.Collision = Collision;
+},{"./services/Item":"services/Item.ts","/images/gift-box01.png":"images/gift-box01.png","./helper":"helper.ts"}],"images/spaceship.png":[function(require,module,exports) {
+module.exports = "/spaceship.d28724db.png";
+},{}],"index.ts":[function(require,module,exports) {
 "use strict";
 
 var _CanvasView = require("./view/CanvasView");
 
-var _Bullet = require("./sprites/Bullet");
-
-var _StarShip = require("./sprites/StarShip");
+var _StarShip = require("./services/StarShip");
 
 var _Colision = require("./Colision");
 
 var _spaceship = _interopRequireDefault(require("/images/spaceship.png"));
-
-var _ball = _interopRequireDefault(require("/images/ball.png"));
 
 var _setup = require("./setup");
 
@@ -862,14 +1168,17 @@ function setGameWin(view) {
   view.drawInfo("Game Won!");
 }
 
-function gameLoop(view, chickens, starShip, bullet, conlision) {
+function gameLoop(view, chickens, starShip, conlision) {
   view.clear();
   view.drawChicken(chickens);
-  view.drawSprite(starShip);
+  view.drawSprite(starShip); //view.drawSprite(gift);
 
   if (starShip.isMovingLeft && starShip.pos.x > 0 || starShip.isMovingRight && starShip.pos.x < view.canvas.width - starShip.width || starShip.isMovingDown && starShip.pos.y > 0 || starShip.isMovingUp && starShip.pos.y < view.canvas.height - starShip.height) {
     starShip.moveStarShip();
-  }
+  } // gift.moveItemSupport();
+  // const conflicking = conlision.checkCollidingItem(gift, starShip);
+  //if(conflicking) starShip.typeBullet = 2;
+
 
   starShip.bullets.forEach(function (b) {
     view.drawSprite(b);
@@ -881,10 +1190,17 @@ function gameLoop(view, chickens, starShip, bullet, conlision) {
       view.drawScore(score);
     }
   });
+  conlision.gifts.forEach(function (g) {
+    view.drawSprite(g);
+    g.moveItemSupport();
+    var conflicking = conlision.checkCollidingItem(g, starShip);
+    if (conflicking) starShip.typeBullet = 2;
+  });
+  if (conlision.checkCollidingStarshipWithChickens(chickens, starShip)) return setGameOver(view);
   if (chickens.length === 0) return setGameWin(view);
   if (gameOver) return setGameOver(view);
   requestAnimationFrame(function () {
-    return gameLoop(view, chickens, starShip, bullet, conlision);
+    return gameLoop(view, chickens, starShip, conlision);
   });
 }
 
@@ -893,22 +1209,19 @@ function startGame(view) {
   view.drawInfo('');
   view.drawScore(0);
   var collision = new _Colision.Collision();
-  var chickens = (0, _helper.createChickens)();
-  var bullet = new _Bullet.Bullet(_setup.BALL_SPEED, _setup.BALL_SIZE, {
-    x: _setup.BALL_STARTX,
-    y: _setup.BALL_STARTY
-  }, _ball.default, 2);
-  console.log(chickens);
-  var paddle = new _StarShip.StarShip(_setup.PADDLE_SPEED, _setup.PADDLE_WIDTH, _setup.PADDLE_HEIGHT, {
+  var chickens = (0, _helper.createChickens)(); //const bullet = new Bullet(BALL_SPEED, BALL_SIZE, {x: BALL_STARTX, y: BALL_STARTY}, BULLET_IMAGE, 2)
+  //const gift = new ItemSupport(1, 50, {x: 300, y: 0}, GIFT_BOX01, 1);
+
+  var startShip = new _StarShip.StarShip(_setup.PADDLE_SPEED, _setup.PADDLE_WIDTH, _setup.PADDLE_HEIGHT, {
     x: _setup.PADDLE_STARTX,
     y: view.canvas.height - _setup.PADDLE_HEIGHT - 5
-  }, _spaceship.default);
-  gameLoop(view, chickens, paddle, bullet, collision);
+  }, _spaceship.default, 3, 1);
+  gameLoop(view, chickens, startShip, collision);
 }
 
 var view = new _CanvasView.CanvasView("#playField");
 view.initStartButton(startGame);
-},{"./view/CanvasView":"view/CanvasView.ts","./sprites/Bullet":"sprites/Bullet.ts","./sprites/StarShip":"sprites/StarShip.ts","./Colision":"Colision.ts","/images/spaceship.png":"images/spaceship.png","/images/ball.png":"images/ball.png","./setup":"setup.ts","./helper":"helper.ts"}],"../node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./view/CanvasView":"view/CanvasView.ts","./services/StarShip":"services/StarShip.ts","./Colision":"Colision.ts","/images/spaceship.png":"images/spaceship.png","./setup":"setup.ts","./helper":"helper.ts"}],"../node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -936,7 +1249,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "25698" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "1230" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

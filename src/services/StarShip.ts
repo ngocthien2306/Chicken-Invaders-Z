@@ -1,7 +1,8 @@
 import { BulletModel } from "~/model/Bullet.model";
 import { BALL_SIZE, BALL_SPEED, BALL_STARTX, BALL_STARTY, PADDLE_WIDTH } from "~/setup";
 import { Context } from "~/strategy/context";
-import { FireBulletStrategy } from "~/strategy/FireBulletStrategy";
+import { FireStrategy } from "~/strategy/FireStrategy";
+import { IceStrategy } from "~/strategy/IceStrategy";
 import { Vector } from "~/types";
 import { Bullet } from "./Bullet";
 import BALL_IMAGE from '/images/ball.png';
@@ -12,6 +13,8 @@ export class StarShip {
   private moveUp: boolean;
   private moveDown:  boolean;
   private shooting: boolean;
+  level: number;
+  typeBullet: number;
   
   bullets: Bullet[] = [];
   constructor(
@@ -19,7 +22,9 @@ export class StarShip {
     private paddleWidth: number,
     private paddleHeight: number,
     private position: Vector,
-    image: string
+    image: string,
+    level: number,
+    typeBullet: number
   ) {
     this.speed = speed;
     this.paddleWidth = paddleWidth;
@@ -31,7 +36,8 @@ export class StarShip {
     this.moveUp = false;
     this.shooting = false;
     this.paddleImage.src = image;
-
+    this.level = level;
+    this.typeBullet = typeBullet;
     // Event Listeners
     document.addEventListener('keydown', this.handleKeyRight);
     document.addEventListener('keyup', this.handleKeyLeft);
@@ -52,6 +58,9 @@ export class StarShip {
     return this.position;
   }
 
+  get typeOfBullet(): number {
+    return this.typeBullet;
+  }
   get image(): HTMLImageElement {
     return this.paddleImage;
   }
@@ -66,6 +75,10 @@ export class StarShip {
 
   get isShooting(): boolean {
     return this.moveRight;
+  }
+
+  get heart(): number {
+    return this.level;
   }
 
   get isMovingUp(): boolean {
@@ -130,20 +143,30 @@ export class StarShip {
     }
   };
 
-  public StrattygyBullet(): void {
+  public StrattygyBullet(): Bullet[] {
     const bulletModel: BulletModel = {
       speed: BALL_SPEED,
       size: BALL_SIZE,
       image: BALL_IMAGE,
       damage: 1
     }
-    const context = new Context(new FireBulletStrategy());
+
     let bullet: any;
     const pos: Vector = {x: this.pos.x, y: this.pos.y};
-    if(true) {
+
+    if(this.typeOfBullet === 1) {
+      const context = new Context(new FireStrategy());
       bullet = context.doBusinessLogicBullet(bulletModel, pos);
     }
+    else if (this.typeOfBullet === 2) {
+      const context = new Context(new IceStrategy());
+      bullet = context.doBusinessLogicBullet(bulletModel, pos);
+    }
+
+    //console.log(this.typeOfBullet);
+
     this.bullets.push(bullet as Bullet)
+    return this.bullets;
   }
 
 }
