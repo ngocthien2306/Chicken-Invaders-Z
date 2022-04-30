@@ -3,13 +3,17 @@ import { StarShip } from "./services/StarShip";
 import { Bullet } from "./services/Bullet";
 import { CanvasView } from "./view/CanvasView";
 import { ItemSupport } from "./services/Item";
-import GIFT_BOX01 from '/images/gift-box01.png';
-import { getRandomInt, listCategoryItem } from "./helper";
+
+import { getItemSupport, getRandomInt, listCategoryItem } from "./helper";
 import { ItemModel } from "./model/Item.model";
 export class Collision {
 
   gifts: ItemSupport[] = [];
 
+  typeNumberItem!: number;
+  get typeItem():number {
+    return this.typeNumberItem;
+  }
   checkStarshipColliding(chickens: Chicken[], starShip: StarShip): boolean {
     let colliding = false;
     chickens.forEach((chicken, i) => {
@@ -52,8 +56,9 @@ export class Collision {
         //chicken.energy -= bullet.damage;
         if (chicken.energy <= 0) {
           const randomNumber = getRandomInt(10);
-          if(randomNumber > 8) {
-            const gift = new ItemSupport(1, 50, {x: chicken.pos.x, y: chicken.pos.y}, GIFT_BOX01, 1);
+          if(randomNumber > 5) {
+            const gift = getItemSupport(chicken.pos.x, chicken.pos.y);           
+            //console.log(gift.typeGift);
             this.gifts.push(gift);
           }
           chickens.splice(i, 1);
@@ -104,6 +109,10 @@ export class Collision {
       )
     {
       item.changeDirectionWhenConfict();
+      if(item.typeGift < 6) {
+        this.typeNumberItem = item.typeGift;
+      }
+      
       isConflicking = true;
     }
     return isConflicking;

@@ -6,21 +6,16 @@ import { Vector } from "~/types";
 import { Strategy } from "./context";
 import { ItemSupport } from "~/services/Item";
 import { ItemModel } from "~/model/Item.model";
-import GIFT_BOX01 from '/images/gift-box01.png';
+import GIFT_BOX01 from '/images/gift-fire.png';
 
-export class IceStrategy implements Strategy {
+export class Nomaltrategy implements Strategy {
   public doChangeInfoBullet(data: BulletModel, pos: Vector): Bullet {
-    const iceBullet: BulletModel = {
-      speed: data.speed,
-      size: data.size,
-      image: data.image,
-      damage: data.damage
-    };
+    const nomalBullet: BulletModel = data
     const bullet = new Bullet(
-      iceBullet.speed, iceBullet.size, 
-      {x: pos.x + (PADDLE_WIDTH/2 - iceBullet.size/2),
+      nomalBullet.speed, nomalBullet.size, 
+      {x: pos.x + (PADDLE_WIDTH/2 - nomalBullet.size/2),
        y: pos.y}, 
-       iceBullet.image, iceBullet.damage);
+       nomalBullet.image, nomalBullet.damage);
 
     return bullet;
   }

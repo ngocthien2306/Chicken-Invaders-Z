@@ -5,13 +5,10 @@ import { StarShip } from "./services/StarShip";
 import { Collision } from "./Colision";
 // Image
 import STARSHIP_IMAGE from '/images/spaceship.png';
-import BULLET_IMAGE from '/images/ball.png';
-import GIFT_BOX01 from '/images/gift-box01.png';
-
 // Level and colors
 import { PADDLE_WIDTH, PADDLE_HEIGHT, BALL_SPEED, PADDLE_SPEED, BALL_STARTX, BALL_STARTY, BRICK_HEIGHT, BALL_SIZE, PADDLE_STARTX } from "./setup";
 import { createChickens } from "./helper";
-import { ItemSupport } from "./services/Item";
+
 
 let score = 0;
 let gameOver = false;
@@ -42,10 +39,7 @@ function gameLoop(view: CanvasView, chickens: Chicken[], starShip: StarShip, con
     starShip.moveStarShip();
 
   }
-  // gift.moveItemSupport();
-  // const conflicking = conlision.checkCollidingItem(gift, starShip);
 
-  //if(conflicking) starShip.typeBullet = 2;
 
   starShip.bullets.forEach(b => {
     view.drawSprite(b);
@@ -61,7 +55,7 @@ function gameLoop(view: CanvasView, chickens: Chicken[], starShip: StarShip, con
     view.drawSprite(g);
     g.moveItemSupport();
     const conflicking = conlision.checkCollidingItem(g, starShip);
-    if(conflicking) starShip.typeBullet = 2;
+    if(conflicking) starShip.typeBullet = conlision.typeItem;
   })
   if(conlision.checkCollidingStarshipWithChickens(chickens, starShip)) return setGameOver(view);
   if(chickens.length === 0) return setGameWin(view);
@@ -79,11 +73,9 @@ function startGame(view: CanvasView) {
   
   //const bullet = new Bullet(BALL_SPEED, BALL_SIZE, {x: BALL_STARTX, y: BALL_STARTY}, BULLET_IMAGE, 2)
   //const gift = new ItemSupport(1, 50, {x: 300, y: 0}, GIFT_BOX01, 1);
-  const startShip = new StarShip(PADDLE_SPEED, PADDLE_WIDTH, PADDLE_HEIGHT, {x: PADDLE_STARTX, y: view.canvas.height - PADDLE_HEIGHT - 5}, STARSHIP_IMAGE, 3, 1);
+  const startShip = new StarShip(PADDLE_SPEED, PADDLE_WIDTH, PADDLE_HEIGHT, {x: PADDLE_STARTX, y: view.canvas.height - PADDLE_HEIGHT - 5}, STARSHIP_IMAGE, 3, -1);
   gameLoop(view, chickens, startShip, collision);
 }
-
-
 
 const view = new CanvasView("#playField"); 
 view.initStartButton(startGame)

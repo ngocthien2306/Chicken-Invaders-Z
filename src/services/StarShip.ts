@@ -3,6 +3,10 @@ import { BALL_SIZE, BALL_SPEED, BALL_STARTX, BALL_STARTY, PADDLE_WIDTH } from "~
 import { Context } from "~/strategy/context";
 import { FireStrategy } from "~/strategy/FireStrategy";
 import { IceStrategy } from "~/strategy/IceStrategy";
+import { LeafStrategy } from "~/strategy/LeafStrategy";
+import { LightStrategy } from "~/strategy/LightningStrategy";
+import { Nomaltrategy } from "~/strategy/NomalStrategy";
+import { StoneStrategy } from "~/strategy/StoneStrategy";
 import { Vector } from "~/types";
 import { Bullet } from "./Bullet";
 import BALL_IMAGE from '/images/ball.png';
@@ -153,8 +157,12 @@ export class StarShip {
 
     let bullet: any;
     const pos: Vector = {x: this.pos.x, y: this.pos.y};
-
-    if(this.typeOfBullet === 1) {
+    
+    if(this.typeOfBullet === -1) {
+      const context = new Context(new Nomaltrategy());
+      bullet = context.doBusinessLogicBullet(bulletModel, pos);
+    }
+    else if (this.typeOfBullet === 1) {
       const context = new Context(new FireStrategy());
       bullet = context.doBusinessLogicBullet(bulletModel, pos);
     }
@@ -162,6 +170,25 @@ export class StarShip {
       const context = new Context(new IceStrategy());
       bullet = context.doBusinessLogicBullet(bulletModel, pos);
     }
+    else if (this.typeOfBullet === 3) {
+      const context = new Context(new LightStrategy());
+      bullet = context.doBusinessLogicBullet(bulletModel, pos);
+    }
+    else if (this.typeOfBullet === 4) {
+      const context = new Context(new LeafStrategy());
+      bullet = context.doBusinessLogicBullet(bulletModel, pos);
+    }
+    else if (this.typeOfBullet === 5) {
+      const context = new Context(new StoneStrategy());
+      bullet = context.doBusinessLogicBullet(bulletModel, pos);
+    }
+
+    else if (typeof(this.typeOfBullet) === 'undefined') {
+      const context = new Context(new Nomaltrategy());
+      bullet = context.doBusinessLogicBullet(bulletModel, pos);
+    }
+
+
 
     //console.log(this.typeOfBullet);
 

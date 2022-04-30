@@ -255,7 +255,7 @@ var BRICK_ENERGY = {
 }; // prettier-ignore
 
 exports.BRICK_ENERGY = BRICK_ENERGY;
-var LEVEL = [0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 4, 4, 5, 5, 5, 4, 4, 0, 0, 0, 0]; // export const LEVEL = [
+var LEVEL = [0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 4, 4, 5, 5, 5, 4, 4, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0]; // export const LEVEL = [
 //   0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 //   0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 //   0, 0, 1, 1, 1, 1, 1, 1, 0, 0,
@@ -476,8 +476,10 @@ function () {
 }();
 
 exports.ItemSupport = ItemSupport;
-},{}],"images/gift-box01.png":[function(require,module,exports) {
-module.exports = "/gift-box01.a43581b7.png";
+},{}],"images/gift-fire.png":[function(require,module,exports) {
+module.exports = "/gift-fire.1e49a58f.png";
+},{}],"images/fire-bullet.png":[function(require,module,exports) {
+module.exports = "/fire-bullet.e2b07078.png";
 },{}],"strategy/FireStrategy.ts":[function(require,module,exports) {
 "use strict";
 
@@ -492,7 +494,9 @@ var _Bullet = require("~/services/Bullet");
 
 var _Item = require("~/services/Item");
 
-var _giftBox = _interopRequireDefault(require("/images/gift-box01.png"));
+var _giftFire = _interopRequireDefault(require("/images/gift-fire.png"));
+
+var _fireBullet = _interopRequireDefault(require("/images/fire-bullet.png"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -505,7 +509,7 @@ function () {
     var fireBullet = {
       speed: data.speed - 4,
       size: data.size + 5,
-      image: data.image,
+      image: _fireBullet.default,
       damage: data.damage + 3
     };
     var bullet = new _Bullet.Bullet(fireBullet.speed, fireBullet.size, {
@@ -519,7 +523,7 @@ function () {
     var fireItem = {
       speed: data.speed,
       size: data.size,
-      image: _giftBox.default,
+      image: _giftFire.default,
       type: data.type
     };
     var item = new _Item.ItemSupport(fireItem.speed, fireItem.size, {
@@ -533,7 +537,11 @@ function () {
 }();
 
 exports.FireStrategy = FireStrategy;
-},{"~/setup":"setup.ts","~/services/Bullet":"services/Bullet.ts","~/services/Item":"services/Item.ts","/images/gift-box01.png":"images/gift-box01.png"}],"strategy/IceStrategy.ts":[function(require,module,exports) {
+},{"~/setup":"setup.ts","~/services/Bullet":"services/Bullet.ts","~/services/Item":"services/Item.ts","/images/gift-fire.png":"images/gift-fire.png","/images/fire-bullet.png":"images/fire-bullet.png"}],"images/gift-blue.png":[function(require,module,exports) {
+module.exports = "/gift-blue.8e15de08.png";
+},{}],"images/ice-bullet.png":[function(require,module,exports) {
+module.exports = "/ice-bullet.e1f97bcf.png";
+},{}],"strategy/IceStrategy.ts":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -547,7 +555,9 @@ var _Bullet = require("~/services/Bullet");
 
 var _Item = require("~/services/Item");
 
-var _giftBox = _interopRequireDefault(require("/images/gift-box01.png"));
+var _giftBlue = _interopRequireDefault(require("/images/gift-blue.png"));
+
+var _iceBullet = _interopRequireDefault(require("/images/ice-bullet.png"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -558,9 +568,9 @@ function () {
 
   IceStrategy.prototype.doChangeInfoBullet = function (data, pos) {
     var iceBullet = {
-      speed: data.speed + 10,
-      size: data.size,
-      image: data.image,
+      speed: data.speed + 5,
+      size: data.size + 5,
+      image: _iceBullet.default,
       damage: data.damage + 1
     };
     var bullet = new _Bullet.Bullet(iceBullet.speed, iceBullet.size, {
@@ -573,8 +583,8 @@ function () {
   IceStrategy.prototype.doChangeTypeItem = function (data, pos) {
     var fireItem = {
       speed: data.speed,
-      size: data.size,
-      image: _giftBox.default,
+      size: data.size - 10,
+      image: _giftBlue.default,
       type: data.type
     };
     var item = new _Item.ItemSupport(fireItem.speed, fireItem.size, {
@@ -588,7 +598,240 @@ function () {
 }();
 
 exports.IceStrategy = IceStrategy;
-},{"~/setup":"setup.ts","~/services/Bullet":"services/Bullet.ts","~/services/Item":"services/Item.ts","/images/gift-box01.png":"images/gift-box01.png"}],"images/ball.png":[function(require,module,exports) {
+},{"~/setup":"setup.ts","~/services/Bullet":"services/Bullet.ts","~/services/Item":"services/Item.ts","/images/gift-blue.png":"images/gift-blue.png","/images/ice-bullet.png":"images/ice-bullet.png"}],"images/green-gift.png":[function(require,module,exports) {
+module.exports = "/green-gift.b4c1b835.png";
+},{}],"images/leaf-bullet.png":[function(require,module,exports) {
+module.exports = "/leaf-bullet.90e51652.png";
+},{}],"strategy/LeafStrategy.ts":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.LeafStrategy = void 0;
+
+var _setup = require("~/setup");
+
+var _Bullet = require("~/services/Bullet");
+
+var _Item = require("~/services/Item");
+
+var _greenGift = _interopRequireDefault(require("/images/green-gift.png"));
+
+var _leafBullet = _interopRequireDefault(require("/images/leaf-bullet.png"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var LeafStrategy =
+/** @class */
+function () {
+  function LeafStrategy() {}
+
+  LeafStrategy.prototype.doChangeInfoBullet = function (data, pos) {
+    var lightBullet = {
+      speed: data.speed + 5,
+      size: data.size + 2,
+      image: _leafBullet.default,
+      damage: data.damage + 3
+    };
+    var bullet = new _Bullet.Bullet(lightBullet.speed, lightBullet.size, {
+      x: pos.x + (_setup.PADDLE_WIDTH / 2 - lightBullet.size / 2),
+      y: pos.y
+    }, lightBullet.image, lightBullet.damage);
+    return bullet;
+  };
+
+  LeafStrategy.prototype.doChangeTypeItem = function (data, pos) {
+    var fireItem = {
+      speed: data.speed,
+      size: data.size,
+      image: _greenGift.default,
+      type: data.type
+    };
+    var item = new _Item.ItemSupport(fireItem.speed, fireItem.size, {
+      x: pos.x,
+      y: pos.y
+    }, fireItem.image, fireItem.type.Id);
+    return item;
+  };
+
+  return LeafStrategy;
+}();
+
+exports.LeafStrategy = LeafStrategy;
+},{"~/setup":"setup.ts","~/services/Bullet":"services/Bullet.ts","~/services/Item":"services/Item.ts","/images/green-gift.png":"images/green-gift.png","/images/leaf-bullet.png":"images/leaf-bullet.png"}],"images/gift-light.png":[function(require,module,exports) {
+module.exports = "/gift-light.86b4c05e.png";
+},{}],"images/light-bullet.png":[function(require,module,exports) {
+module.exports = "/light-bullet.74632b9f.png";
+},{}],"strategy/LightningStrategy.ts":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.LightStrategy = void 0;
+
+var _setup = require("~/setup");
+
+var _Bullet = require("~/services/Bullet");
+
+var _Item = require("~/services/Item");
+
+var _giftLight = _interopRequireDefault(require("/images/gift-light.png"));
+
+var _lightBullet = _interopRequireDefault(require("/images/light-bullet.png"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var LightStrategy =
+/** @class */
+function () {
+  function LightStrategy() {}
+
+  LightStrategy.prototype.doChangeInfoBullet = function (data, pos) {
+    var lightBullet = {
+      speed: data.speed + 9,
+      size: data.size + 7,
+      image: _lightBullet.default,
+      damage: data.damage + 2
+    };
+    var bullet = new _Bullet.Bullet(lightBullet.speed, lightBullet.size, {
+      x: pos.x + (_setup.PADDLE_WIDTH / 2 - lightBullet.size / 2),
+      y: pos.y
+    }, lightBullet.image, lightBullet.damage);
+    return bullet;
+  };
+
+  LightStrategy.prototype.doChangeTypeItem = function (data, pos) {
+    var fireItem = {
+      speed: data.speed,
+      size: data.size - 10,
+      image: _giftLight.default,
+      type: data.type
+    };
+    var item = new _Item.ItemSupport(fireItem.speed, fireItem.size, {
+      x: pos.x,
+      y: pos.y
+    }, fireItem.image, fireItem.type.Id);
+    return item;
+  };
+
+  return LightStrategy;
+}();
+
+exports.LightStrategy = LightStrategy;
+},{"~/setup":"setup.ts","~/services/Bullet":"services/Bullet.ts","~/services/Item":"services/Item.ts","/images/gift-light.png":"images/gift-light.png","/images/light-bullet.png":"images/light-bullet.png"}],"strategy/NomalStrategy.ts":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Nomaltrategy = void 0;
+
+var _setup = require("~/setup");
+
+var _Bullet = require("~/services/Bullet");
+
+var _Item = require("~/services/Item");
+
+var _giftFire = _interopRequireDefault(require("/images/gift-fire.png"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Nomaltrategy =
+/** @class */
+function () {
+  function Nomaltrategy() {}
+
+  Nomaltrategy.prototype.doChangeInfoBullet = function (data, pos) {
+    var nomalBullet = data;
+    var bullet = new _Bullet.Bullet(nomalBullet.speed, nomalBullet.size, {
+      x: pos.x + (_setup.PADDLE_WIDTH / 2 - nomalBullet.size / 2),
+      y: pos.y
+    }, nomalBullet.image, nomalBullet.damage);
+    return bullet;
+  };
+
+  Nomaltrategy.prototype.doChangeTypeItem = function (data, pos) {
+    var fireItem = {
+      speed: data.speed,
+      size: data.size,
+      image: _giftFire.default,
+      type: data.type
+    };
+    var item = new _Item.ItemSupport(fireItem.speed, fireItem.size, {
+      x: pos.x,
+      y: pos.y
+    }, fireItem.image, fireItem.type.Id);
+    return item;
+  };
+
+  return Nomaltrategy;
+}();
+
+exports.Nomaltrategy = Nomaltrategy;
+},{"~/setup":"setup.ts","~/services/Bullet":"services/Bullet.ts","~/services/Item":"services/Item.ts","/images/gift-fire.png":"images/gift-fire.png"}],"images/gift-stone.png":[function(require,module,exports) {
+module.exports = "/gift-stone.fe6b45cf.png";
+},{}],"images/stone-bullet.png":[function(require,module,exports) {
+module.exports = "/stone-bullet.b28c8c7d.png";
+},{}],"strategy/StoneStrategy.ts":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.StoneStrategy = void 0;
+
+var _setup = require("~/setup");
+
+var _Bullet = require("~/services/Bullet");
+
+var _Item = require("~/services/Item");
+
+var _giftStone = _interopRequireDefault(require("/images/gift-stone.png"));
+
+var _stoneBullet = _interopRequireDefault(require("/images/stone-bullet.png"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var StoneStrategy =
+/** @class */
+function () {
+  function StoneStrategy() {}
+
+  StoneStrategy.prototype.doChangeInfoBullet = function (data, pos) {
+    var iceBullet = {
+      speed: data.speed + 5,
+      size: data.size + 5,
+      image: _stoneBullet.default,
+      damage: data.damage + 1
+    };
+    var bullet = new _Bullet.Bullet(iceBullet.speed, iceBullet.size, {
+      x: pos.x + (_setup.PADDLE_WIDTH / 2 - iceBullet.size / 2),
+      y: pos.y
+    }, iceBullet.image, iceBullet.damage);
+    return bullet;
+  };
+
+  StoneStrategy.prototype.doChangeTypeItem = function (data, pos) {
+    var fireItem = {
+      speed: data.speed,
+      size: data.size - 10,
+      image: _giftStone.default,
+      type: data.type
+    };
+    var item = new _Item.ItemSupport(fireItem.speed, fireItem.size, {
+      x: pos.x,
+      y: pos.y
+    }, fireItem.image, fireItem.type.Id);
+    return item;
+  };
+
+  return StoneStrategy;
+}();
+
+exports.StoneStrategy = StoneStrategy;
+},{"~/setup":"setup.ts","~/services/Bullet":"services/Bullet.ts","~/services/Item":"services/Item.ts","/images/gift-stone.png":"images/gift-stone.png","/images/stone-bullet.png":"images/stone-bullet.png"}],"images/ball.png":[function(require,module,exports) {
 module.exports = "/ball.96931fde.png";
 },{}],"services/StarShip.ts":[function(require,module,exports) {
 "use strict";
@@ -605,6 +848,14 @@ var _context = require("~/strategy/context");
 var _FireStrategy = require("~/strategy/FireStrategy");
 
 var _IceStrategy = require("~/strategy/IceStrategy");
+
+var _LeafStrategy = require("~/strategy/LeafStrategy");
+
+var _LightningStrategy = require("~/strategy/LightningStrategy");
+
+var _NomalStrategy = require("~/strategy/NomalStrategy");
+
+var _StoneStrategy = require("~/strategy/StoneStrategy");
 
 var _ball = _interopRequireDefault(require("/images/ball.png"));
 
@@ -795,11 +1046,26 @@ function () {
       y: this.pos.y
     };
 
-    if (this.typeOfBullet === 1) {
+    if (this.typeOfBullet === -1) {
+      var context = new _context.Context(new _NomalStrategy.Nomaltrategy());
+      bullet = context.doBusinessLogicBullet(bulletModel, pos);
+    } else if (this.typeOfBullet === 1) {
       var context = new _context.Context(new _FireStrategy.FireStrategy());
       bullet = context.doBusinessLogicBullet(bulletModel, pos);
     } else if (this.typeOfBullet === 2) {
       var context = new _context.Context(new _IceStrategy.IceStrategy());
+      bullet = context.doBusinessLogicBullet(bulletModel, pos);
+    } else if (this.typeOfBullet === 3) {
+      var context = new _context.Context(new _LightningStrategy.LightStrategy());
+      bullet = context.doBusinessLogicBullet(bulletModel, pos);
+    } else if (this.typeOfBullet === 4) {
+      var context = new _context.Context(new _LeafStrategy.LeafStrategy());
+      bullet = context.doBusinessLogicBullet(bulletModel, pos);
+    } else if (this.typeOfBullet === 5) {
+      var context = new _context.Context(new _StoneStrategy.StoneStrategy());
+      bullet = context.doBusinessLogicBullet(bulletModel, pos);
+    } else if (typeof this.typeOfBullet === 'undefined') {
+      var context = new _context.Context(new _NomalStrategy.Nomaltrategy());
       bullet = context.doBusinessLogicBullet(bulletModel, pos);
     } //console.log(this.typeOfBullet);
 
@@ -812,7 +1078,7 @@ function () {
 }();
 
 exports.StarShip = StarShip;
-},{"~/setup":"setup.ts","~/strategy/context":"strategy/context.ts","~/strategy/FireStrategy":"strategy/FireStrategy.ts","~/strategy/IceStrategy":"strategy/IceStrategy.ts","/images/ball.png":"images/ball.png"}],"services/Chicken.ts":[function(require,module,exports) {
+},{"~/setup":"setup.ts","~/strategy/context":"strategy/context.ts","~/strategy/FireStrategy":"strategy/FireStrategy.ts","~/strategy/IceStrategy":"strategy/IceStrategy.ts","~/strategy/LeafStrategy":"strategy/LeafStrategy.ts","~/strategy/LightningStrategy":"strategy/LightningStrategy.ts","~/strategy/NomalStrategy":"strategy/NomalStrategy.ts","~/strategy/StoneStrategy":"strategy/StoneStrategy.ts","/images/ball.png":"images/ball.png"}],"services/Chicken.ts":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -878,7 +1144,72 @@ function () {
 }();
 
 exports.Chicken = Chicken;
-},{}],"helper.ts":[function(require,module,exports) {
+},{}],"images/meat01.png":[function(require,module,exports) {
+module.exports = "/meat01.5d124be7.png";
+},{}],"images/meat02.png":[function(require,module,exports) {
+module.exports = "/meat02.5509b4ad.png";
+},{}],"images/meat03.png":[function(require,module,exports) {
+module.exports = "/meat03.be1648b6.png";
+},{}],"images/heart.png":[function(require,module,exports) {
+module.exports = "/heart.054550bc.png";
+},{}],"images/coin.png":[function(require,module,exports) {
+module.exports = "/coin.f3955474.png";
+},{}],"strategy/ChickenMeatStrategy.ts":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ChickenMeatStrategy = void 0;
+
+var _setup = require("~/setup");
+
+var _Bullet = require("~/services/Bullet");
+
+var _Item = require("~/services/Item");
+
+var _leafBullet = _interopRequireDefault(require("/images/leaf-bullet.png"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ChickenMeatStrategy =
+/** @class */
+function () {
+  function ChickenMeatStrategy() {}
+
+  ChickenMeatStrategy.prototype.doChangeInfoBullet = function (data, pos) {
+    var lightBullet = {
+      speed: data.speed + 5,
+      size: data.size + 2,
+      image: _leafBullet.default,
+      damage: data.damage + 3
+    };
+    var bullet = new _Bullet.Bullet(lightBullet.speed, lightBullet.size, {
+      x: pos.x + (_setup.PADDLE_WIDTH / 2 - lightBullet.size / 2),
+      y: pos.y
+    }, lightBullet.image, lightBullet.damage);
+    return bullet;
+  };
+
+  ChickenMeatStrategy.prototype.doChangeTypeItem = function (data, pos) {
+    var fireItem = {
+      speed: data.speed,
+      size: data.size,
+      image: data.image,
+      type: data.type
+    };
+    var item = new _Item.ItemSupport(fireItem.speed, fireItem.size, {
+      x: pos.x,
+      y: pos.y
+    }, fireItem.image, fireItem.type.Id);
+    return item;
+  };
+
+  return ChickenMeatStrategy;
+}();
+
+exports.ChickenMeatStrategy = ChickenMeatStrategy;
+},{"~/setup":"setup.ts","~/services/Bullet":"services/Bullet.ts","~/services/Item":"services/Item.ts","/images/leaf-bullet.png":"images/leaf-bullet.png"}],"helper.ts":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -891,13 +1222,33 @@ exports.getItemSupport = getItemSupport;
 
 var _Chicken = require("./services/Chicken");
 
-var _giftBox = _interopRequireDefault(require("/images/gift-box01.png"));
+var _giftFire = _interopRequireDefault(require("/images/gift-fire.png"));
+
+var _meat = _interopRequireDefault(require("/images/meat01.png"));
+
+var _meat2 = _interopRequireDefault(require("/images/meat02.png"));
+
+var _meat3 = _interopRequireDefault(require("/images/meat03.png"));
+
+var _heart = _interopRequireDefault(require("/images/heart.png"));
+
+var _coin = _interopRequireDefault(require("/images/coin.png"));
 
 var _setup = require("./setup");
 
 var _context = require("./strategy/context");
 
 var _FireStrategy = require("./strategy/FireStrategy");
+
+var _IceStrategy = require("./strategy/IceStrategy");
+
+var _LightningStrategy = require("./strategy/LightningStrategy");
+
+var _LeafStrategy = require("./strategy/LeafStrategy");
+
+var _StoneStrategy = require("./strategy/StoneStrategy");
+
+var _ChickenMeatStrategy = require("./strategy/ChickenMeatStrategy");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -957,7 +1308,7 @@ function listCategoryItem() {
   };
   var category5 = {
     Id: 5,
-    Name: "WaterBullets",
+    Name: "StoneBullets",
     Type: "bullet"
   };
   var category6 = {
@@ -999,8 +1350,9 @@ function listCategoryItem() {
 }
 
 function getItemSupport(posX, posY) {
-  var categorys = listCategoryItem();
-  var randomNumber = getRandomInt(5);
+  var categorys = listCategoryItem(); //console.log(categorys);
+
+  var randomNumber = getRandomInt(10);
   var vector = {
     x: posX,
     y: posY
@@ -1008,19 +1360,76 @@ function getItemSupport(posX, posY) {
   var model = {
     speed: 1,
     size: 50,
-    image: _giftBox.default,
+    image: _giftFire.default,
     type: categorys[randomNumber]
   };
   var item;
 
-  if (randomNumber === 1) {
+  if (randomNumber === 0) {
     var context = new _context.Context(new _FireStrategy.FireStrategy());
     item = context.doBusinessLogicItem(model, vector);
+  } else if (randomNumber === 1) {
+    var context = new _context.Context(new _IceStrategy.IceStrategy());
+    item = context.doBusinessLogicItem(model, vector);
+  } else if (randomNumber === 2) {
+    var context = new _context.Context(new _LightningStrategy.LightStrategy());
+    item = context.doBusinessLogicItem(model, vector);
+  } else if (randomNumber === 3) {
+    var context = new _context.Context(new _LeafStrategy.LeafStrategy());
+    item = context.doBusinessLogicItem(model, vector);
+  } else if (randomNumber === 4) {
+    var context = new _context.Context(new _StoneStrategy.StoneStrategy());
+    item = context.doBusinessLogicItem(model, vector);
+  } else if (randomNumber === 5) {
+    var modelMeat = {
+      speed: 1,
+      size: 30,
+      image: _meat.default,
+      type: categorys[randomNumber]
+    };
+    var context = new _context.Context(new _ChickenMeatStrategy.ChickenMeatStrategy());
+    item = context.doBusinessLogicItem(modelMeat, vector);
+  } else if (randomNumber === 6) {
+    var modelMeat = {
+      speed: 1,
+      size: 40,
+      image: _meat2.default,
+      type: categorys[randomNumber]
+    };
+    var context = new _context.Context(new _ChickenMeatStrategy.ChickenMeatStrategy());
+    item = context.doBusinessLogicItem(modelMeat, vector);
+  } else if (randomNumber === 7) {
+    var modelMeat = {
+      speed: 1,
+      size: 60,
+      image: _meat3.default,
+      type: categorys[randomNumber]
+    };
+    var context = new _context.Context(new _ChickenMeatStrategy.ChickenMeatStrategy());
+    item = context.doBusinessLogicItem(modelMeat, vector);
+  } else if (randomNumber === 8) {
+    var modelMeat = {
+      speed: 1,
+      size: 40,
+      image: _heart.default,
+      type: categorys[randomNumber]
+    };
+    var context = new _context.Context(new _ChickenMeatStrategy.ChickenMeatStrategy());
+    item = context.doBusinessLogicItem(modelMeat, vector);
+  } else if (randomNumber === 9) {
+    var modelMeat = {
+      speed: 1,
+      size: 40,
+      image: _coin.default,
+      type: categorys[randomNumber]
+    };
+    var context = new _context.Context(new _ChickenMeatStrategy.ChickenMeatStrategy());
+    item = context.doBusinessLogicItem(modelMeat, vector);
   }
 
   return item;
 }
-},{"./services/Chicken":"services/Chicken.ts","/images/gift-box01.png":"images/gift-box01.png","./setup":"setup.ts","./strategy/context":"strategy/context.ts","./strategy/FireStrategy":"strategy/FireStrategy.ts"}],"Colision.ts":[function(require,module,exports) {
+},{"./services/Chicken":"services/Chicken.ts","/images/gift-fire.png":"images/gift-fire.png","/images/meat01.png":"images/meat01.png","/images/meat02.png":"images/meat02.png","/images/meat03.png":"images/meat03.png","/images/heart.png":"images/heart.png","/images/coin.png":"images/coin.png","./setup":"setup.ts","./strategy/context":"strategy/context.ts","./strategy/FireStrategy":"strategy/FireStrategy.ts","./strategy/IceStrategy":"strategy/IceStrategy.ts","./strategy/LightningStrategy":"strategy/LightningStrategy.ts","./strategy/LeafStrategy":"strategy/LeafStrategy.ts","./strategy/StoneStrategy":"strategy/StoneStrategy.ts","./strategy/ChickenMeatStrategy":"strategy/ChickenMeatStrategy.ts"}],"Colision.ts":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1028,13 +1437,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Collision = void 0;
 
-var _Item = require("./services/Item");
-
-var _giftBox = _interopRequireDefault(require("/images/gift-box01.png"));
-
 var _helper = require("./helper");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Collision =
 /** @class */
@@ -1042,6 +1445,14 @@ function () {
   function Collision() {
     this.gifts = [];
   }
+
+  Object.defineProperty(Collision.prototype, "typeItem", {
+    get: function get() {
+      return this.typeNumberItem;
+    },
+    enumerable: false,
+    configurable: true
+  });
 
   Collision.prototype.checkStarshipColliding = function (chickens, starShip) {
     var colliding = false;
@@ -1074,11 +1485,8 @@ function () {
         if (chicken.energy <= 0) {
           var randomNumber = (0, _helper.getRandomInt)(10);
 
-          if (randomNumber > 8) {
-            var gift = new _Item.ItemSupport(1, 50, {
-              x: chicken.pos.x,
-              y: chicken.pos.y
-            }, _giftBox.default, 1);
+          if (randomNumber > 5) {
+            var gift = (0, _helper.getItemSupport)(chicken.pos.x, chicken.pos.y); //console.log(gift.typeGift);
 
             _this.gifts.push(gift);
           }
@@ -1125,6 +1533,11 @@ function () {
 
     if (item.pos.x + item.width > starShip.pos.x && item.pos.x < starShip.pos.x + starShip.width && item.pos.y + item.height > starShip.pos.y && item.pos.y < starShip.pos.y + starShip.height) {
       item.changeDirectionWhenConfict();
+
+      if (item.typeGift < 6) {
+        this.typeNumberItem = item.typeGift;
+      }
+
       isConflicking = true;
     }
 
@@ -1135,7 +1548,7 @@ function () {
 }();
 
 exports.Collision = Collision;
-},{"./services/Item":"services/Item.ts","/images/gift-box01.png":"images/gift-box01.png","./helper":"helper.ts"}],"images/spaceship.png":[function(require,module,exports) {
+},{"./helper":"helper.ts"}],"images/spaceship.png":[function(require,module,exports) {
 module.exports = "/spaceship.d28724db.png";
 },{}],"index.ts":[function(require,module,exports) {
 "use strict";
@@ -1175,10 +1588,7 @@ function gameLoop(view, chickens, starShip, conlision) {
 
   if (starShip.isMovingLeft && starShip.pos.x > 0 || starShip.isMovingRight && starShip.pos.x < view.canvas.width - starShip.width || starShip.isMovingDown && starShip.pos.y > 0 || starShip.isMovingUp && starShip.pos.y < view.canvas.height - starShip.height) {
     starShip.moveStarShip();
-  } // gift.moveItemSupport();
-  // const conflicking = conlision.checkCollidingItem(gift, starShip);
-  //if(conflicking) starShip.typeBullet = 2;
-
+  }
 
   starShip.bullets.forEach(function (b) {
     view.drawSprite(b);
@@ -1194,7 +1604,7 @@ function gameLoop(view, chickens, starShip, conlision) {
     view.drawSprite(g);
     g.moveItemSupport();
     var conflicking = conlision.checkCollidingItem(g, starShip);
-    if (conflicking) starShip.typeBullet = 2;
+    if (conflicking) starShip.typeBullet = conlision.typeItem;
   });
   if (conlision.checkCollidingStarshipWithChickens(chickens, starShip)) return setGameOver(view);
   if (chickens.length === 0) return setGameWin(view);
@@ -1215,7 +1625,7 @@ function startGame(view) {
   var startShip = new _StarShip.StarShip(_setup.PADDLE_SPEED, _setup.PADDLE_WIDTH, _setup.PADDLE_HEIGHT, {
     x: _setup.PADDLE_STARTX,
     y: view.canvas.height - _setup.PADDLE_HEIGHT - 5
-  }, _spaceship.default, 3, 1);
+  }, _spaceship.default, 3, -1);
   gameLoop(view, chickens, startShip, collision);
 }
 
@@ -1249,7 +1659,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "1230" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "1113" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

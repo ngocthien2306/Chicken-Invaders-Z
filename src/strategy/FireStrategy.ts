@@ -6,14 +6,15 @@ import { Vector } from "~/types";
 import { Strategy } from "./context";
 import { ItemModel } from "~/model/Item.model";
 import { ItemSupport } from "~/services/Item";
-import GIFT_BOX01 from '/images/gift-box01.png';
+import GIFT_RED from '/images/gift-fire.png';
+import FIRE_BULLET from '/images/fire-bullet.png';
 
 export class FireStrategy implements Strategy {
   public doChangeInfoBullet(data: BulletModel, pos: Vector): Bullet {
     const fireBullet: BulletModel = {
       speed: data.speed - 4,
       size: data.size + 5,
-      image: data.image,
+      image: FIRE_BULLET,
       damage: data.damage + 3
     };
     const bullet = new Bullet(
@@ -28,7 +29,7 @@ export class FireStrategy implements Strategy {
     const fireItem: ItemModel = {
       speed: data.speed,
       size: data.size,
-      image: GIFT_BOX01,
+      image: GIFT_RED,
       type: data.type
     }
     const item = new ItemSupport(

@@ -1,7 +1,11 @@
 import { CategoryModel, ItemModel } from './model/Item.model';
 import { Chicken } from './services/Chicken';
-import GIFT_BOX01 from '/images/gift-box01.png';
-
+import GIFT_FIRE from '/images/gift-fire.png';
+import MEAT_SMALL from '/images/meat01.png';
+import MEAT_MEDIUM from '/images/meat02.png';
+import MEAT_LARGE from '/images/meat03.png';
+import HEART from '/images/heart.png';
+import COIN from '/images/coin.png';
 import {
   BRICK_IMAGES,
   LEVEL,
@@ -16,6 +20,11 @@ import { ItemSupport } from './services/Item';
 import { Vector } from './types';
 import { Context } from './strategy/context';
 import { FireStrategy } from './strategy/FireStrategy';
+import { IceStrategy } from './strategy/IceStrategy';
+import { LightStrategy } from './strategy/LightningStrategy';
+import { LeafStrategy } from './strategy/LeafStrategy';
+import { StoneStrategy } from './strategy/StoneStrategy';
+import { ChickenMeatStrategy } from './strategy/ChickenMeatStrategy';
 
 export function createChickens(): Chicken[] {
   return LEVEL.reduce((ack, element, i) => {
@@ -50,7 +59,7 @@ export function listCategoryItem(): CategoryModel[] {
   const category2: CategoryModel = {Id: 2, Name: "IceBullets", Type: "bullet"};
   const category3: CategoryModel = {Id: 3, Name: "LightBullets", Type: "bullet"};
   const category4: CategoryModel = {Id: 4, Name: "LeafBullets", Type: "bullet"};
-  const category5: CategoryModel = {Id: 5, Name: "WaterBullets", Type: "bullet"};
+  const category5: CategoryModel = {Id: 5, Name: "StoneBullets", Type: "bullet"};
 
   const category6: CategoryModel = {Id: 6, Name: "ChickenThighsSmall", Type: "meat"};
   const category7: CategoryModel = {Id: 7, Name: "ChickenThighsMedium", Type: "meat"};
@@ -76,20 +85,88 @@ export function listCategoryItem(): CategoryModel[] {
 
 export function getItemSupport(posX: number, posY: number): ItemSupport {
   const categorys = listCategoryItem();
-  const randomNumber = getRandomInt(5);
+  //console.log(categorys);
+  const randomNumber = getRandomInt(10);
 
   const vector: Vector = {x: posX, y: posY}
   const model: ItemModel = {
     speed: 1,
     size: 50, 
-    image: GIFT_BOX01,
+    image: GIFT_FIRE,
     type: categorys[randomNumber]
   }
 
   let item: any;
-  if(randomNumber === 1) {
+  if(randomNumber === 0) {
     const context = new Context(new FireStrategy());
     item = context.doBusinessLogicItem(model, vector);
   }
+  else if(randomNumber === 1) {
+    const context = new Context(new IceStrategy());
+    item = context.doBusinessLogicItem(model, vector);
+  }
+  else if(randomNumber === 2) {
+    const context = new Context(new LightStrategy());
+    item = context.doBusinessLogicItem(model, vector);
+  }
+  else if(randomNumber === 3) {
+    const context = new Context(new LeafStrategy());
+    item = context.doBusinessLogicItem(model, vector);
+  }
+  else if(randomNumber === 4) {
+    const context = new Context(new StoneStrategy());
+    item = context.doBusinessLogicItem(model, vector);
+  }
+  else if(randomNumber === 5) {
+    const modelMeat: ItemModel = {
+      speed: 1,
+      size: 30, 
+      image: MEAT_SMALL,
+      type: categorys[randomNumber]
+    }
+    const context = new Context(new ChickenMeatStrategy());
+    item = context.doBusinessLogicItem(modelMeat, vector);
+  }
+  else if(randomNumber === 6) {
+    const modelMeat: ItemModel = {
+      speed: 1,
+      size: 40, 
+      image: MEAT_MEDIUM,
+      type: categorys[randomNumber]
+    }
+    const context = new Context(new ChickenMeatStrategy());
+    item = context.doBusinessLogicItem(modelMeat, vector);
+  }
+  else if(randomNumber === 7) {
+    const modelMeat: ItemModel = {
+      speed: 1,
+      size: 60, 
+      image: MEAT_LARGE,
+      type: categorys[randomNumber]
+    }
+    const context = new Context(new ChickenMeatStrategy());
+    item = context.doBusinessLogicItem(modelMeat, vector);
+  }
+  else if(randomNumber === 8) {
+    const modelMeat: ItemModel = {
+      speed: 1,
+      size: 40, 
+      image: HEART,
+      type: categorys[randomNumber]
+    }
+    const context = new Context(new ChickenMeatStrategy());
+    item = context.doBusinessLogicItem(modelMeat, vector);
+  }
+  else if(randomNumber === 9) {
+    const modelMeat: ItemModel = {
+      speed: 1,
+      size: 40, 
+      image: COIN,
+      type: categorys[randomNumber]
+    }
+    const context = new Context(new ChickenMeatStrategy());
+    item = context.doBusinessLogicItem(modelMeat, vector);
+  }
+  
   return item;
 }
