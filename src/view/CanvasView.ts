@@ -45,7 +45,10 @@ export class CanvasView {
   }
 
   drawChicken(chickens: Chicken[]): void {
-    chickens.forEach(chicken => this.drawSprite(chicken))
+    chickens.forEach(chicken => {
+      this.drawSprite(chicken)
+      chicken.changeYDirection();
+    })
   }
   drawBullet(bullet: Bullet, starShip: StarShip): void {
     //console.log(starShip.pos.x, starShip.pos.y)

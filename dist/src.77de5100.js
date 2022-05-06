@@ -171,7 +171,9 @@ function () {
     var _this = this;
 
     chickens.forEach(function (chicken) {
-      return _this.drawSprite(chicken);
+      _this.drawSprite(chicken);
+
+      chicken.changeYDirection();
     });
   };
 
@@ -197,7 +199,7 @@ module.exports = "/chicken_blue.ef8857b3.png";
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.LEVEL = exports.BRICK_ENERGY = exports.BRICK_IMAGES = exports.BALL_STARTY = exports.BALL_STARTX = exports.BALL_SIZE = exports.BALL_SPEED = exports.PADDLE_SPEED = exports.PADDLE_STARTX = exports.PADDLE_HEIGHT = exports.PADDLE_WIDTH = exports.BRICK_HEIGHT = exports.BRICK_WIDTH = exports.BRICK_PADDING = exports.STAGE_COLS = exports.STAGE_ROWS = exports.STAGE_PADDING = void 0;
+exports.LEVEL2 = exports.LEVEL1 = exports.BRICK_ENERGY = exports.BRICK_IMAGES = exports.BALL_STARTY = exports.BALL_STARTX = exports.BALL_SIZE = exports.BALL_SPEED = exports.PADDLE_SPEED = exports.PADDLE_STARTX = exports.PADDLE_HEIGHT = exports.PADDLE_WIDTH = exports.BRICK_HEIGHT = exports.BRICK_WIDTH = exports.BRICK_PADDING = exports.STAGE_COLS = exports.STAGE_ROWS = exports.STAGE_PADDING = void 0;
 
 var _chicken_red = _interopRequireDefault(require("./images/chicken_red.png"));
 
@@ -250,12 +252,14 @@ var BRICK_ENERGY = {
   2: 2,
   3: 6,
   4: 8,
-  5: 10 // Purple brick
-
+  5: 10
 }; // prettier-ignore
 
 exports.BRICK_ENERGY = BRICK_ENERGY;
-var LEVEL = [0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 4, 4, 5, 5, 5, 4, 4, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0]; // export const LEVEL = [
+var LEVEL1 = [0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 4, 4, 5, 5, 5, 4, 4, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0]; // prettier-ignore
+
+exports.LEVEL1 = LEVEL1;
+var LEVEL2 = [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 5, 5, 5, 5, 0, 0, 0, 5, 5, 5, 5, 0, 0, 0, 0, 3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 0, 0, 0, 0, 3, 0, 4, 4, 5, 5, 5, 4, 4, 0, 3, 0, 0, 0, 0, 2, 2, 0, 2, 2, 0, 2, 2, 0, 2, 2, 0, 0]; // export const LEVEL = [
 //   0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 //   0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 //   0, 0, 1, 1, 1, 1, 1, 1, 0, 0,
@@ -264,7 +268,7 @@ var LEVEL = [0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2
 //   0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 // ];
 
-exports.LEVEL = LEVEL;
+exports.LEVEL2 = LEVEL2;
 },{"./images/chicken_red.png":"images/chicken_red.png","./images/chicken_blue.png":"images/chicken_blue.png"}],"strategy/context.ts":[function(require,module,exports) {
 "use strict";
 
@@ -1089,19 +1093,31 @@ exports.Chicken = void 0;
 var Chicken =
 /** @class */
 function () {
-  function Chicken(brickWidth, brickHeight, postion, brickEnergy, image) {
+  function Chicken(speed, brickWidth, brickHeight, postion, brickEnergy, image) {
     this.brickWidth = brickWidth;
     this.brickHeight = brickHeight;
     this.postion = postion;
     this.brickEnergy = brickEnergy;
-    this.brickImage = new Image();
+    this.chickenImage = new Image();
+    this.count = 0;
+    this.speed = {
+      x: speed,
+      y: -speed
+    };
     this.brickWidth = brickWidth;
     this.brickHeight = brickHeight;
     this.postion = postion;
     this.brickEnergy = brickEnergy;
-    this.brickImage.src = image;
+    this.chickenImage.src = image;
   }
 
+  Object.defineProperty(Chicken.prototype, "countMove", {
+    get: function get() {
+      return this.count;
+    },
+    enumerable: false,
+    configurable: true
+  });
   Object.defineProperty(Chicken.prototype, "width", {
     get: function get() {
       return this.brickWidth;
@@ -1125,7 +1141,7 @@ function () {
   });
   Object.defineProperty(Chicken.prototype, "image", {
     get: function get() {
-      return this.brickImage;
+      return this.chickenImage;
     },
     enumerable: false,
     configurable: true
@@ -1140,6 +1156,19 @@ function () {
     enumerable: false,
     configurable: true
   });
+
+  Chicken.prototype.changeYDirection = function () {
+    this.speed.y = this.speed.y;
+  };
+
+  Chicken.prototype.moveDownChicken = function () {
+    this.pos.x -= this.speed.x; //this.pos.y -= this.speed.y;
+  };
+
+  Chicken.prototype.moveUpChicken = function () {
+    this.pos.x += this.speed.x; //this.pos.y += this.speed.y;
+  };
+
   return Chicken;
 }();
 
@@ -1266,14 +1295,14 @@ var __spreadArrays = void 0 && (void 0).__spreadArrays || function () {
   return r;
 };
 
-function createChickens() {
-  return _setup.LEVEL.reduce(function (ack, element, i) {
+function createChickens(level) {
+  return level.reduce(function (ack, element, i) {
     var row = Math.floor((i + 1) / _setup.STAGE_COLS);
     var col = i % _setup.STAGE_COLS;
     var x = _setup.STAGE_PADDING + col * (_setup.BRICK_WIDTH + _setup.BRICK_PADDING);
     var y = _setup.STAGE_PADDING + row * (_setup.BRICK_HEIGHT + _setup.BRICK_PADDING);
     if (element === 0) return ack;
-    return __spreadArrays(ack, [new _Chicken.Chicken(_setup.BRICK_WIDTH, _setup.BRICK_HEIGHT, {
+    return __spreadArrays(ack, [new _Chicken.Chicken(1, _setup.BRICK_WIDTH, _setup.BRICK_HEIGHT, {
       x: x,
       y: y
     }, _setup.BRICK_ENERGY[element], _setup.BRICK_IMAGES[element])]);
@@ -1470,6 +1499,31 @@ function () {
     }
 
     return false;
+  };
+
+  Collision.prototype.isChickenConfictWall = function (chicken, view) {
+    if (chicken.pos.x > view.canvas.width - chicken.width || chicken.pos.x < 0) {
+      //console.log(chicken.pos.x);
+      return true;
+    }
+
+    return false;
+  };
+
+  Collision.prototype.isChickenConfictWalls = function (chickens, view) {
+    var _this = this;
+
+    var colliding = false;
+    chickens.forEach(function (c) {
+      view.drawSprite(c);
+      c.moveDownChicken();
+
+      if (_this.isChickenConfictWall(c, view)) {
+        c.moveUpChicken();
+        colliding = true;
+      }
+    });
+    return colliding;
   }; // Check ball collision with bricks
 
 
@@ -1571,6 +1625,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // Level and colors
 var score = 0;
 var gameOver = false;
+var count = 0;
 
 function setGameOver(view) {
   view.drawInfo("Game Over!");
@@ -1582,9 +1637,13 @@ function setGameWin(view) {
 }
 
 function gameLoop(view, chickens, starShip, conlision) {
+  count++;
   view.clear();
-  view.drawChicken(chickens);
+  chickens.forEach(function (chicken) {
+    view.drawSprite(chicken);
+  });
   view.drawSprite(starShip); //view.drawSprite(gift);
+  //conlision.isChickenConfictWalls(chickens, view);
 
   if (starShip.isMovingLeft && starShip.pos.x > 0 || starShip.isMovingRight && starShip.pos.x < view.canvas.width - starShip.width || starShip.isMovingDown && starShip.pos.y > 0 || starShip.isMovingUp && starShip.pos.y < view.canvas.height - starShip.height) {
     starShip.moveStarShip();
@@ -1605,9 +1664,15 @@ function gameLoop(view, chickens, starShip, conlision) {
     g.moveItemSupport();
     var conflicking = conlision.checkCollidingItem(g, starShip);
     if (conflicking) starShip.typeBullet = conlision.typeItem;
-  });
+  }); //conlision.isChickenConfictWalls(chickens, view);
+
   if (conlision.checkCollidingStarshipWithChickens(chickens, starShip)) return setGameOver(view);
-  if (chickens.length === 0) return setGameWin(view);
+
+  if (chickens.length === 0) {
+    chickens = (0, _helper.createChickens)(_setup.LEVEL2);
+    view.drawChicken(chickens);
+  }
+
   if (gameOver) return setGameOver(view);
   requestAnimationFrame(function () {
     return gameLoop(view, chickens, starShip, conlision);
@@ -1619,7 +1684,7 @@ function startGame(view) {
   view.drawInfo('');
   view.drawScore(0);
   var collision = new _Colision.Collision();
-  var chickens = (0, _helper.createChickens)(); //const bullet = new Bullet(BALL_SPEED, BALL_SIZE, {x: BALL_STARTX, y: BALL_STARTY}, BULLET_IMAGE, 2)
+  var chickens = (0, _helper.createChickens)(_setup.LEVEL1); //const bullet = new Bullet(BALL_SPEED, BALL_SIZE, {x: BALL_STARTX, y: BALL_STARTY}, BULLET_IMAGE, 2)
   //const gift = new ItemSupport(1, 50, {x: 300, y: 0}, GIFT_BOX01, 1);
 
   var startShip = new _StarShip.StarShip(_setup.PADDLE_SPEED, _setup.PADDLE_WIDTH, _setup.PADDLE_HEIGHT, {
@@ -1659,7 +1724,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "1113" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "30343" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -43,7 +43,28 @@ export class Collision {
     return false;
   }
 
+  isChickenConfictWall(chicken: Chicken, view: CanvasView) {
+    if(chicken.pos.x > view.canvas.width - chicken.width || chicken.pos.x < 0) {
+      //console.log(chicken.pos.x);
+      return true;
+    }
+    return false;
+  }
 
+  isChickenConfictWalls(chickens: Chicken[], view: CanvasView) {
+    let colliding = false;
+    chickens.forEach(c => {
+      view.drawSprite(c);
+      c.moveDownChicken();
+      if(this.isChickenConfictWall(c, view)) {
+        c.moveUpChicken();
+        colliding = true;
+      }
+
+
+    })
+    return colliding;
+  }
 
   // Check ball collision with bricks
   isCollidingChickens(bullet: Bullet, chickens: Chicken[]): boolean {
@@ -67,7 +88,11 @@ export class Collision {
         }
         colliding = true;
       }
+
+
+
     });
+
     return colliding;
   }
 
@@ -117,5 +142,6 @@ export class Collision {
     }
     return isConflicking;
   }
+
 
 }

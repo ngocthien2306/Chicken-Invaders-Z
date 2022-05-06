@@ -8,13 +8,13 @@ import HEART from '/images/heart.png';
 import COIN from '/images/coin.png';
 import {
   BRICK_IMAGES,
-  LEVEL,
   STAGE_COLS,
   STAGE_PADDING,
   BRICK_WIDTH,
   BRICK_HEIGHT,
   BRICK_PADDING,
-  BRICK_ENERGY
+  BRICK_ENERGY,
+  LEVEL1
 } from './setup';
 import { ItemSupport } from './services/Item';
 import { Vector } from './types';
@@ -26,8 +26,9 @@ import { LeafStrategy } from './strategy/LeafStrategy';
 import { StoneStrategy } from './strategy/StoneStrategy';
 import { ChickenMeatStrategy } from './strategy/ChickenMeatStrategy';
 
-export function createChickens(): Chicken[] {
-  return LEVEL.reduce((ack, element, i) => {
+export function createChickens(level: number[]): Chicken[] {
+
+  return level.reduce((ack, element, i) => {
     const row = Math.floor((i + 1) / STAGE_COLS);
     const col = i % STAGE_COLS;
 
@@ -39,11 +40,13 @@ export function createChickens(): Chicken[] {
     return [
       ...ack,
       new Chicken(
+        1,
         BRICK_WIDTH,
         BRICK_HEIGHT,
         { x, y },
         BRICK_ENERGY[element],
-        BRICK_IMAGES[element]
+        BRICK_IMAGES[element],
+        
       )
     ];
   }, [] as Chicken[]);
