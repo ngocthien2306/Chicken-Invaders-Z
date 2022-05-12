@@ -21,7 +21,7 @@ export class ChickenMeatStrategy implements Strategy {
       lightBullet.speed, lightBullet.size, 
       {x: pos.x + (PADDLE_WIDTH/2 - lightBullet.size/2),
        y: pos.y}, 
-       lightBullet.image, lightBullet.damage);
+       lightBullet.image, lightBullet.damage, 1);
     return bullet;
   }
   

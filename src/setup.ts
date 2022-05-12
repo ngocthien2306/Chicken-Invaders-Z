@@ -1,8 +1,8 @@
-import RED_CHICKEN_IMAGE from './images/chicken_red.png';
+import CHICK from './images/chick.png';
 import BLUE_CHICKEN_IMAGE from './images/chicken_blue.png';
-import GREEN_CHICKEN_IMAGE from './images/chicken_red.png';
-import YELLOW_CHICKEN_IMAGE from './images/chicken_blue.png';
-import PURPLE_CHICKEN_IMAGE from './images/chicken_red.png';
+import RED_CHICKEN_IMAGE from './images/chicken_red.png';
+import BOSS01_CHICKEN_IMAGE from './images/chicken05.png';
+import BOSS02_CHICKEN_IMAGE from './images/chicken06.png';
 
 // Grab the canvas element for calculating the brick width
 // depending on canvas width
@@ -29,11 +29,13 @@ export const BALL_STARTX = 500;
 export const BALL_STARTY = 500;
 
 export const CHICKEN_IMAGES: { [key: number]: string } = {
-  1: RED_CHICKEN_IMAGE,
-  2: GREEN_CHICKEN_IMAGE,
-  3: YELLOW_CHICKEN_IMAGE,
-  4: BLUE_CHICKEN_IMAGE,
-  5: PURPLE_CHICKEN_IMAGE
+  1: CHICK,
+  2: RED_CHICKEN_IMAGE,
+  3: BLUE_CHICKEN_IMAGE,
+  4: BOSS01_CHICKEN_IMAGE,
+  5: BOSS02_CHICKEN_IMAGE,
+  6: BOSS01_CHICKEN_IMAGE,
+  7: BOSS02_CHICKEN_IMAGE
 };
 
 export const CHICKEN_ENERGY: { [key: number]: number } = {
@@ -41,26 +43,24 @@ export const CHICKEN_ENERGY: { [key: number]: number } = {
   2: 2, 
   3: 6, 
   4: 8, 
-  5: 10 
+  5: 10,
+  6: 1000,
+  7: 1400
 };
 
 
 // prettier-ignore
 export const LEVEL1 = [
-  0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0,
-  0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0,
+  0, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0,
+  0, 0, 2, 2, 2, 4, 5, 5, 5, 4, 2, 2, 2, 0, 0,
   0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0,
-  0, 0, 0, 0, 4, 4, 5, 5, 5, 4, 4, 0, 0, 0, 0,
-  0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0,
+  0, 0, 0, 0, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0,
+  0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0,
 ];
 
 // prettier-ignore
 export const LEVEL2 = [
-  0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0,
-  0, 0, 5, 5, 5, 5, 0, 0, 0, 5, 5, 5, 5, 0, 0,
-  0, 0, 3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 0, 0,
-  0, 0, 3, 0, 4, 4, 5, 5, 5, 4, 4, 0, 3, 0, 0,
-  0, 0, 2, 2, 0, 2, 2, 0, 2, 2, 0, 2, 2, 0, 0,
+6, 0, 0, 0, 0, 0, 0, 7
 ];
 
 
@@ -72,6 +72,15 @@ export const LEVEL2 = [
 //   0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 //   0, 0, 4, 4, 4, 4, 4, 4, 0, 0, 
 //   0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+// ];
+
+
+// export const LEVEL2 = [
+//   0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0,
+//   0, 0, 5, 5, 5, 5, 0, 0, 0, 5, 5, 5, 5, 0, 0,
+//   0, 0, 3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 0, 0,
+//   0, 0, 3, 0, 4, 4, 5, 5, 5, 4, 4, 0, 3, 0, 0,
+//   0, 0, 2, 2, 0, 2, 2, 0, 2, 2, 0, 2, 2, 0, 0,
 // ];
 
 

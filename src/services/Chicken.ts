@@ -72,7 +72,7 @@ export class Chicken {
       this.speed.x = - this.speed.x;
     }
 
-    if (this.pos.y < 0 || (this.pos.y + this.height) > view.canvas.height/1.5) {
+    if (this.pos.y < 0 || (this.pos.y + this.height) > view.canvas.height) {
       this.speed.y = - this.speed.y;
   }
     this.pos.x += this.speed.x

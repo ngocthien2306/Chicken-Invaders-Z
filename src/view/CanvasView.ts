@@ -13,6 +13,7 @@ export class CanvasView {
   private heart: HTMLObjectElement | null;
   private meat: HTMLObjectElement | null;
   private coin: HTMLObjectElement | null;
+  private gift: HTMLImageElement | null;
 
 
   constructor(canvasName: string) {
@@ -21,9 +22,10 @@ export class CanvasView {
     this.scoreDisplay = document.querySelector('#score');
     this.start = document.querySelector('#start');
     this.info = document.querySelector('#info');
-    this.heart = document.querySelector('#heart');
+    this.heart = document.querySelector('#heart1');
     this.meat = document.querySelector("#meat");
     this.coin = document.querySelector("#coin");
+    this.gift = document.querySelector("#img-gift");
     
   }
 
@@ -34,8 +36,8 @@ export class CanvasView {
     this.start?.addEventListener('click', () => startFunction(this));
   }
 
-  drawScore(score: number): void {
-    if(this.scoreDisplay) this.scoreDisplay.innerHTML = score.toString();
+  drawScore(score: string): void {
+    if(this.scoreDisplay) this.scoreDisplay.innerHTML = score;
   }
 
   drawInfo(txt: string): void {
@@ -52,6 +54,11 @@ export class CanvasView {
   drawCoin(txt: string): void {
     if(this.coin) this.coin.innerHTML = txt;
   }
+
+  drawGift(txt: string): void {
+    if(this.gift) this.gift.src = txt;
+  }
+
   drawSprite(frame: Chicken | StarShip | Bullet | ItemSupport | Egg): void {
     if(!frame) return;
     this.context?.drawImage(

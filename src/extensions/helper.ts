@@ -54,6 +54,30 @@ export function createChickens(level: number[]): Chicken[] {
     ];
   }, [] as Chicken[]);
 }
+export function createBoss(level: number[]): Chicken[] {
+  return level.reduce((ack, element, i) => {
+    const row = Math.floor((i + 1) / STAGE_COLS);
+    const col = i % STAGE_COLS;
+
+    const x = STAGE_PADDING + col * (BRICK_WIDTH + BRICK_PADDING);
+    const y = STAGE_PADDING + row * (BRICK_HEIGHT + BRICK_PADDING);
+
+    if (element === 0) return ack;
+
+    return [
+      ...ack,
+      new Chicken(
+        2,
+        280,
+        300,
+        { x, y },
+        CHICKEN_ENERGY[element],
+        CHICKEN_IMAGES[element],
+        
+      )
+    ];
+  }, [] as Chicken[]);
+}
 export function createEgg(view: CanvasView, chicken: Chicken) :void {
   const egg = new ItemSupport(1, 30, {x: chicken.pos.x , y: chicken.pos.y}, EGG_IMAGE, 1);
   view.drawSprite(egg);
@@ -73,7 +97,16 @@ export function createHeart(num: number): string {
   return icon;
 }
 
+export function changeGiftBoxesInUI(index: number): string {
+  let img = "/gift-normal.png";
+  if(index === 1) img = "/gift-gift-fire.png"
+  else if(index === 2) img = '/gift-blue.png';
+  else if(index === 3) img = "/gift-light.png";
+  else if(index === 4) img = '/green-gift.png';
+  else if(index === 5) img = '/gift-stone.png';
 
+  return img;
+}
 
 // generate list item (gift, meat, coin,...)
 export function listCategoryItem(): CategoryModel[] {

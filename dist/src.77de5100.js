@@ -134,9 +134,10 @@ function () {
     this.scoreDisplay = document.querySelector('#score');
     this.start = document.querySelector('#start');
     this.info = document.querySelector('#info');
-    this.heart = document.querySelector('#heart');
+    this.heart = document.querySelector('#heart1');
     this.meat = document.querySelector("#meat");
     this.coin = document.querySelector("#coin");
+    this.gift = document.querySelector("#img-gift");
   }
 
   CanvasView.prototype.clear = function () {
@@ -156,7 +157,7 @@ function () {
   };
 
   CanvasView.prototype.drawScore = function (score) {
-    if (this.scoreDisplay) this.scoreDisplay.innerHTML = score.toString();
+    if (this.scoreDisplay) this.scoreDisplay.innerHTML = score;
   };
 
   CanvasView.prototype.drawInfo = function (txt) {
@@ -173,6 +174,10 @@ function () {
 
   CanvasView.prototype.drawCoin = function (txt) {
     if (this.coin) this.coin.innerHTML = txt;
+  };
+
+  CanvasView.prototype.drawGift = function (txt) {
+    if (this.gift) this.gift.src = txt;
   };
 
   CanvasView.prototype.drawSprite = function (frame) {
@@ -204,10 +209,16 @@ function () {
 }();
 
 exports.CanvasView = CanvasView;
-},{}],"images/chicken_red.png":[function(require,module,exports) {
-module.exports = "/chicken_red.0b95f595.png";
+},{}],"images/chick.png":[function(require,module,exports) {
+module.exports = "/chick.d75d671a.png";
 },{}],"images/chicken_blue.png":[function(require,module,exports) {
 module.exports = "/chicken_blue.ef8857b3.png";
+},{}],"images/chicken_red.png":[function(require,module,exports) {
+module.exports = "/chicken_red.0b95f595.png";
+},{}],"images/chicken05.png":[function(require,module,exports) {
+module.exports = "/chicken05.b6f2901a.png";
+},{}],"images/chicken06.png":[function(require,module,exports) {
+module.exports = "/chicken06.2e9b5305.png";
 },{}],"setup.ts":[function(require,module,exports) {
 "use strict";
 
@@ -216,9 +227,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.LEVEL2 = exports.LEVEL1 = exports.CHICKEN_ENERGY = exports.CHICKEN_IMAGES = exports.BALL_STARTY = exports.BALL_STARTX = exports.BALL_SIZE = exports.BALL_SPEED = exports.PADDLE_SPEED = exports.PADDLE_STARTX = exports.PADDLE_HEIGHT = exports.PADDLE_WIDTH = exports.BRICK_HEIGHT = exports.BRICK_WIDTH = exports.BRICK_PADDING = exports.STAGE_COLS = exports.STAGE_ROWS = exports.STAGE_PADDING = void 0;
 
-var _chicken_red = _interopRequireDefault(require("./images/chicken_red.png"));
+var _chick = _interopRequireDefault(require("./images/chick.png"));
 
 var _chicken_blue = _interopRequireDefault(require("./images/chicken_blue.png"));
+
+var _chicken_red = _interopRequireDefault(require("./images/chicken_red.png"));
+
+var _chicken = _interopRequireDefault(require("./images/chicken05.png"));
+
+var _chicken2 = _interopRequireDefault(require("./images/chicken06.png"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -255,11 +272,13 @@ exports.BALL_STARTX = BALL_STARTX;
 var BALL_STARTY = 500;
 exports.BALL_STARTY = BALL_STARTY;
 var CHICKEN_IMAGES = {
-  1: _chicken_red.default,
+  1: _chick.default,
   2: _chicken_red.default,
   3: _chicken_blue.default,
-  4: _chicken_blue.default,
-  5: _chicken_red.default
+  4: _chicken.default,
+  5: _chicken2.default,
+  6: _chicken.default,
+  7: _chicken2.default
 };
 exports.CHICKEN_IMAGES = CHICKEN_IMAGES;
 var CHICKEN_ENERGY = {
@@ -267,14 +286,16 @@ var CHICKEN_ENERGY = {
   2: 2,
   3: 6,
   4: 8,
-  5: 10
+  5: 10,
+  6: 1000,
+  7: 1400
 }; // prettier-ignore
 
 exports.CHICKEN_ENERGY = CHICKEN_ENERGY;
-var LEVEL1 = [0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 4, 4, 5, 5, 5, 4, 4, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0]; // prettier-ignore
+var LEVEL1 = [0, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0, 0, 0, 2, 2, 2, 4, 5, 5, 5, 4, 2, 2, 2, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0]; // prettier-ignore
 
 exports.LEVEL1 = LEVEL1;
-var LEVEL2 = [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 5, 5, 5, 5, 0, 0, 0, 5, 5, 5, 5, 0, 0, 0, 0, 3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 0, 0, 0, 0, 3, 0, 4, 4, 5, 5, 5, 4, 4, 0, 3, 0, 0, 0, 0, 2, 2, 0, 2, 2, 0, 2, 2, 0, 2, 2, 0, 0]; // export const LEVEL = [
+var LEVEL2 = [6, 0, 0, 0, 0, 0, 0, 7]; // export const LEVEL = [
 //   0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 //   0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 //   0, 0, 1, 1, 1, 1, 1, 1, 0, 0,
@@ -282,9 +303,16 @@ var LEVEL2 = [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 5, 5, 5, 5, 0, 
 //   0, 0, 4, 4, 4, 4, 4, 4, 0, 0, 
 //   0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 // ];
+// export const LEVEL2 = [
+//   0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0,
+//   0, 0, 5, 5, 5, 5, 0, 0, 0, 5, 5, 5, 5, 0, 0,
+//   0, 0, 3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 0, 0,
+//   0, 0, 3, 0, 4, 4, 5, 5, 5, 4, 4, 0, 3, 0, 0,
+//   0, 0, 2, 2, 0, 2, 2, 0, 2, 2, 0, 2, 2, 0, 0,
+// ];
 
 exports.LEVEL2 = LEVEL2;
-},{"./images/chicken_red.png":"images/chicken_red.png","./images/chicken_blue.png":"images/chicken_blue.png"}],"strategy/context.ts":[function(require,module,exports) {
+},{"./images/chick.png":"images/chick.png","./images/chicken_blue.png":"images/chicken_blue.png","./images/chicken_red.png":"images/chicken_red.png","./images/chicken05.png":"images/chicken05.png","./images/chicken06.png":"images/chicken06.png"}],"strategy/context.ts":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -407,7 +435,7 @@ function () {
       this.speed.x = -this.speed.x;
     }
 
-    if (this.pos.y < 0 || this.pos.y + this.height > view.canvas.height / 1.5) {
+    if (this.pos.y < 0 || this.pos.y + this.height > view.canvas.height) {
       this.speed.y = -this.speed.y;
     }
 
@@ -556,7 +584,7 @@ function () {
     var bullet = new _Bullet.Bullet(iceBullet.speed, iceBullet.size, {
       x: pos.x + (_setup.PADDLE_WIDTH / 2 - iceBullet.size / 2),
       y: pos.y
-    }, iceBullet.image, iceBullet.damage);
+    }, iceBullet.image, iceBullet.damage, 3);
     return bullet;
   };
 
@@ -617,7 +645,7 @@ function () {
     var bullet = new _Bullet.Bullet(lightBullet.speed, lightBullet.size, {
       x: pos.x + (_setup.PADDLE_WIDTH / 2 - lightBullet.size / 2),
       y: pos.y
-    }, lightBullet.image, lightBullet.damage);
+    }, lightBullet.image, lightBullet.damage, 8);
     return bullet;
   };
 
@@ -678,7 +706,7 @@ function () {
     var bullet = new _Bullet.Bullet(lightBullet.speed, lightBullet.size, {
       x: pos.x + (_setup.PADDLE_WIDTH / 2 - lightBullet.size / 2),
       y: pos.y
-    }, lightBullet.image, lightBullet.damage);
+    }, lightBullet.image, lightBullet.damage, 2);
     return bullet;
   };
 
@@ -739,7 +767,7 @@ function () {
     var bullet = new _Bullet.Bullet(iceBullet.speed, iceBullet.size, {
       x: pos.x + (_setup.PADDLE_WIDTH / 2 - iceBullet.size / 2),
       y: pos.y
-    }, iceBullet.image, iceBullet.damage);
+    }, iceBullet.image, iceBullet.damage, 1);
     return bullet;
   };
 
@@ -794,7 +822,7 @@ function () {
     var bullet = new _Bullet.Bullet(lightBullet.speed, lightBullet.size, {
       x: pos.x + (_setup.PADDLE_WIDTH / 2 - lightBullet.size / 2),
       y: pos.y
-    }, lightBullet.image, lightBullet.damage);
+    }, lightBullet.image, lightBullet.damage, 1);
     return bullet;
   };
 
@@ -849,7 +877,7 @@ function () {
     var bullet = new _Bullet.Bullet(lightBullet.speed, lightBullet.size, {
       x: pos.x + (_setup.PADDLE_WIDTH / 2 - lightBullet.size / 2),
       y: pos.y
-    }, lightBullet.image, lightBullet.damage);
+    }, lightBullet.image, lightBullet.damage, 1);
     return bullet;
   };
 
@@ -878,10 +906,12 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.createChickens = createChickens;
+exports.createBoss = createBoss;
 exports.createEgg = createEgg;
 exports.getRandomInt = getRandomInt;
 exports.getRandomSpeed = getRandomSpeed;
 exports.createHeart = createHeart;
+exports.changeGiftBoxesInUI = changeGiftBoxesInUI;
 exports.listCategoryItem = listCategoryItem;
 exports.getItemSupport = getItemSupport;
 
@@ -951,6 +981,20 @@ function createChickens(level) {
   }, []);
 }
 
+function createBoss(level) {
+  return level.reduce(function (ack, element, i) {
+    var row = Math.floor((i + 1) / _setup.STAGE_COLS);
+    var col = i % _setup.STAGE_COLS;
+    var x = _setup.STAGE_PADDING + col * (_setup.BRICK_WIDTH + _setup.BRICK_PADDING);
+    var y = _setup.STAGE_PADDING + row * (_setup.BRICK_HEIGHT + _setup.BRICK_PADDING);
+    if (element === 0) return ack;
+    return __spreadArrays(ack, [new _Chicken.Chicken(2, 280, 300, {
+      x: x,
+      y: y
+    }, _setup.CHICKEN_ENERGY[element], _setup.CHICKEN_IMAGES[element])]);
+  }, []);
+}
+
 function createEgg(view, chicken) {
   var egg = new _Item.ItemSupport(1, 30, {
     x: chicken.pos.x,
@@ -976,6 +1020,12 @@ function getRandomSpeed(max) {
 function createHeart(num) {
   var icon = "<span>" + num.toString() + "</span> " + "<i class='fa fa-heart red'></i>";
   return icon;
+}
+
+function changeGiftBoxesInUI(index) {
+  var img = "/gift-normal.png";
+  if (index === 1) img = "/gift-gift-fire.png";else if (index === 2) img = '/gift-blue.png';else if (index === 3) img = "/gift-light.png";else if (index === 4) img = '/green-gift.png';else if (index === 5) img = '/gift-stone.png';
+  return img;
 } // generate list item (gift, meat, coin,...)
 
 
@@ -1152,7 +1202,7 @@ var _helper = require("~/extensions/helper");
 var Bullet =
 /** @class */
 function () {
-  function Bullet(speed, bulletSize, position, image, damage) {
+  function Bullet(speed, bulletSize, position, image, damage, deviation) {
     this.bulletSize = bulletSize;
     this.position = position;
     this.bulletImage = new Image();
@@ -1164,7 +1214,8 @@ function () {
     };
     this.bulletImage.src = image;
     this.shoting = false;
-    this.damage = damage; //document.addEventListener('keydown', this.handleKeySpace);
+    this.damage = damage;
+    this.deviation = deviation; //document.addEventListener('keydown', this.handleKeySpace);
   }
 
   Object.defineProperty(Bullet.prototype, "width", {
@@ -1178,6 +1229,13 @@ function () {
   Object.defineProperty(Bullet.prototype, "height", {
     get: function get() {
       return this.bulletSize;
+    },
+    enumerable: false,
+    configurable: true
+  });
+  Object.defineProperty(Bullet.prototype, "deviationBullet", {
+    get: function get() {
+      return this.deviation;
     },
     enumerable: false,
     configurable: true
@@ -1225,7 +1283,7 @@ function () {
   };
 
   Bullet.prototype.moveBullet = function () {
-    var _a = (0, _helper.getRandomSpeed)(5),
+    var _a = (0, _helper.getRandomSpeed)(this.deviationBullet),
         number = _a.number,
         type = _a.type;
 
@@ -1279,7 +1337,7 @@ function () {
     var bullet = new _Bullet.Bullet(fireBullet.speed, fireBullet.size, {
       x: pos.x + (_setup.PADDLE_WIDTH / 2 - fireBullet.size / 2),
       y: pos.y
-    }, fireBullet.image, fireBullet.damage);
+    }, fireBullet.image, fireBullet.damage, 3);
     return bullet;
   };
 
@@ -1329,7 +1387,7 @@ function () {
     var bullet = new _Bullet.Bullet(nomalBullet.speed, nomalBullet.size, {
       x: pos.x + (_setup.PADDLE_WIDTH / 2 - nomalBullet.size / 2),
       y: pos.y
-    }, nomalBullet.image, nomalBullet.damage);
+    }, nomalBullet.image, nomalBullet.damage, 1);
     return bullet;
   };
 
@@ -1844,7 +1902,6 @@ exports.Egg = Egg;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.drawAndMoveObject = drawAndMoveObject;
 exports.moveStarShip = moveStarShip;
 exports.shootingBullet = shootingBullet;
 exports.drawAndMoveGift = drawAndMoveGift;
@@ -1861,8 +1918,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var score = 0;
 
-function drawAndMoveObject(starShip, view, conlision, chickens) {}
-
 function moveStarShip(starShip, view) {
   if (starShip.isMovingLeft && starShip.pos.x > 0 || starShip.isMovingRight && starShip.pos.x < view.canvas.width - starShip.width || starShip.isMovingDown && starShip.pos.y > 0 || starShip.isMovingUp && starShip.pos.y < view.canvas.height - starShip.height) {
     starShip.moveStarShip();
@@ -1877,7 +1932,7 @@ function shootingBullet(starShip, view, conlision, chickens) {
 
     if (collidingBrick) {
       score += b.damage;
-      view.drawScore(score);
+      view.drawScore("Score: " + score.toString());
     }
   });
 }
@@ -1887,7 +1942,10 @@ function drawAndMoveGift(conlision, view, starShip) {
     view.drawSprite(g);
     g.moveItemSupport();
     var conflicking = conlision.checkCollidingItem(g, starShip);
-    if (conflicking) starShip.typeBullet = conlision.typeItem;
+
+    if (conflicking) {
+      starShip.typeBullet = conlision.typeItem; //view.drawGift(changeGiftBoxesInUI(conlision.typeItem));
+    }
   });
 }
 
@@ -1963,7 +2021,7 @@ function gameLoop(view, chickens, starShip, conlision) {
   if (conlision.checkCollidingStarshipWithChickens(chickens, starShip)) return setGameOver(view);
 
   if (chickens.length === 0) {
-    chickens = (0, _helper.createChickens)(_setup.LEVEL2);
+    chickens = (0, _helper.createBoss)(_setup.LEVEL2);
     view.drawChicken(chickens);
   }
 
@@ -1976,7 +2034,7 @@ function gameLoop(view, chickens, starShip, conlision) {
 function startGame(view) {
   score = 0;
   view.drawInfo('');
-  view.drawScore(0);
+  view.drawScore("Score: 0");
   var collision = new _Colision.Collision();
   var chickens = (0, _helper.createChickens)(_setup.LEVEL1);
   var startShip = new _StarShip.StarShip(_setup.PADDLE_SPEED, _setup.PADDLE_WIDTH, _setup.PADDLE_HEIGHT, {
@@ -1988,10 +2046,6 @@ function startGame(view) {
 
 var view = new _CanvasView.CanvasView("#playField");
 view.initStartButton(startGame);
-
-function creaItem(creaItem) {
-  throw new Error("Function not implemented.");
-}
 },{"./view/CanvasView":"view/CanvasView.ts","./services/StarShip":"services/StarShip.ts","./Colision":"Colision.ts","/images/spaceship.png":"images/spaceship.png","./setup":"setup.ts","./extensions/helper":"extensions/helper.ts","./extensions/move.extensions":"extensions/move.extensions.ts"}],"../node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -2020,7 +2074,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "45412" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53394" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

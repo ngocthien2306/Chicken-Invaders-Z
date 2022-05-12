@@ -15,8 +15,15 @@
             <canvas id="playField" width="1000" height="600"></canvas>
             <img id="background" src="/background.0063873b.png">
             <div id="display">
-              <div id="score"></div>
-              <div id="heart"> <span>3</span><i class="fa fa-heart red"></i></div>
+              <div id="score">Score: </div>
+              <div id="heart"> 
+                <div id="heart1">
+                  <span>3</span><i class="fa fa-heart red"></i>
+                </div>
+                <div>
+                  <img id="img-gift" width="35px" height="35px" src="/energy.758b191f.png">
+                </div>
+              </div>
               <button id="start" class="btn btn-primary">Start</button>
               <div id="item">
                 <div id="item1"> <span id="meat">0</span> <img width="35px" height="35px" src="/meat01.5d124be7.png"></div>
@@ -75,6 +82,12 @@
       width: 100px;
     }
     #item {
+      display:flex;
+      margin: 0 5px;
+      justify-content: space-around;
+    }
+
+    #heart {
       display:flex;
       margin: 0 5px;
       justify-content: space-around;

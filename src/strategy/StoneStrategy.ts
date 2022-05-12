@@ -21,7 +21,7 @@ export class StoneStrategy implements Strategy {
       iceBullet.speed, iceBullet.size, 
       {x: pos.x + (PADDLE_WIDTH/2 - iceBullet.size/2),
        y: pos.y}, 
-       iceBullet.image, iceBullet.damage);
+       iceBullet.image, iceBullet.damage, 1);
 
     return bullet;
   }

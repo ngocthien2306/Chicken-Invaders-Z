@@ -15,7 +15,7 @@ export class Nomaltrategy implements Strategy {
       nomalBullet.speed, nomalBullet.size, 
       {x: pos.x + (PADDLE_WIDTH/2 - nomalBullet.size/2),
        y: pos.y}, 
-       nomalBullet.image, nomalBullet.damage);
+       nomalBullet.image, nomalBullet.damage, 1);
 
     return bullet;
   }

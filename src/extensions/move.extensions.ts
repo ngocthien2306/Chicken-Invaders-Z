@@ -3,13 +3,10 @@ import { Chicken } from "~/services/Chicken";
 import { Egg } from "~/services/Egg";
 import { StarShip } from "~/services/StarShip";
 import { CanvasView } from "~/view/CanvasView";
-import { createHeart, getRandomInt } from "./helper";
+import { changeGiftBoxesInUI, getRandomInt } from "./helper";
 import EGG_IMAGE from "/images/egg.png";
 let score = 0;
-export function drawAndMoveObject(starShip: StarShip, view: CanvasView, conlision: Collision, chickens: Chicken[]): void {
 
-
-}
 
 export function moveStarShip(starShip: StarShip, view: CanvasView): void {
   if(
@@ -31,7 +28,7 @@ export function shootingBullet(starShip: StarShip, view: CanvasView, conlision: 
     const collidingBrick = conlision.isCollidingChickens(b, chickens);
     if (collidingBrick) {
       score += b.damage;
-      view.drawScore(score);
+      view.drawScore("Score: " + score.toString());
     }
   })
 }
@@ -41,7 +38,10 @@ export function drawAndMoveGift(conlision: Collision, view: CanvasView, starShip
     view.drawSprite(g);
     g.moveItemSupport();
     const conflicking = conlision.checkCollidingItem(g, starShip);
-    if(conflicking) starShip.typeBullet = conlision.typeItem;
+    if(conflicking) {
+      starShip.typeBullet = conlision.typeItem;
+      //view.drawGift(changeGiftBoxesInUI(conlision.typeItem));
+    }
   })
 }
 
@@ -64,6 +64,5 @@ export function drawAndMoveChicken(chickens: Chicken[], view: CanvasView): void 
     chicken.moveChicken(view);
     view.drawSprite(chicken);
   }) 
-
 }
   

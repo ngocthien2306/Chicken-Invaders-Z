@@ -6,7 +6,7 @@ import { Collision } from "./Colision";
 import STARSHIP_IMAGE from '/images/spaceship.png';
 // Level and colors
 import { PADDLE_WIDTH, PADDLE_HEIGHT, BALL_SPEED, PADDLE_SPEED, BALL_STARTX, BALL_STARTY, BRICK_HEIGHT, BALL_SIZE, PADDLE_STARTX, LEVEL1, LEVEL2 } from "./setup";
-import { createChickens, createHeart } from "./extensions/helper";
+import { createBoss, createChickens, createHeart } from "./extensions/helper";
 import { drawAndMoveChicken, drawAndMoveEgg, drawAndMoveGift, moveStarShip, shootingBullet } from "./extensions/move.extensions";
 
 
@@ -41,7 +41,7 @@ function gameLoop(view: CanvasView, chickens: Chicken[], starShip: StarShip, con
   if(starShip.level === 0) return setGameOver(view);
   if(conlision.checkCollidingStarshipWithChickens(chickens, starShip)) return setGameOver(view);
   if(chickens.length === 0) {
-    chickens = createChickens(LEVEL2);
+    chickens = createBoss(LEVEL2);
     view.drawChicken(chickens);
   }
   if(gameOver) return setGameOver(view);
@@ -53,7 +53,7 @@ function gameLoop(view: CanvasView, chickens: Chicken[], starShip: StarShip, con
 function startGame(view: CanvasView) {
   score = 0;
   view.drawInfo('');
-  view.drawScore(0);
+  view.drawScore("Score: 0");
   const collision = new Collision();
   const chickens = createChickens(LEVEL1);
   const startShip = new StarShip(PADDLE_SPEED, PADDLE_WIDTH, PADDLE_HEIGHT, {x: PADDLE_STARTX, y: view.canvas.height - PADDLE_HEIGHT - 5}, STARSHIP_IMAGE, 3, -1);
@@ -62,7 +62,5 @@ function startGame(view: CanvasView) {
 
 const view = new CanvasView("#playField"); 
 view.initStartButton(startGame)
-function creaItem(creaItem: any) {
-  throw new Error("Function not implemented.");
-}
+
 

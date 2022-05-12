@@ -4,8 +4,9 @@ export class Bullet {
   private speed: Vector;
   damage: number;
   shoting: boolean;
+  deviation: number;
   private bulletImage: HTMLImageElement = new Image();
-  constructor(speed: number, private bulletSize: number, private position: Vector, image: string, damage: number) {
+  constructor(speed: number, private bulletSize: number, private position: Vector, image: string, damage: number, deviation: number) {
     this.bulletSize = bulletSize;
     this.position = position;
     this.speed = {
@@ -15,6 +16,7 @@ export class Bullet {
     this.bulletImage.src = image;
     this.shoting = false;
     this.damage = damage;
+    this.deviation = deviation;
     //document.addEventListener('keydown', this.handleKeySpace);
   }
 
@@ -27,6 +29,9 @@ export class Bullet {
     return this.bulletSize;
   }
 
+  get deviationBullet() :number {
+    return this.deviation;
+  }
   get damageAttack(): number {
     return this.damage;
   }
@@ -55,7 +60,7 @@ export class Bullet {
     this.speed.x = -this.speed.x;
   }
   moveBullet(): void {
-    const {number, type} = getRandomSpeed(5);
+    const {number, type} = getRandomSpeed(this.deviationBullet);
     if(type === 1)
       this.pos.x += number;
     else
