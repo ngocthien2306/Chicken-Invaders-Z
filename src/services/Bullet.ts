@@ -1,3 +1,4 @@
+import { getRandomInt, getRandomSpeed } from "~/extensions/helper";
 import { Vector } from "~/types";
 export class Bullet {
   private speed: Vector;
@@ -54,7 +55,11 @@ export class Bullet {
     this.speed.x = -this.speed.x;
   }
   moveBullet(): void {
-    //this.pos.x += this.speed.x;
+    const {number, type} = getRandomSpeed(5);
+    if(type === 1)
+      this.pos.x += number;
+    else
+      this.pos.x -= number;;
     this.pos.y += this.speed.y;
   }
 

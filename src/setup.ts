@@ -1,8 +1,8 @@
-import RED_BRICK_IMAGE from './images/chicken_red.png';
-import BLUE_BRICK_IMAGE from './images/chicken_blue.png';
-import GREEN_BRICK_IMAGE from './images/chicken_red.png';
-import YELLOW_BRICK_IMAGE from './images/chicken_blue.png';
-import PURPLE_BRICK_IMAGE from './images/chicken_red.png';
+import RED_CHICKEN_IMAGE from './images/chicken_red.png';
+import BLUE_CHICKEN_IMAGE from './images/chicken_blue.png';
+import GREEN_CHICKEN_IMAGE from './images/chicken_red.png';
+import YELLOW_CHICKEN_IMAGE from './images/chicken_blue.png';
+import PURPLE_CHICKEN_IMAGE from './images/chicken_red.png';
 
 // Grab the canvas element for calculating the brick width
 // depending on canvas width
@@ -28,15 +28,15 @@ export const BALL_SIZE = 20;
 export const BALL_STARTX = 500;
 export const BALL_STARTY = 500;
 
-export const BRICK_IMAGES: { [key: number]: string } = {
-  1: RED_BRICK_IMAGE,
-  2: GREEN_BRICK_IMAGE,
-  3: YELLOW_BRICK_IMAGE,
-  4: BLUE_BRICK_IMAGE,
-  5: PURPLE_BRICK_IMAGE
+export const CHICKEN_IMAGES: { [key: number]: string } = {
+  1: RED_CHICKEN_IMAGE,
+  2: GREEN_CHICKEN_IMAGE,
+  3: YELLOW_CHICKEN_IMAGE,
+  4: BLUE_CHICKEN_IMAGE,
+  5: PURPLE_CHICKEN_IMAGE
 };
 
-export const BRICK_ENERGY: { [key: number]: number } = {
+export const CHICKEN_ENERGY: { [key: number]: number } = {
   1: 2, 
   2: 2, 
   3: 6, 

@@ -4,13 +4,18 @@ import { Bullet } from "./services/Bullet";
 import { CanvasView } from "./view/CanvasView";
 import { ItemSupport } from "./services/Item";
 
-import { getItemSupport, getRandomInt, listCategoryItem } from "./helper";
+import { getItemSupport, getRandomInt, listCategoryItem } from "./extensions/helper";
 import { ItemModel } from "./model/Item.model";
+import { Egg } from "./services/Egg";
 export class Collision {
 
   gifts: ItemSupport[] = [];
-
+  eggs: Egg[] = []
+  timeImmortal: number = 1000;
   typeNumberItem!: number;
+  countMeat: number = 0;
+  countCoin: number = 0;
+
   get typeItem():number {
     return this.typeNumberItem;
   }
@@ -66,7 +71,7 @@ export class Collision {
     return colliding;
   }
 
-  // Check ball collision with bricks
+  // Check bullet collision with chicken
   isCollidingChickens(bullet: Bullet, chickens: Chicken[]): boolean {
     let colliding = false;
 
@@ -110,9 +115,13 @@ export class Collision {
 
   checkCollidingStarshipWithChickens(chickens: Chicken[], starShip: StarShip): boolean {
     let colliding = false;
+
     chickens.forEach((chicken, i) => {
       if(this.checkCollidingStarshipWithChicken(chicken, starShip)) {
         chickens.splice(i, 1);
+        starShip.pos.x = 450;
+        starShip.pos.y = 515;
+
         if(starShip.heart === 0) {
           colliding = true;
         }
@@ -123,7 +132,20 @@ export class Collision {
     })
     return colliding;
   }
-
+  checkCollidingEgg(egg: Egg, starShip: StarShip): void {
+    if(
+      egg.pos.x + egg.width > starShip.pos.x &&
+      egg.pos.x < starShip.pos.x + starShip.width &&
+      egg.pos.y + egg.height > starShip.pos.y &&
+      egg.pos.y < starShip.pos.y + starShip.height
+      ) 
+      {
+        starShip.pos.x = 450;
+        starShip.pos.y = 515;
+        egg.changeDirectionWhenConfict();
+        starShip.level--;
+      }
+  }
   checkCollidingItem(item: ItemSupport, starShip: StarShip): boolean {
     let isConflicking = false;
     if(
@@ -136,7 +158,24 @@ export class Collision {
       item.changeDirectionWhenConfict();
       if(item.typeGift < 6) {
         this.typeNumberItem = item.typeGift;
+        
       }
+      else if (item.typeGift === 9){
+        starShip.level++;
+      }
+      else if (item.typeGift === 10) {
+        this.countCoin++;
+      }
+      else if(item.typeGift === 6) {
+        this.countMeat++;
+      }
+      else if(item.typeGift === 8) {
+        this.countMeat += 5;
+      }
+      else if(item.typeGift === 7) {
+        this.countMeat += 3;
+      }
+      
       
       isConflicking = true;
     }

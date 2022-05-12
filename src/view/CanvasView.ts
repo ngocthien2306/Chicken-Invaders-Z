@@ -2,6 +2,7 @@ import { Chicken } from "~/services/Chicken";
 import { Bullet } from "~/services/Bullet";
 import { StarShip } from "~/services/StarShip";
 import { ItemSupport } from "~/services/Item";
+import { Egg } from "~/services/Egg";
 
 export class CanvasView {
   canvas: HTMLCanvasElement;
@@ -9,6 +10,10 @@ export class CanvasView {
   private scoreDisplay: HTMLObjectElement | null;
   private start: HTMLObjectElement | null;
   private info: HTMLObjectElement | null;
+  private heart: HTMLObjectElement | null;
+  private meat: HTMLObjectElement | null;
+  private coin: HTMLObjectElement | null;
+
 
   constructor(canvasName: string) {
     this.canvas = document.querySelector(canvasName) as HTMLCanvasElement;
@@ -16,6 +21,10 @@ export class CanvasView {
     this.scoreDisplay = document.querySelector('#score');
     this.start = document.querySelector('#start');
     this.info = document.querySelector('#info');
+    this.heart = document.querySelector('#heart');
+    this.meat = document.querySelector("#meat");
+    this.coin = document.querySelector("#coin");
+    
   }
 
   clear():void {
@@ -32,8 +41,18 @@ export class CanvasView {
   drawInfo(txt: string): void {
     if(this.info) this.info.innerHTML = txt;
   }
+  drawHeart(txt: string): void {
+    if(this.heart) this.heart.innerHTML = txt;
+  }
 
-  drawSprite(frame: Chicken | StarShip | Bullet | ItemSupport): void {
+  drawMeat(txt: string): void {
+    if(this.meat) this.meat.innerHTML = txt;
+  }
+
+  drawCoin(txt: string): void {
+    if(this.coin) this.coin.innerHTML = txt;
+  }
+  drawSprite(frame: Chicken | StarShip | Bullet | ItemSupport | Egg): void {
     if(!frame) return;
     this.context?.drawImage(
       frame.image,

@@ -125,7 +125,7 @@ export class StarShip {
   };
 
   handleKeyRight = (e: KeyboardEvent): void => {
-    this.StrattygyBullet();
+    this.StrategyBullet();
     switch (e.key) {
       case 'a':
         this.moveLeft = true
@@ -147,7 +147,7 @@ export class StarShip {
     }
   };
 
-  public StrattygyBullet(): Bullet[] {
+  public StrategyBullet(): Bullet[] {
     const bulletModel: BulletModel = {
       speed: BALL_SPEED,
       size: BALL_SIZE,

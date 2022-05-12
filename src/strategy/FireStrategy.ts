@@ -22,6 +22,7 @@ export class FireStrategy implements Strategy {
       {x: pos.x + (PADDLE_WIDTH/2 - fireBullet.size/2),
        y: pos.y}, 
        fireBullet.image, fireBullet.damage);
+       
     return bullet;
   }
   

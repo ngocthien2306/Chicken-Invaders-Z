@@ -1,30 +1,33 @@
-import { CategoryModel, ItemModel } from './model/Item.model';
-import { Chicken } from './services/Chicken';
+import { CategoryModel, ItemModel } from '../model/Item.model';
+import { Chicken } from '../services/Chicken';
 import GIFT_FIRE from '/images/gift-fire.png';
 import MEAT_SMALL from '/images/meat01.png';
 import MEAT_MEDIUM from '/images/meat02.png';
 import MEAT_LARGE from '/images/meat03.png';
 import HEART from '/images/heart.png';
 import COIN from '/images/coin.png';
+import EGG_IMAGE from '/images/egg.png';
 import {
-  BRICK_IMAGES,
+  CHICKEN_IMAGES,
   STAGE_COLS,
   STAGE_PADDING,
   BRICK_WIDTH,
   BRICK_HEIGHT,
   BRICK_PADDING,
-  BRICK_ENERGY,
-  LEVEL1
-} from './setup';
-import { ItemSupport } from './services/Item';
-import { Vector } from './types';
-import { Context } from './strategy/context';
-import { FireStrategy } from './strategy/FireStrategy';
-import { IceStrategy } from './strategy/IceStrategy';
-import { LightStrategy } from './strategy/LightningStrategy';
-import { LeafStrategy } from './strategy/LeafStrategy';
-import { StoneStrategy } from './strategy/StoneStrategy';
-import { ChickenMeatStrategy } from './strategy/ChickenMeatStrategy';
+  CHICKEN_ENERGY
+  
+} from '../setup';
+import { ItemSupport } from '../services/Item';
+import { Vector } from '../types';
+import { Context } from '../strategy/context';
+import { FireStrategy } from '../strategy/FireStrategy';
+import { IceStrategy } from '../strategy/IceStrategy';
+import { LightStrategy } from '../strategy/LightningStrategy';
+import { LeafStrategy } from '../strategy/LeafStrategy';
+import { StoneStrategy } from '../strategy/StoneStrategy';
+import { ChickenMeatStrategy } from '../strategy/ChickenMeatStrategy';
+import { OtherItemStrategy } from '../strategy/OtherItemStrategy';
+import { CanvasView } from '../view/CanvasView';
 
 export function createChickens(level: number[]): Chicken[] {
 
@@ -40,21 +43,39 @@ export function createChickens(level: number[]): Chicken[] {
     return [
       ...ack,
       new Chicken(
-        1,
+        0.8,
         BRICK_WIDTH,
         BRICK_HEIGHT,
         { x, y },
-        BRICK_ENERGY[element],
-        BRICK_IMAGES[element],
+        CHICKEN_ENERGY[element],
+        CHICKEN_IMAGES[element],
         
       )
     ];
   }, [] as Chicken[]);
 }
-
+export function createEgg(view: CanvasView, chicken: Chicken) :void {
+  const egg = new ItemSupport(1, 30, {x: chicken.pos.x , y: chicken.pos.y}, EGG_IMAGE, 1);
+  view.drawSprite(egg);
+  egg.moveItemSupport();
+}
 export function getRandomInt(max: number) {
   return Math.floor(Math.random() * max);
 }
+export function getRandomSpeed(max: number): {number: number, type: number} {
+  var plusOrMinus = Math.random() < 0.5 ? -1 : 1;
+  var ranNum = Math.floor(Math.random()*max)
+  return {number: ranNum, type:plusOrMinus}
+}
+
+export function createHeart(num: number): string {
+  let icon = "<span>" + num.toString() + "</span> "  + "<i class='fa fa-heart red'></i>";
+  return icon;
+}
+
+
+
+// generate list item (gift, meat, coin,...)
 export function listCategoryItem(): CategoryModel[] {
 
   let categorys: CategoryModel[] = [];
@@ -71,6 +92,8 @@ export function listCategoryItem(): CategoryModel[] {
   const category9: CategoryModel = {Id: 9, Name: "Heart", Type: "level"};
   const category10: CategoryModel = {Id: 10, Name: "Money", Type: "money"};
 
+  const category11: CategoryModel = {Id: 11, Name: "Egg", Type: "egg"};
+
   categorys.push(category1);
   categorys.push(category2);
   categorys.push(category3);
@@ -81,7 +104,7 @@ export function listCategoryItem(): CategoryModel[] {
   categorys.push(category8);
   categorys.push(category9);
   categorys.push(category10);
-
+  categorys.push(category11);
   return categorys;
 
 }
@@ -157,7 +180,7 @@ export function getItemSupport(posX: number, posY: number): ItemSupport {
       image: HEART,
       type: categorys[randomNumber]
     }
-    const context = new Context(new ChickenMeatStrategy());
+    const context = new Context(new OtherItemStrategy());
     item = context.doBusinessLogicItem(modelMeat, vector);
   }
   else if(randomNumber === 9) {
@@ -167,9 +190,18 @@ export function getItemSupport(posX: number, posY: number): ItemSupport {
       image: COIN,
       type: categorys[randomNumber]
     }
-    const context = new Context(new ChickenMeatStrategy());
+    const context = new Context(new OtherItemStrategy());
     item = context.doBusinessLogicItem(modelMeat, vector);
   }
-  
+  else if(randomNumber === 10) {
+    const modelMeat: ItemModel = {
+      speed: 1,
+      size: 30, 
+      image: EGG_IMAGE,
+      type: categorys[randomNumber]
+    }
+    const context = new Context(new OtherItemStrategy());
+    item = context.doBusinessLogicItem(modelMeat, vector);
+  }
   return item;
 }

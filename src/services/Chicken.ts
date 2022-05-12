@@ -1,15 +1,18 @@
 import { Vector } from "~/types";
+import { CanvasView } from "~/view/CanvasView";
+import { Egg } from "./Egg";
 
 export class Chicken {
   private chickenImage: HTMLImageElement = new Image();
   private speed: Vector;
   public count: number = 0;
+
   constructor(
     speed: number,
-    private brickWidth: number,
-    private brickHeight: number,
+    private chickenWidth: number,
+    private chickenHeight: number,
     private postion: Vector,
-    private brickEnergy: number,
+    private chickenEnergy: number,
     image: string
 
     ) 
@@ -18,10 +21,10 @@ export class Chicken {
         x: speed,
         y: -speed
       };
-      this.brickWidth = brickWidth;
-      this.brickHeight = brickHeight;
+      this.chickenWidth = chickenWidth;
+      this.chickenHeight = chickenHeight;
       this.postion = postion;
-      this.brickEnergy = brickEnergy;
+      this.chickenEnergy = chickenEnergy;
       this.chickenImage.src = image;
 
     }
@@ -31,11 +34,11 @@ export class Chicken {
   }
 
   get width(): number {
-    return this.brickWidth;
+    return this.chickenWidth;
   }
 
   get height(): number {
-    return this.brickHeight;
+    return this.chickenHeight;
   }
 
   get pos(): Vector {
@@ -47,11 +50,11 @@ export class Chicken {
   }
 
   get energy(): number {
-    return this.brickEnergy;
+    return this.chickenEnergy;
   }
 
   set energy(energy: number) {
-    this.brickEnergy = energy;
+    this.chickenEnergy = energy;
   }
   changeYDirection(): void {
     this.speed.y = this.speed.y;
@@ -64,5 +67,17 @@ export class Chicken {
     this.pos.x += this.speed.x;
     //this.pos.y += this.speed.y;
   }
+  moveChicken(view: CanvasView): void {
+    if(this.pos.x < 0 || (this.pos.x + this.width) > view.canvas.width) {
+      this.speed.x = - this.speed.x;
+    }
+
+    if (this.pos.y < 0 || (this.pos.y + this.height) > view.canvas.height/1.5) {
+      this.speed.y = - this.speed.y;
+  }
+    this.pos.x += this.speed.x
+    this.pos.y += this.speed.y;
+  }
+  
 
 }
