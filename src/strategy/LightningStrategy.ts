@@ -12,10 +12,10 @@ import LIGHT_BULLET from '/images/light-bullet.png';
 export class LightStrategy implements Strategy {
   public doChangeInfoBullet(data: BulletModel, pos: Vector): Bullet {
     const lightBullet: BulletModel = {
-      speed: data.speed + 9,
+      speed: data.speed + 6,
       size: data.size + 7,
       image: LIGHT_BULLET,
-      damage: data.damage + 2
+      damage: data.damage + 1
     };
     const bullet = new Bullet(
       lightBullet.speed, lightBullet.size, 

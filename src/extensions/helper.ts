@@ -54,6 +54,18 @@ export function createChickens(level: number[]): Chicken[] {
     ];
   }, [] as Chicken[]);
 }
+export function sumEnergyChicken(chickens: Chicken[]): number {
+  var count = 0;
+  chickens.forEach(c => {
+    count += c.energy;
+  });
+  return count;
+}
+export function hpRemaining(sumEnergy: number, sumEnergyRemaining: number): string{
+  var percentHp = (sumEnergyRemaining / sumEnergy) * 100;
+  var drawString = "<div class='progress-bar progress-bar-striped bg-danger' role='progressbar' style='width: " + percentHp.toString() +"%'></div>";
+  return drawString;
+}
 export function createBoss(level: number[]): Chicken[] {
   return level.reduce((ack, element, i) => {
     const row = Math.floor((i + 1) / STAGE_COLS);
@@ -68,8 +80,8 @@ export function createBoss(level: number[]): Chicken[] {
       ...ack,
       new Chicken(
         2,
-        280,
-        300,
+        200,
+        220,
         { x, y },
         CHICKEN_ENERGY[element],
         CHICKEN_IMAGES[element],

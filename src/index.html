@@ -5,7 +5,8 @@
     <title>Chicken Invaders Z</title>
     <link rel="icon" type="image/x-icon" href="https://img.icons8.com/color/452/star-wars-naboo-ship.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> -->
   </head>
   <body>
     <div class="container">
@@ -24,18 +25,20 @@
                   <img id="img-gift" width="35px" height="35px" src="../src/images/energy.png">
                 </div>
               </div>
-              <button id="start" class="btn btn-primary">Start</button>
+              <button id="start" class="btn btn-outline-info">Start</button>
               <div id="item">
                 <div id="item1"> <span id="meat">0</span> <img width="35px" height="35px" src="../src/images/meat01.png"></div>
                 <div id="item2"> <span id="coin">0</span> <img width="35px" height="35px" src="../src/images/coin.png"></div>
-              
               </div>
               <div id="info">Press play!</div>
             </div>
           </div>
+          <div class="progress mt-5" id='progress' style="user-select: auto;">
+           
+          </div>
         </div>
-        <div class="col-4-md">
-          
+        <div class="col-8-md">
+
         </div>
       </div>
     </div>
@@ -46,7 +49,15 @@
       --width: 1000px;
       --height: 650px;
     }
-
+    body {
+      margin: 0;
+      background-image: radial-gradient(#5D6D7E, #34495E);
+    }
+    #progress {
+      position: relative;
+      width: 1000px;
+      margin: 0 auto;
+    }
     #main {
       position: relative;
       width: 1000px;
@@ -55,6 +66,8 @@
       height: var(--height);
       font-size: 32px;
       font-family: Arial, Helvetica, sans-serif;
+      color: #ECF0F1;
+      
     }
 
     canvas {

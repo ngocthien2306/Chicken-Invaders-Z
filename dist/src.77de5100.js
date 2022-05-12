@@ -138,6 +138,7 @@ function () {
     this.meat = document.querySelector("#meat");
     this.coin = document.querySelector("#coin");
     this.gift = document.querySelector("#img-gift");
+    this.hp = document.querySelector("#progress");
   }
 
   CanvasView.prototype.clear = function () {
@@ -178,6 +179,10 @@ function () {
 
   CanvasView.prototype.drawGift = function (txt) {
     if (this.gift) this.gift.src = txt;
+  };
+
+  CanvasView.prototype.drawHP = function (txt) {
+    if (this.hp) this.hp.innerHTML = txt;
   };
 
   CanvasView.prototype.drawSprite = function (frame) {
@@ -435,7 +440,7 @@ function () {
       this.speed.x = -this.speed.x;
     }
 
-    if (this.pos.y < 0 || this.pos.y + this.height > view.canvas.height) {
+    if (this.pos.y < 0 || this.pos.y + this.height > view.canvas.height / 1.5) {
       this.speed.y = -this.speed.y;
     }
 
@@ -637,10 +642,10 @@ function () {
 
   LightStrategy.prototype.doChangeInfoBullet = function (data, pos) {
     var lightBullet = {
-      speed: data.speed + 9,
+      speed: data.speed + 6,
       size: data.size + 7,
       image: _lightBullet.default,
-      damage: data.damage + 2
+      damage: data.damage + 1
     };
     var bullet = new _Bullet.Bullet(lightBullet.speed, lightBullet.size, {
       x: pos.x + (_setup.PADDLE_WIDTH / 2 - lightBullet.size / 2),
@@ -906,6 +911,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.createChickens = createChickens;
+exports.sumEnergyChicken = sumEnergyChicken;
+exports.hpRemaining = hpRemaining;
 exports.createBoss = createBoss;
 exports.createEgg = createEgg;
 exports.getRandomInt = getRandomInt;
@@ -981,6 +988,20 @@ function createChickens(level) {
   }, []);
 }
 
+function sumEnergyChicken(chickens) {
+  var count = 0;
+  chickens.forEach(function (c) {
+    count += c.energy;
+  });
+  return count;
+}
+
+function hpRemaining(sumEnergy, sumEnergyRemaining) {
+  var percentHp = sumEnergyRemaining / sumEnergy * 100;
+  var drawString = "<div class='progress-bar progress-bar-striped bg-danger' role='progressbar' style='width: " + percentHp.toString() + "%'></div>";
+  return drawString;
+}
+
 function createBoss(level) {
   return level.reduce(function (ack, element, i) {
     var row = Math.floor((i + 1) / _setup.STAGE_COLS);
@@ -988,7 +1009,7 @@ function createBoss(level) {
     var x = _setup.STAGE_PADDING + col * (_setup.BRICK_WIDTH + _setup.BRICK_PADDING);
     var y = _setup.STAGE_PADDING + row * (_setup.BRICK_HEIGHT + _setup.BRICK_PADDING);
     if (element === 0) return ack;
-    return __spreadArrays(ack, [new _Chicken.Chicken(2, 280, 300, {
+    return __spreadArrays(ack, [new _Chicken.Chicken(2, 200, 220, {
       x: x,
       y: y
     }, _setup.CHICKEN_ENERGY[element], _setup.CHICKEN_IMAGES[element])]);
@@ -1996,6 +2017,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // Level and colors
 var score = 0;
 var gameOver = false;
+var sumEnergy = 0;
 
 function setGameOver(view) {
   view.drawInfo("Game Over!");
@@ -2017,11 +2039,13 @@ function gameLoop(view, chickens, starShip, conlision) {
   view.drawHeart((0, _helper.createHeart)(starShip.heart));
   view.drawMeat(conlision.countMeat.toString());
   view.drawCoin(conlision.countCoin.toString());
+  view.drawHP((0, _helper.hpRemaining)(sumEnergy, (0, _helper.sumEnergyChicken)(chickens)));
   if (starShip.level === 0) return setGameOver(view);
   if (conlision.checkCollidingStarshipWithChickens(chickens, starShip)) return setGameOver(view);
 
   if (chickens.length === 0) {
     chickens = (0, _helper.createBoss)(_setup.LEVEL2);
+    sumEnergy = (0, _helper.sumEnergyChicken)(chickens);
     view.drawChicken(chickens);
   }
 
@@ -2037,6 +2061,7 @@ function startGame(view) {
   view.drawScore("Score: 0");
   var collision = new _Colision.Collision();
   var chickens = (0, _helper.createChickens)(_setup.LEVEL1);
+  sumEnergy = (0, _helper.sumEnergyChicken)(chickens);
   var startShip = new _StarShip.StarShip(_setup.PADDLE_SPEED, _setup.PADDLE_WIDTH, _setup.PADDLE_HEIGHT, {
     x: _setup.PADDLE_STARTX,
     y: view.canvas.height - _setup.PADDLE_HEIGHT - 5
@@ -2074,7 +2099,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53394" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "30845" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

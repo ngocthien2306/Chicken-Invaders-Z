@@ -14,6 +14,7 @@ export class CanvasView {
   private meat: HTMLObjectElement | null;
   private coin: HTMLObjectElement | null;
   private gift: HTMLImageElement | null;
+  private hp: HTMLObjectElement | null;
 
 
   constructor(canvasName: string) {
@@ -26,7 +27,7 @@ export class CanvasView {
     this.meat = document.querySelector("#meat");
     this.coin = document.querySelector("#coin");
     this.gift = document.querySelector("#img-gift");
-    
+    this.hp = document.querySelector("#progress");
   }
 
   clear():void {
@@ -57,6 +58,10 @@ export class CanvasView {
 
   drawGift(txt: string): void {
     if(this.gift) this.gift.src = txt;
+  }
+
+  drawHP(txt: string): void {
+    if(this.hp) this.hp.innerHTML = txt;
   }
 
   drawSprite(frame: Chicken | StarShip | Bullet | ItemSupport | Egg): void {
