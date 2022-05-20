@@ -8,6 +8,7 @@ import { ItemModel } from "~/model/Item.model";
 import { ItemSupport } from "~/services/Item";
 import GIFT_RED from '/images/gift-fire.png';
 import FIRE_BULLET from '/images/fire-bullet.png';
+import { randomIntFromInterval } from "~/extensions/helper";
 
 export class FireStrategy implements Strategy {
   public doChangeInfoBullet(data: BulletModel, pos: Vector): Bullet {
@@ -15,7 +16,7 @@ export class FireStrategy implements Strategy {
       speed: data.speed - 4,
       size: data.size + 5,
       image: FIRE_BULLET,
-      damage: data.damage + 3
+      damage: randomIntFromInterval(data.damage + 2, data.damage + 5)  
     };
     const bullet = new Bullet(
       fireBullet.speed, fireBullet.size, 

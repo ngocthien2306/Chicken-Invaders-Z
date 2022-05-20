@@ -7,6 +7,7 @@ import { Strategy } from "./context";
 import { ItemSupport } from "~/services/Item";
 import { ItemModel } from "~/model/Item.model";
 import GIFT_BOX01 from '/images/gift-fire.png';
+import { randomIntFromInterval } from "~/extensions/helper";
 
 export class Nomaltrategy implements Strategy {
   public doChangeInfoBullet(data: BulletModel, pos: Vector): Bullet {
@@ -15,7 +16,7 @@ export class Nomaltrategy implements Strategy {
       nomalBullet.speed, nomalBullet.size, 
       {x: pos.x + (PADDLE_WIDTH/2 - nomalBullet.size/2),
        y: pos.y}, 
-       nomalBullet.image, nomalBullet.damage, 1);
+       nomalBullet.image, randomIntFromInterval(nomalBullet.damage, nomalBullet.damage + 2)  , 1);
 
     return bullet;
   }

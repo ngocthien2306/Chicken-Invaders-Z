@@ -8,6 +8,7 @@ import { ItemSupport } from "~/services/Item";
 import { ItemModel } from "~/model/Item.model";
 import GIFT_STONE from '/images/gift-stone.png';
 import STONE_BULLET from '/images/stone-bullet.png';
+import { randomIntFromInterval } from "~/extensions/helper";
 
 export class StoneStrategy implements Strategy {
   public doChangeInfoBullet(data: BulletModel, pos: Vector): Bullet {
@@ -15,7 +16,7 @@ export class StoneStrategy implements Strategy {
       speed: data.speed + 5,
       size: data.size + 5,
       image: STONE_BULLET,
-      damage: data.damage + 1
+      damage: randomIntFromInterval(data.damage, data.damage + 3)  
     };
     const bullet = new Bullet(
       iceBullet.speed, iceBullet.size, 

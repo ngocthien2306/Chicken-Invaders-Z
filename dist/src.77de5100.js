@@ -572,6 +572,8 @@ var _giftBlue = _interopRequireDefault(require("/images/gift-blue.png"));
 
 var _iceBullet = _interopRequireDefault(require("/images/ice-bullet.png"));
 
+var _helper = require("~/extensions/helper");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var IceStrategy =
@@ -584,7 +586,7 @@ function () {
       speed: data.speed + 5,
       size: data.size + 5,
       image: _iceBullet.default,
-      damage: data.damage + 1
+      damage: (0, _helper.randomIntFromInterval)(data.damage + 1, data.damage + 3)
     };
     var bullet = new _Bullet.Bullet(iceBullet.speed, iceBullet.size, {
       x: pos.x + (_setup.PADDLE_WIDTH / 2 - iceBullet.size / 2),
@@ -611,7 +613,7 @@ function () {
 }();
 
 exports.IceStrategy = IceStrategy;
-},{"~/setup":"setup.ts","~/services/Bullet":"services/Bullet.ts","~/services/Item":"services/Item.ts","/images/gift-blue.png":"images/gift-blue.png","/images/ice-bullet.png":"images/ice-bullet.png"}],"images/gift-light.png":[function(require,module,exports) {
+},{"~/setup":"setup.ts","~/services/Bullet":"services/Bullet.ts","~/services/Item":"services/Item.ts","/images/gift-blue.png":"images/gift-blue.png","/images/ice-bullet.png":"images/ice-bullet.png","~/extensions/helper":"extensions/helper.ts"}],"images/gift-light.png":[function(require,module,exports) {
 module.exports = "/gift-light.86b4c05e.png";
 },{}],"images/light-bullet.png":[function(require,module,exports) {
 module.exports = "/light-bullet.74632b9f.png";
@@ -633,6 +635,8 @@ var _giftLight = _interopRequireDefault(require("/images/gift-light.png"));
 
 var _lightBullet = _interopRequireDefault(require("/images/light-bullet.png"));
 
+var _helper = require("~/extensions/helper");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var LightStrategy =
@@ -645,12 +649,12 @@ function () {
       speed: data.speed + 6,
       size: data.size + 7,
       image: _lightBullet.default,
-      damage: data.damage + 1
+      damage: (0, _helper.randomIntFromInterval)(data.damage - 1, data.damage + 1)
     };
     var bullet = new _Bullet.Bullet(lightBullet.speed, lightBullet.size, {
       x: pos.x + (_setup.PADDLE_WIDTH / 2 - lightBullet.size / 2),
       y: pos.y
-    }, lightBullet.image, lightBullet.damage, 8);
+    }, lightBullet.image, lightBullet.damage, 15);
     return bullet;
   };
 
@@ -672,7 +676,7 @@ function () {
 }();
 
 exports.LightStrategy = LightStrategy;
-},{"~/setup":"setup.ts","~/services/Bullet":"services/Bullet.ts","~/services/Item":"services/Item.ts","/images/gift-light.png":"images/gift-light.png","/images/light-bullet.png":"images/light-bullet.png"}],"images/green-gift.png":[function(require,module,exports) {
+},{"~/setup":"setup.ts","~/services/Bullet":"services/Bullet.ts","~/services/Item":"services/Item.ts","/images/gift-light.png":"images/gift-light.png","/images/light-bullet.png":"images/light-bullet.png","~/extensions/helper":"extensions/helper.ts"}],"images/green-gift.png":[function(require,module,exports) {
 module.exports = "/green-gift.b4c1b835.png";
 },{}],"images/leaf-bullet.png":[function(require,module,exports) {
 module.exports = "/leaf-bullet.90e51652.png";
@@ -694,6 +698,8 @@ var _greenGift = _interopRequireDefault(require("/images/green-gift.png"));
 
 var _leafBullet = _interopRequireDefault(require("/images/leaf-bullet.png"));
 
+var _helper = require("~/extensions/helper");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var LeafStrategy =
@@ -703,10 +709,10 @@ function () {
 
   LeafStrategy.prototype.doChangeInfoBullet = function (data, pos) {
     var lightBullet = {
-      speed: data.speed + 5,
+      speed: data.speed + 3,
       size: data.size + 2,
       image: _leafBullet.default,
-      damage: data.damage + 3
+      damage: (0, _helper.randomIntFromInterval)(data.damage + 1, data.damage + 5)
     };
     var bullet = new _Bullet.Bullet(lightBullet.speed, lightBullet.size, {
       x: pos.x + (_setup.PADDLE_WIDTH / 2 - lightBullet.size / 2),
@@ -733,7 +739,7 @@ function () {
 }();
 
 exports.LeafStrategy = LeafStrategy;
-},{"~/setup":"setup.ts","~/services/Bullet":"services/Bullet.ts","~/services/Item":"services/Item.ts","/images/green-gift.png":"images/green-gift.png","/images/leaf-bullet.png":"images/leaf-bullet.png"}],"images/gift-stone.png":[function(require,module,exports) {
+},{"~/setup":"setup.ts","~/services/Bullet":"services/Bullet.ts","~/services/Item":"services/Item.ts","/images/green-gift.png":"images/green-gift.png","/images/leaf-bullet.png":"images/leaf-bullet.png","~/extensions/helper":"extensions/helper.ts"}],"images/gift-stone.png":[function(require,module,exports) {
 module.exports = "/gift-stone.fe6b45cf.png";
 },{}],"images/stone-bullet.png":[function(require,module,exports) {
 module.exports = "/stone-bullet.b28c8c7d.png";
@@ -755,6 +761,8 @@ var _giftStone = _interopRequireDefault(require("/images/gift-stone.png"));
 
 var _stoneBullet = _interopRequireDefault(require("/images/stone-bullet.png"));
 
+var _helper = require("~/extensions/helper");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var StoneStrategy =
@@ -767,7 +775,7 @@ function () {
       speed: data.speed + 5,
       size: data.size + 5,
       image: _stoneBullet.default,
-      damage: data.damage + 1
+      damage: (0, _helper.randomIntFromInterval)(data.damage, data.damage + 3)
     };
     var bullet = new _Bullet.Bullet(iceBullet.speed, iceBullet.size, {
       x: pos.x + (_setup.PADDLE_WIDTH / 2 - iceBullet.size / 2),
@@ -794,7 +802,7 @@ function () {
 }();
 
 exports.StoneStrategy = StoneStrategy;
-},{"~/setup":"setup.ts","~/services/Bullet":"services/Bullet.ts","~/services/Item":"services/Item.ts","/images/gift-stone.png":"images/gift-stone.png","/images/stone-bullet.png":"images/stone-bullet.png"}],"strategy/ChickenMeatStrategy.ts":[function(require,module,exports) {
+},{"~/setup":"setup.ts","~/services/Bullet":"services/Bullet.ts","~/services/Item":"services/Item.ts","/images/gift-stone.png":"images/gift-stone.png","/images/stone-bullet.png":"images/stone-bullet.png","~/extensions/helper":"extensions/helper.ts"}],"strategy/ChickenMeatStrategy.ts":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -916,6 +924,7 @@ exports.hpRemaining = hpRemaining;
 exports.createBoss = createBoss;
 exports.createEgg = createEgg;
 exports.getRandomInt = getRandomInt;
+exports.randomIntFromInterval = randomIntFromInterval;
 exports.getRandomSpeed = getRandomSpeed;
 exports.createHeart = createHeart;
 exports.changeGiftBoxesInUI = changeGiftBoxesInUI;
@@ -998,7 +1007,8 @@ function sumEnergyChicken(chickens) {
 
 function hpRemaining(sumEnergy, sumEnergyRemaining) {
   var percentHp = sumEnergyRemaining / sumEnergy * 100;
-  var drawString = "<div class='progress-bar progress-bar-striped bg-danger' role='progressbar' style='width: " + percentHp.toString() + "%'></div>";
+  if (sumEnergyRemaining < 0) sumEnergyRemaining = 0;
+  var drawString = " <div class='progress-bar progress-bar-striped bg-danger' role='progressbar' style='width: " + percentHp.toString() + "%'> </div> <spans'>" + sumEnergyRemaining.toString() + "</span> ";
   return drawString;
 }
 
@@ -1027,6 +1037,10 @@ function createEgg(view, chicken) {
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
+}
+
+function randomIntFromInterval(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
 function getRandomSpeed(max) {
@@ -1341,6 +1355,8 @@ var _giftFire = _interopRequireDefault(require("/images/gift-fire.png"));
 
 var _fireBullet = _interopRequireDefault(require("/images/fire-bullet.png"));
 
+var _helper = require("~/extensions/helper");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var FireStrategy =
@@ -1353,7 +1369,7 @@ function () {
       speed: data.speed - 4,
       size: data.size + 5,
       image: _fireBullet.default,
-      damage: data.damage + 3
+      damage: (0, _helper.randomIntFromInterval)(data.damage + 2, data.damage + 5)
     };
     var bullet = new _Bullet.Bullet(fireBullet.speed, fireBullet.size, {
       x: pos.x + (_setup.PADDLE_WIDTH / 2 - fireBullet.size / 2),
@@ -1380,7 +1396,7 @@ function () {
 }();
 
 exports.FireStrategy = FireStrategy;
-},{"~/setup":"setup.ts","~/services/Bullet":"services/Bullet.ts","~/services/Item":"services/Item.ts","/images/gift-fire.png":"images/gift-fire.png","/images/fire-bullet.png":"images/fire-bullet.png"}],"strategy/NomalStrategy.ts":[function(require,module,exports) {
+},{"~/setup":"setup.ts","~/services/Bullet":"services/Bullet.ts","~/services/Item":"services/Item.ts","/images/gift-fire.png":"images/gift-fire.png","/images/fire-bullet.png":"images/fire-bullet.png","~/extensions/helper":"extensions/helper.ts"}],"strategy/NomalStrategy.ts":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1396,6 +1412,8 @@ var _Item = require("~/services/Item");
 
 var _giftFire = _interopRequireDefault(require("/images/gift-fire.png"));
 
+var _helper = require("~/extensions/helper");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Nomaltrategy =
@@ -1408,7 +1426,7 @@ function () {
     var bullet = new _Bullet.Bullet(nomalBullet.speed, nomalBullet.size, {
       x: pos.x + (_setup.PADDLE_WIDTH / 2 - nomalBullet.size / 2),
       y: pos.y
-    }, nomalBullet.image, nomalBullet.damage, 1);
+    }, nomalBullet.image, (0, _helper.randomIntFromInterval)(nomalBullet.damage, nomalBullet.damage + 2), 1);
     return bullet;
   };
 
@@ -1430,7 +1448,7 @@ function () {
 }();
 
 exports.Nomaltrategy = Nomaltrategy;
-},{"~/setup":"setup.ts","~/services/Bullet":"services/Bullet.ts","~/services/Item":"services/Item.ts","/images/gift-fire.png":"images/gift-fire.png"}],"images/ball.png":[function(require,module,exports) {
+},{"~/setup":"setup.ts","~/services/Bullet":"services/Bullet.ts","~/services/Item":"services/Item.ts","/images/gift-fire.png":"images/gift-fire.png","~/extensions/helper":"extensions/helper.ts"}],"images/ball.png":[function(require,module,exports) {
 module.exports = "/ball.96931fde.png";
 },{}],"services/StarShip.ts":[function(require,module,exports) {
 "use strict";
@@ -1770,7 +1788,7 @@ function () {
 
           chickens.splice(i, 1);
         } else {
-          chicken.energy -= bullet.damage;
+          if (chicken.energy < bullet.damage) chicken.energy = 0;else chicken.energy -= bullet.damage;
         }
 
         colliding = true;
@@ -2099,7 +2117,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "30845" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "38054" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

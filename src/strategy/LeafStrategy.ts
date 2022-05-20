@@ -8,14 +8,15 @@ import { ItemModel } from "~/model/Item.model";
 import { ItemSupport } from "~/services/Item";
 import GIFT_GREEN from '/images/green-gift.png';
 import LEAF_BULLET from '/images/leaf-bullet.png';
+import { randomIntFromInterval } from "~/extensions/helper";
 
 export class LeafStrategy implements Strategy  {
   public doChangeInfoBullet(data: BulletModel, pos: Vector): Bullet {
     const lightBullet: BulletModel = {
-      speed: data.speed + 5,
+      speed: data.speed + 3,
       size: data.size + 2,
       image: LEAF_BULLET,
-      damage: data.damage + 3
+      damage: randomIntFromInterval(data.damage + 1, data.damage + 5)  
     };
     const bullet = new Bullet(
       lightBullet.speed, lightBullet.size, 

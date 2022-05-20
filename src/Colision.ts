@@ -89,7 +89,8 @@ export class Collision {
           }
           chickens.splice(i, 1);
         } else {
-          chicken.energy -= bullet.damage;
+          if(chicken.energy < bullet.damage) chicken.energy = 0;
+          else chicken.energy -= bullet.damage;
         }
         colliding = true;
       }

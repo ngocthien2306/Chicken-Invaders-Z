@@ -63,7 +63,8 @@ export function sumEnergyChicken(chickens: Chicken[]): number {
 }
 export function hpRemaining(sumEnergy: number, sumEnergyRemaining: number): string{
   var percentHp = (sumEnergyRemaining / sumEnergy) * 100;
-  var drawString = "<div class='progress-bar progress-bar-striped bg-danger' role='progressbar' style='width: " + percentHp.toString() +"%'></div>";
+  if(sumEnergyRemaining < 0) sumEnergyRemaining = 0;
+  var drawString = " <div class='progress-bar progress-bar-striped bg-danger' role='progressbar' style='width: " + percentHp.toString() +"%'> </div> <spans'>" + sumEnergyRemaining.toString() + "</span> ";
   return drawString;
 }
 export function createBoss(level: number[]): Chicken[] {
@@ -97,6 +98,9 @@ export function createEgg(view: CanvasView, chicken: Chicken) :void {
 }
 export function getRandomInt(max: number) {
   return Math.floor(Math.random() * max);
+}
+export function randomIntFromInterval(min: number, max: number) { // min and max included 
+  return Math.floor(Math.random() * (max - min + 1) + min)
 }
 export function getRandomSpeed(max: number): {number: number, type: number} {
   var plusOrMinus = Math.random() < 0.5 ? -1 : 1;
