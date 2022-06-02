@@ -60,7 +60,7 @@ export const LEVEL1 = [
 
 // prettier-ignore
 export const LEVEL2 = [
-6, 0, 0, 0, 0, 0, 0, 7
+0, 0, 0, 0, 6, 0, 0, 0
 ];
 
 

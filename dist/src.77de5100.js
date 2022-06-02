@@ -300,7 +300,7 @@ exports.CHICKEN_ENERGY = CHICKEN_ENERGY;
 var LEVEL1 = [0, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0, 0, 0, 2, 2, 2, 4, 5, 5, 5, 4, 2, 2, 2, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0]; // prettier-ignore
 
 exports.LEVEL1 = LEVEL1;
-var LEVEL2 = [6, 0, 0, 0, 0, 0, 0, 7]; // export const LEVEL = [
+var LEVEL2 = [0, 0, 0, 0, 6, 0, 0, 0]; // export const LEVEL = [
 //   0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 //   0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 //   0, 0, 1, 1, 1, 1, 1, 1, 0, 0,
@@ -1509,7 +1509,7 @@ function () {
           _this.moveUp = false;
           break;
 
-        case ' ':
+        case 'j':
           _this.shooting = false;
           break;
 
@@ -1519,8 +1519,6 @@ function () {
     };
 
     this.handleKeyRight = function (e) {
-      _this.StrategyBullet();
-
       switch (e.key) {
         case 'a':
           _this.moveLeft = true;
@@ -1538,7 +1536,9 @@ function () {
           _this.moveUp = true;
           break;
 
-        case ' ':
+        case 'j':
+          _this.StrategyBullet();
+
           _this.shooting = true;
           break;
 
@@ -2008,7 +2008,7 @@ function drawAndMoveEgg(starShip, conlision, chickens, view) {
 
 function drawAndMoveChicken(chickens, view) {
   chickens.forEach(function (chicken, i) {
-    chicken.moveChicken(view);
+    //chicken.moveChicken(view);
     view.drawSprite(chicken);
   });
 }
@@ -2117,7 +2117,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "38054" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "19705" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

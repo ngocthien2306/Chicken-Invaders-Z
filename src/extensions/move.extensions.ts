@@ -61,7 +61,7 @@ export function drawAndMoveEgg(starShip: StarShip,conlision: Collision, chickens
 
 export function drawAndMoveChicken(chickens: Chicken[], view: CanvasView): void {
   chickens.forEach((chicken, i) => {
-    chicken.moveChicken(view);
+    //chicken.moveChicken(view);
     view.drawSprite(chicken);
   }) 
 }

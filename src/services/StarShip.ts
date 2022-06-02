@@ -115,17 +115,16 @@ export class StarShip {
       case 's':
         this.moveUp = false
         break;
-      case ' ':
+      case 'j':
         this.shooting = false;
         break;
       default:
         break;
     }
-
   };
 
   handleKeyRight = (e: KeyboardEvent): void => {
-    this.StrategyBullet();
+
     switch (e.key) {
       case 'a':
         this.moveLeft = true
@@ -139,9 +138,10 @@ export class StarShip {
       case 's':
         this.moveUp = true
         break;
-      case ' ':
-          this.shooting = true;
-          break;
+      case 'j':
+        this.StrategyBullet();
+        this.shooting = true;
+        break;
       default:
           break;
     }
