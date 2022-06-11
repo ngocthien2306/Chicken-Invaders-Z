@@ -214,6 +214,37 @@ function () {
 }();
 
 exports.CanvasView = CanvasView;
+},{}],"design/strategy/context.ts":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Context = void 0;
+
+var Context =
+/** @class */
+function () {
+  function Context(strategy) {
+    this.strategy = strategy;
+  }
+
+  Context.prototype.setStrategy = function (strategy) {
+    this.strategy = strategy;
+  };
+
+  Context.prototype.doBusinessLogicBullet = function (data, pos) {
+    return this.strategy.doChangeInfoBullet(data, pos);
+  };
+
+  Context.prototype.doBusinessLogicItem = function (data, pos) {
+    return this.strategy.doChangeTypeItem(data, pos);
+  };
+
+  return Context;
+}();
+
+exports.Context = Context;
 },{}],"images/chick.png":[function(require,module,exports) {
 module.exports = "/chick.d75d671a.png";
 },{}],"images/chicken_blue.png":[function(require,module,exports) {
@@ -317,38 +348,7 @@ var LEVEL2 = [0, 0, 0, 0, 6, 0, 0, 0]; // export const LEVEL = [
 // ];
 
 exports.LEVEL2 = LEVEL2;
-},{"./images/chick.png":"images/chick.png","./images/chicken_blue.png":"images/chicken_blue.png","./images/chicken_red.png":"images/chicken_red.png","./images/chicken05.png":"images/chicken05.png","./images/chicken06.png":"images/chicken06.png"}],"strategy/context.ts":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Context = void 0;
-
-var Context =
-/** @class */
-function () {
-  function Context(strategy) {
-    this.strategy = strategy;
-  }
-
-  Context.prototype.setStrategy = function (strategy) {
-    this.strategy = strategy;
-  };
-
-  Context.prototype.doBusinessLogicBullet = function (data, pos) {
-    return this.strategy.doChangeInfoBullet(data, pos);
-  };
-
-  Context.prototype.doBusinessLogicItem = function (data, pos) {
-    return this.strategy.doChangeTypeItem(data, pos);
-  };
-
-  return Context;
-}();
-
-exports.Context = Context;
-},{}],"services/Chicken.ts":[function(require,module,exports) {
+},{"./images/chick.png":"images/chick.png","./images/chicken_blue.png":"images/chicken_blue.png","./images/chicken_red.png":"images/chicken_red.png","./images/chicken05.png":"images/chicken05.png","./images/chicken06.png":"images/chicken06.png"}],"services/Chicken.ts":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -425,14 +425,6 @@ function () {
 
   Chicken.prototype.changeYDirection = function () {
     this.speed.y = this.speed.y;
-  };
-
-  Chicken.prototype.moveDownChicken = function () {
-    this.pos.x -= this.speed.x; //this.pos.y -= this.speed.y;
-  };
-
-  Chicken.prototype.moveUpChicken = function () {
-    this.pos.x += this.speed.x; //this.pos.y += this.speed.y;
   };
 
   Chicken.prototype.moveChicken = function (view) {
@@ -554,7 +546,7 @@ exports.ItemSupport = ItemSupport;
 module.exports = "/gift-blue.8e15de08.png";
 },{}],"images/ice-bullet.png":[function(require,module,exports) {
 module.exports = "/ice-bullet.e1f97bcf.png";
-},{}],"strategy/IceStrategy.ts":[function(require,module,exports) {
+},{}],"design/strategy/IceStrategy.ts":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -617,7 +609,7 @@ exports.IceStrategy = IceStrategy;
 module.exports = "/gift-light.86b4c05e.png";
 },{}],"images/light-bullet.png":[function(require,module,exports) {
 module.exports = "/light-bullet.74632b9f.png";
-},{}],"strategy/LightningStrategy.ts":[function(require,module,exports) {
+},{}],"design/strategy/LightningStrategy.ts":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -680,7 +672,7 @@ exports.LightStrategy = LightStrategy;
 module.exports = "/green-gift.b4c1b835.png";
 },{}],"images/leaf-bullet.png":[function(require,module,exports) {
 module.exports = "/leaf-bullet.90e51652.png";
-},{}],"strategy/LeafStrategy.ts":[function(require,module,exports) {
+},{}],"design/strategy/LeafStrategy.ts":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -743,7 +735,7 @@ exports.LeafStrategy = LeafStrategy;
 module.exports = "/gift-stone.fe6b45cf.png";
 },{}],"images/stone-bullet.png":[function(require,module,exports) {
 module.exports = "/stone-bullet.b28c8c7d.png";
-},{}],"strategy/StoneStrategy.ts":[function(require,module,exports) {
+},{}],"design/strategy/StoneStrategy.ts":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -802,7 +794,7 @@ function () {
 }();
 
 exports.StoneStrategy = StoneStrategy;
-},{"~/setup":"setup.ts","~/services/Bullet":"services/Bullet.ts","~/services/Item":"services/Item.ts","/images/gift-stone.png":"images/gift-stone.png","/images/stone-bullet.png":"images/stone-bullet.png","~/extensions/helper":"extensions/helper.ts"}],"strategy/ChickenMeatStrategy.ts":[function(require,module,exports) {
+},{"~/setup":"setup.ts","~/services/Bullet":"services/Bullet.ts","~/services/Item":"services/Item.ts","/images/gift-stone.png":"images/gift-stone.png","/images/stone-bullet.png":"images/stone-bullet.png","~/extensions/helper":"extensions/helper.ts"}],"design/strategy/ChickenMeatStrategy.ts":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -857,7 +849,7 @@ function () {
 }();
 
 exports.ChickenMeatStrategy = ChickenMeatStrategy;
-},{"~/setup":"setup.ts","~/services/Bullet":"services/Bullet.ts","~/services/Item":"services/Item.ts","/images/leaf-bullet.png":"images/leaf-bullet.png"}],"strategy/OtherItemStrategy.ts":[function(require,module,exports) {
+},{"~/setup":"setup.ts","~/services/Bullet":"services/Bullet.ts","~/services/Item":"services/Item.ts","/images/leaf-bullet.png":"images/leaf-bullet.png"}],"design/strategy/OtherItemStrategy.ts":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -951,21 +943,21 @@ var _setup = require("../setup");
 
 var _Item = require("../services/Item");
 
-var _context = require("../strategy/context");
+var _context = require("~/design/strategy/context");
 
-var _FireStrategy = require("../strategy/FireStrategy");
+var _FireStrategy = require("~/design/strategy/FireStrategy");
 
-var _IceStrategy = require("../strategy/IceStrategy");
+var _IceStrategy = require("~/design/strategy/IceStrategy");
 
-var _LightningStrategy = require("../strategy/LightningStrategy");
+var _LightningStrategy = require("~/design/strategy/LightningStrategy");
 
-var _LeafStrategy = require("../strategy/LeafStrategy");
+var _LeafStrategy = require("~/design/strategy/LeafStrategy");
 
-var _StoneStrategy = require("../strategy/StoneStrategy");
+var _StoneStrategy = require("~/design/strategy/StoneStrategy");
 
-var _ChickenMeatStrategy = require("../strategy/ChickenMeatStrategy");
+var _ChickenMeatStrategy = require("~/design/strategy/ChickenMeatStrategy");
 
-var _OtherItemStrategy = require("../strategy/OtherItemStrategy");
+var _OtherItemStrategy = require("~/design/strategy/OtherItemStrategy");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1224,7 +1216,7 @@ function getItemSupport(posX, posY) {
 
   return item;
 }
-},{"../services/Chicken":"services/Chicken.ts","/images/gift-fire.png":"images/gift-fire.png","/images/meat01.png":"images/meat01.png","/images/meat02.png":"images/meat02.png","/images/meat03.png":"images/meat03.png","/images/heart.png":"images/heart.png","/images/coin.png":"images/coin.png","/images/egg.png":"images/egg.png","../setup":"setup.ts","../services/Item":"services/Item.ts","../strategy/context":"strategy/context.ts","../strategy/FireStrategy":"strategy/FireStrategy.ts","../strategy/IceStrategy":"strategy/IceStrategy.ts","../strategy/LightningStrategy":"strategy/LightningStrategy.ts","../strategy/LeafStrategy":"strategy/LeafStrategy.ts","../strategy/StoneStrategy":"strategy/StoneStrategy.ts","../strategy/ChickenMeatStrategy":"strategy/ChickenMeatStrategy.ts","../strategy/OtherItemStrategy":"strategy/OtherItemStrategy.ts"}],"services/Bullet.ts":[function(require,module,exports) {
+},{"../services/Chicken":"services/Chicken.ts","/images/gift-fire.png":"images/gift-fire.png","/images/meat01.png":"images/meat01.png","/images/meat02.png":"images/meat02.png","/images/meat03.png":"images/meat03.png","/images/heart.png":"images/heart.png","/images/coin.png":"images/coin.png","/images/egg.png":"images/egg.png","../setup":"setup.ts","../services/Item":"services/Item.ts","~/design/strategy/context":"design/strategy/context.ts","~/design/strategy/FireStrategy":"design/strategy/FireStrategy.ts","~/design/strategy/IceStrategy":"design/strategy/IceStrategy.ts","~/design/strategy/LightningStrategy":"design/strategy/LightningStrategy.ts","~/design/strategy/LeafStrategy":"design/strategy/LeafStrategy.ts","~/design/strategy/StoneStrategy":"design/strategy/StoneStrategy.ts","~/design/strategy/ChickenMeatStrategy":"design/strategy/ChickenMeatStrategy.ts","~/design/strategy/OtherItemStrategy":"design/strategy/OtherItemStrategy.ts"}],"services/Bullet.ts":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1337,7 +1329,7 @@ function () {
 exports.Bullet = Bullet;
 },{"~/extensions/helper":"extensions/helper.ts"}],"images/fire-bullet.png":[function(require,module,exports) {
 module.exports = "/fire-bullet.e2b07078.png";
-},{}],"strategy/FireStrategy.ts":[function(require,module,exports) {
+},{}],"design/strategy/FireStrategy.ts":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1396,7 +1388,7 @@ function () {
 }();
 
 exports.FireStrategy = FireStrategy;
-},{"~/setup":"setup.ts","~/services/Bullet":"services/Bullet.ts","~/services/Item":"services/Item.ts","/images/gift-fire.png":"images/gift-fire.png","/images/fire-bullet.png":"images/fire-bullet.png","~/extensions/helper":"extensions/helper.ts"}],"strategy/NomalStrategy.ts":[function(require,module,exports) {
+},{"~/setup":"setup.ts","~/services/Bullet":"services/Bullet.ts","~/services/Item":"services/Item.ts","/images/gift-fire.png":"images/gift-fire.png","/images/fire-bullet.png":"images/fire-bullet.png","~/extensions/helper":"extensions/helper.ts"}],"design/strategy/NomalStrategy.ts":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1458,21 +1450,21 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.StarShip = void 0;
 
+var _context = require("~/design/strategy/context");
+
+var _FireStrategy = require("~/design/strategy/FireStrategy");
+
+var _IceStrategy = require("~/design/strategy/IceStrategy");
+
+var _LeafStrategy = require("~/design/strategy/LeafStrategy");
+
+var _LightningStrategy = require("~/design/strategy/LightningStrategy");
+
+var _NomalStrategy = require("~/design/strategy/NomalStrategy");
+
+var _StoneStrategy = require("~/design/strategy/StoneStrategy");
+
 var _setup = require("~/setup");
-
-var _context = require("~/strategy/context");
-
-var _FireStrategy = require("~/strategy/FireStrategy");
-
-var _IceStrategy = require("~/strategy/IceStrategy");
-
-var _LeafStrategy = require("~/strategy/LeafStrategy");
-
-var _LightningStrategy = require("~/strategy/LightningStrategy");
-
-var _NomalStrategy = require("~/strategy/NomalStrategy");
-
-var _StoneStrategy = require("~/strategy/StoneStrategy");
 
 var _ball = _interopRequireDefault(require("/images/ball.png"));
 
@@ -1695,7 +1687,7 @@ function () {
 }();
 
 exports.StarShip = StarShip;
-},{"~/setup":"setup.ts","~/strategy/context":"strategy/context.ts","~/strategy/FireStrategy":"strategy/FireStrategy.ts","~/strategy/IceStrategy":"strategy/IceStrategy.ts","~/strategy/LeafStrategy":"strategy/LeafStrategy.ts","~/strategy/LightningStrategy":"strategy/LightningStrategy.ts","~/strategy/NomalStrategy":"strategy/NomalStrategy.ts","~/strategy/StoneStrategy":"strategy/StoneStrategy.ts","/images/ball.png":"images/ball.png"}],"Colision.ts":[function(require,module,exports) {
+},{"~/design/strategy/context":"design/strategy/context.ts","~/design/strategy/FireStrategy":"design/strategy/FireStrategy.ts","~/design/strategy/IceStrategy":"design/strategy/IceStrategy.ts","~/design/strategy/LeafStrategy":"design/strategy/LeafStrategy.ts","~/design/strategy/LightningStrategy":"design/strategy/LightningStrategy.ts","~/design/strategy/NomalStrategy":"design/strategy/NomalStrategy.ts","~/design/strategy/StoneStrategy":"design/strategy/StoneStrategy.ts","~/setup":"setup.ts","/images/ball.png":"images/ball.png"}],"Colision.ts":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1751,21 +1743,7 @@ function () {
     return false;
   };
 
-  Collision.prototype.isChickenConfictWalls = function (chickens, view) {
-    var _this = this;
-
-    var colliding = false;
-    chickens.forEach(function (c) {
-      view.drawSprite(c);
-      c.moveDownChicken();
-
-      if (_this.isChickenConfictWall(c, view)) {
-        c.moveUpChicken();
-        colliding = true;
-      }
-    });
-    return colliding;
-  }; // Check bullet collision with chicken
+  Collision.prototype.isChickenConfictWalls = function (chickens, view) {}; // Check bullet collision with chicken
 
 
   Collision.prototype.isCollidingChickens = function (bullet, chickens) {
@@ -1967,9 +1945,9 @@ function shootingBullet(starShip, view, conlision, chickens) {
   starShip.bullets.forEach(function (b) {
     view.drawSprite(b);
     b.moveBullet();
-    var collidingBrick = conlision.isCollidingChickens(b, chickens);
+    var collidingChicken = conlision.isCollidingChickens(b, chickens);
 
-    if (collidingBrick) {
+    if (collidingChicken) {
       score += b.damage;
       view.drawScore("Score: " + score.toString());
     }
@@ -2008,11 +1986,269 @@ function drawAndMoveEgg(starShip, conlision, chickens, view) {
 
 function drawAndMoveChicken(chickens, view) {
   chickens.forEach(function (chicken, i) {
-    //chicken.moveChicken(view);
+    chicken.moveChicken(view);
     view.drawSprite(chicken);
   });
 }
-},{"~/services/Egg":"services/Egg.ts","./helper":"extensions/helper.ts","/images/egg.png":"images/egg.png"}],"index.ts":[function(require,module,exports) {
+},{"~/services/Egg":"services/Egg.ts","./helper":"extensions/helper.ts","/images/egg.png":"images/egg.png"}],"design/singleton/SingletonStarShip.ts":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.SingletonStarShip = void 0;
+
+var _setup = require("~/setup");
+
+var _context = require("../strategy/context");
+
+var _FireStrategy = require("../strategy/FireStrategy");
+
+var _IceStrategy = require("../strategy/IceStrategy");
+
+var _LeafStrategy = require("../strategy/LeafStrategy");
+
+var _LightningStrategy = require("../strategy/LightningStrategy");
+
+var _NomalStrategy = require("../strategy/NomalStrategy");
+
+var _StoneStrategy = require("../strategy/StoneStrategy");
+
+var _spaceship = _interopRequireDefault(require("/images/spaceship.png"));
+
+var _ball = _interopRequireDefault(require("/images/ball.png"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var SingletonStarShip =
+/** @class */
+function () {
+  function SingletonStarShip(speed, paddleWidth, paddleHeight, position, image, level, typeBullet) {
+    var _this = this;
+
+    this.speed = speed;
+    this.paddleWidth = paddleWidth;
+    this.paddleHeight = paddleHeight;
+    this.position = position;
+    this.bullets = [];
+    this.paddleImage = new Image();
+
+    this.handleKeyLeft = function (e) {
+      switch (e.key) {
+        case 'a':
+          _this.moveLeft = false;
+          break;
+
+        case 'd':
+          _this.moveRight = false;
+          break;
+
+        case 'w':
+          _this.moveDown = false;
+          break;
+
+        case 's':
+          _this.moveUp = false;
+          break;
+
+        case 'j':
+          _this.shooting = false;
+          break;
+
+        default:
+          break;
+      }
+    };
+
+    this.handleKeyRight = function (e) {
+      switch (e.key) {
+        case 'a':
+          _this.moveLeft = true;
+          break;
+
+        case 'd':
+          _this.moveRight = true;
+          break;
+
+        case 'w':
+          _this.moveDown = true;
+          break;
+
+        case 's':
+          _this.moveUp = true;
+          break;
+
+        case 'j':
+          _this.StrategyBullet();
+
+          _this.shooting = true;
+          break;
+
+        default:
+          break;
+      }
+    };
+
+    this.speed = speed;
+    this.paddleWidth = paddleWidth;
+    this.paddleHeight = paddleHeight;
+    this.position = position;
+    this.moveLeft = false;
+    this.moveRight = false;
+    this.moveDown = false;
+    this.moveUp = false;
+    this.shooting = false;
+    this.paddleImage.src = image;
+    this.level = level;
+    this.typeBullet = typeBullet; // Event Listeners
+
+    document.addEventListener('keydown', this.handleKeyRight);
+    document.addEventListener('keyup', this.handleKeyLeft);
+  }
+
+  SingletonStarShip.getInstance = function (view) {
+    if (!SingletonStarShip.instance) {
+      SingletonStarShip.instance = new SingletonStarShip(_setup.PADDLE_SPEED, _setup.PADDLE_WIDTH, _setup.PADDLE_HEIGHT, {
+        x: _setup.PADDLE_STARTX,
+        y: view.canvas.height - _setup.PADDLE_HEIGHT - 5
+      }, _spaceship.default, 3, -1);
+    }
+
+    return SingletonStarShip.instance;
+  };
+
+  Object.defineProperty(SingletonStarShip.prototype, "width", {
+    // Getters
+    get: function get() {
+      return this.paddleWidth;
+    },
+    enumerable: false,
+    configurable: true
+  });
+  Object.defineProperty(SingletonStarShip.prototype, "height", {
+    get: function get() {
+      return this.paddleHeight;
+    },
+    enumerable: false,
+    configurable: true
+  });
+  Object.defineProperty(SingletonStarShip.prototype, "pos", {
+    get: function get() {
+      return this.position;
+    },
+    enumerable: false,
+    configurable: true
+  });
+  Object.defineProperty(SingletonStarShip.prototype, "typeOfBullet", {
+    get: function get() {
+      return this.typeBullet;
+    },
+    enumerable: false,
+    configurable: true
+  });
+  Object.defineProperty(SingletonStarShip.prototype, "image", {
+    get: function get() {
+      return this.paddleImage;
+    },
+    enumerable: false,
+    configurable: true
+  });
+  Object.defineProperty(SingletonStarShip.prototype, "isMovingLeft", {
+    get: function get() {
+      return this.moveLeft;
+    },
+    enumerable: false,
+    configurable: true
+  });
+  Object.defineProperty(SingletonStarShip.prototype, "isMovingRight", {
+    get: function get() {
+      return this.moveRight;
+    },
+    enumerable: false,
+    configurable: true
+  });
+  Object.defineProperty(SingletonStarShip.prototype, "isShooting", {
+    get: function get() {
+      return this.moveRight;
+    },
+    enumerable: false,
+    configurable: true
+  });
+  Object.defineProperty(SingletonStarShip.prototype, "heart", {
+    get: function get() {
+      return this.level;
+    },
+    enumerable: false,
+    configurable: true
+  });
+  Object.defineProperty(SingletonStarShip.prototype, "isMovingUp", {
+    get: function get() {
+      return this.moveUp;
+    },
+    enumerable: false,
+    configurable: true
+  });
+  Object.defineProperty(SingletonStarShip.prototype, "isMovingDown", {
+    get: function get() {
+      return this.moveDown;
+    },
+    enumerable: false,
+    configurable: true
+  });
+
+  SingletonStarShip.prototype.moveStarShip = function () {
+    if (this.moveLeft) this.pos.x -= this.speed;
+    if (this.moveRight) this.pos.x += this.speed;
+    if (this.moveDown) this.pos.y -= this.speed;
+    if (this.moveUp) this.pos.y += this.speed;
+  };
+
+  SingletonStarShip.prototype.StrategyBullet = function () {
+    var bulletModel = {
+      speed: _setup.BALL_SPEED,
+      size: _setup.BALL_SIZE,
+      image: _ball.default,
+      damage: 1
+    };
+    var bullet;
+    var pos = {
+      x: this.pos.x,
+      y: this.pos.y
+    };
+
+    if (this.typeOfBullet === -1) {
+      var context = new _context.Context(new _NomalStrategy.Nomaltrategy());
+      bullet = context.doBusinessLogicBullet(bulletModel, pos);
+    } else if (this.typeOfBullet === 1) {
+      var context = new _context.Context(new _FireStrategy.FireStrategy());
+      bullet = context.doBusinessLogicBullet(bulletModel, pos);
+    } else if (this.typeOfBullet === 2) {
+      var context = new _context.Context(new _IceStrategy.IceStrategy());
+      bullet = context.doBusinessLogicBullet(bulletModel, pos);
+    } else if (this.typeOfBullet === 3) {
+      var context = new _context.Context(new _LightningStrategy.LightStrategy());
+      bullet = context.doBusinessLogicBullet(bulletModel, pos);
+    } else if (this.typeOfBullet === 4) {
+      var context = new _context.Context(new _LeafStrategy.LeafStrategy());
+      bullet = context.doBusinessLogicBullet(bulletModel, pos);
+    } else if (this.typeOfBullet === 5) {
+      var context = new _context.Context(new _StoneStrategy.StoneStrategy());
+      bullet = context.doBusinessLogicBullet(bulletModel, pos);
+    } else if (typeof this.typeOfBullet === 'undefined') {
+      var context = new _context.Context(new _NomalStrategy.Nomaltrategy());
+      bullet = context.doBusinessLogicBullet(bulletModel, pos);
+    } //console.log(this.typeOfBullet);
+
+
+    this.bullets.push(bullet);
+    return this.bullets;
+  };
+
+  return SingletonStarShip;
+}();
+
+exports.SingletonStarShip = SingletonStarShip;
+},{"~/setup":"setup.ts","../strategy/context":"design/strategy/context.ts","../strategy/FireStrategy":"design/strategy/FireStrategy.ts","../strategy/IceStrategy":"design/strategy/IceStrategy.ts","../strategy/LeafStrategy":"design/strategy/LeafStrategy.ts","../strategy/LightningStrategy":"design/strategy/LightningStrategy.ts","../strategy/NomalStrategy":"design/strategy/NomalStrategy.ts","../strategy/StoneStrategy":"design/strategy/StoneStrategy.ts","/images/spaceship.png":"images/spaceship.png","/images/ball.png":"images/ball.png"}],"index.ts":[function(require,module,exports) {
 "use strict";
 
 var _CanvasView = require("./view/CanvasView");
@@ -2028,6 +2264,8 @@ var _setup = require("./setup");
 var _helper = require("./extensions/helper");
 
 var _move = require("./extensions/move.extensions");
+
+var _SingletonStarShip = require("./design/singleton/SingletonStarShip");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2080,7 +2318,10 @@ function startGame(view) {
   var collision = new _Colision.Collision();
   var chickens = (0, _helper.createChickens)(_setup.LEVEL1);
   sumEnergy = (0, _helper.sumEnergyChicken)(chickens);
-  var startShip = new _StarShip.StarShip(_setup.PADDLE_SPEED, _setup.PADDLE_WIDTH, _setup.PADDLE_HEIGHT, {
+
+  var startShip = _SingletonStarShip.SingletonStarShip.getInstance(view);
+
+  var startShip1 = new _StarShip.StarShip(_setup.PADDLE_SPEED, _setup.PADDLE_WIDTH, _setup.PADDLE_HEIGHT, {
     x: _setup.PADDLE_STARTX,
     y: view.canvas.height - _setup.PADDLE_HEIGHT - 5
   }, _spaceship.default, 3, -1);
@@ -2089,7 +2330,7 @@ function startGame(view) {
 
 var view = new _CanvasView.CanvasView("#playField");
 view.initStartButton(startGame);
-},{"./view/CanvasView":"view/CanvasView.ts","./services/StarShip":"services/StarShip.ts","./Colision":"Colision.ts","/images/spaceship.png":"images/spaceship.png","./setup":"setup.ts","./extensions/helper":"extensions/helper.ts","./extensions/move.extensions":"extensions/move.extensions.ts"}],"../node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./view/CanvasView":"view/CanvasView.ts","./services/StarShip":"services/StarShip.ts","./Colision":"Colision.ts","/images/spaceship.png":"images/spaceship.png","./setup":"setup.ts","./extensions/helper":"extensions/helper.ts","./extensions/move.extensions":"extensions/move.extensions.ts","./design/singleton/SingletonStarShip":"design/singleton/SingletonStarShip.ts"}],"../node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -2117,7 +2358,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "19705" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "23980" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

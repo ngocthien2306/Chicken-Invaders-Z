@@ -3,6 +3,7 @@ import { Bullet } from "~/services/Bullet";
 import { StarShip } from "~/services/StarShip";
 import { ItemSupport } from "~/services/Item";
 import { Egg } from "~/services/Egg";
+import { SingletonStarShip } from "~/design/singleton/SingletonStarShip";
 
 export class CanvasView {
   canvas: HTMLCanvasElement;
@@ -64,7 +65,7 @@ export class CanvasView {
     if(this.hp) this.hp.innerHTML = txt;
   }
 
-  drawSprite(frame: Chicken | StarShip | Bullet | ItemSupport | Egg): void {
+  drawSprite(frame: Chicken | SingletonStarShip | Bullet | ItemSupport | Egg): void {
     if(!frame) return;
     this.context?.drawImage(
       frame.image,

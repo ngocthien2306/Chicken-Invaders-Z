@@ -1,4 +1,5 @@
 
+import { IStrategy } from "~/interface/Stategy.interface";
 import { BulletModel } from "~/model/Bullet.model";
 import { ItemModel } from "~/model/Item.model";
 import { Bullet } from "~/services/Bullet";
@@ -6,21 +7,17 @@ import { ItemSupport } from "~/services/Item";
 import { StarShip } from "~/services/StarShip";
 import { Vector } from "~/types";
 
-export interface Strategy {
-  doChangeInfoBullet(data: BulletModel, pos: Vector): Bullet;
-  doChangeTypeItem(data: ItemModel, pos: Vector): ItemSupport;
-}
 export class Context {
 
-  private strategy: Strategy;
+  private strategy: IStrategy;
 
 
-  constructor(strategy: Strategy) {
+  constructor(strategy: IStrategy) {
       this.strategy = strategy;
   }
 
 
-  public setStrategy(strategy: Strategy) {
+  public setStrategy(strategy: IStrategy) {
       this.strategy = strategy;
   }
 

@@ -59,14 +59,7 @@ export class Chicken {
   changeYDirection(): void {
     this.speed.y = this.speed.y;
   }
-  moveDownChicken(): void {
-    this.pos.x -= this.speed.x;
-    //this.pos.y -= this.speed.y;
-  }  
-  moveUpChicken(): void {
-    this.pos.x += this.speed.x;
-    //this.pos.y += this.speed.y;
-  }
+
   moveChicken(view: CanvasView): void {
     if(this.pos.x < 0 || (this.pos.x + this.width) > view.canvas.width) {
       this.speed.x = - this.speed.x;
@@ -74,7 +67,7 @@ export class Chicken {
 
     if (this.pos.y < 0 || (this.pos.y + this.height) > view.canvas.height/1.5) {
       this.speed.y = - this.speed.y;
-  }
+    }
     this.pos.x += this.speed.x
     this.pos.y += this.speed.y;
   }

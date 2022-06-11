@@ -19,15 +19,16 @@ import {
 } from '../setup';
 import { ItemSupport } from '../services/Item';
 import { Vector } from '../types';
-import { Context } from '../strategy/context';
-import { FireStrategy } from '../strategy/FireStrategy';
-import { IceStrategy } from '../strategy/IceStrategy';
-import { LightStrategy } from '../strategy/LightningStrategy';
-import { LeafStrategy } from '../strategy/LeafStrategy';
-import { StoneStrategy } from '../strategy/StoneStrategy';
-import { ChickenMeatStrategy } from '../strategy/ChickenMeatStrategy';
-import { OtherItemStrategy } from '../strategy/OtherItemStrategy';
+
 import { CanvasView } from '../view/CanvasView';
+import { Context } from '~/design/strategy/context';
+import { FireStrategy } from '~/design/strategy/FireStrategy';
+import { IceStrategy } from '~/design/strategy/IceStrategy';
+import { LightStrategy } from '~/design/strategy/LightningStrategy';
+import { LeafStrategy } from '~/design/strategy/LeafStrategy';
+import { StoneStrategy } from '~/design/strategy/StoneStrategy';
+import { ChickenMeatStrategy } from '~/design/strategy/ChickenMeatStrategy';
+import { OtherItemStrategy } from '~/design/strategy/OtherItemStrategy';
 
 export function createChickens(level: number[]): Chicken[] {
 

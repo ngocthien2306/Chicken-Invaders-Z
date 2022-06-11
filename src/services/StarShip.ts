@@ -1,12 +1,13 @@
+import { Context } from "~/design/strategy/context";
+import { FireStrategy } from "~/design/strategy/FireStrategy";
+import { IceStrategy } from "~/design/strategy/IceStrategy";
+import { LeafStrategy } from "~/design/strategy/LeafStrategy";
+import { LightStrategy } from "~/design/strategy/LightningStrategy";
+import { Nomaltrategy } from "~/design/strategy/NomalStrategy";
+import { StoneStrategy } from "~/design/strategy/StoneStrategy";
 import { BulletModel } from "~/model/Bullet.model";
 import { BALL_SIZE, BALL_SPEED, BALL_STARTX, BALL_STARTY, PADDLE_WIDTH } from "~/setup";
-import { Context } from "~/strategy/context";
-import { FireStrategy } from "~/strategy/FireStrategy";
-import { IceStrategy } from "~/strategy/IceStrategy";
-import { LeafStrategy } from "~/strategy/LeafStrategy";
-import { LightStrategy } from "~/strategy/LightningStrategy";
-import { Nomaltrategy } from "~/strategy/NomalStrategy";
-import { StoneStrategy } from "~/strategy/StoneStrategy";
+
 import { Vector } from "~/types";
 import { Bullet } from "./Bullet";
 import BALL_IMAGE from '/images/ball.png';

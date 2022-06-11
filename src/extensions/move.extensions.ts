@@ -1,4 +1,5 @@
 import { Collision } from "~/Colision";
+import { SingletonStarShip } from "~/design/singleton/SingletonStarShip";
 import { Chicken } from "~/services/Chicken";
 import { Egg } from "~/services/Egg";
 import { StarShip } from "~/services/StarShip";
@@ -8,7 +9,7 @@ import EGG_IMAGE from "/images/egg.png";
 let score = 0;
 
 
-export function moveStarShip(starShip: StarShip, view: CanvasView): void {
+export function moveStarShip(starShip: SingletonStarShip, view: CanvasView): void {
   if(
     (starShip.isMovingLeft && starShip.pos.x > 0) ||
     (starShip.isMovingRight && starShip.pos.x < view.canvas.width - starShip.width) ||
@@ -21,19 +22,19 @@ export function moveStarShip(starShip: StarShip, view: CanvasView): void {
 
 
 
-export function shootingBullet(starShip: StarShip, view: CanvasView, conlision: Collision, chickens: Chicken[]): void {
+export function shootingBullet(starShip: SingletonStarShip, view: CanvasView, conlision: Collision, chickens: Chicken[]): void {
   starShip.bullets.forEach(b => {
     view.drawSprite(b);
     b.moveBullet();
-    const collidingBrick = conlision.isCollidingChickens(b, chickens);
-    if (collidingBrick) {
+    const collidingChicken = conlision.isCollidingChickens(b, chickens);
+    if (collidingChicken) {
       score += b.damage;
       view.drawScore("Score: " + score.toString());
     }
   })
 }
 
-export function drawAndMoveGift(conlision: Collision, view: CanvasView, starShip: StarShip): void {
+export function drawAndMoveGift(conlision: Collision, view: CanvasView, starShip: SingletonStarShip): void {
   conlision.gifts.forEach(g => {
     view.drawSprite(g);
     g.moveItemSupport();
@@ -45,7 +46,7 @@ export function drawAndMoveGift(conlision: Collision, view: CanvasView, starShip
   })
 }
 
-export function drawAndMoveEgg(starShip: StarShip,conlision: Collision, chickens: Chicken[], view: CanvasView): void {
+export function drawAndMoveEgg(starShip: SingletonStarShip,conlision: Collision, chickens: Chicken[], view: CanvasView): void {
   var number = getRandomInt(150);
   if(number === 50) {
     var index = getRandomInt(chickens.length);
@@ -61,7 +62,7 @@ export function drawAndMoveEgg(starShip: StarShip,conlision: Collision, chickens
 
 export function drawAndMoveChicken(chickens: Chicken[], view: CanvasView): void {
   chickens.forEach((chicken, i) => {
-    //chicken.moveChicken(view);
+    chicken.moveChicken(view);
     view.drawSprite(chicken);
   }) 
 }

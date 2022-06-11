@@ -8,6 +8,7 @@ import STARSHIP_IMAGE from '/images/spaceship.png';
 import { PADDLE_WIDTH, PADDLE_HEIGHT, BALL_SPEED, PADDLE_SPEED, BALL_STARTX, BALL_STARTY, BRICK_HEIGHT, BALL_SIZE, PADDLE_STARTX, LEVEL1, LEVEL2 } from "./setup";
 import { createBoss, createChickens, createHeart, hpRemaining, sumEnergyChicken } from "./extensions/helper";
 import { drawAndMoveChicken, drawAndMoveEgg, drawAndMoveGift, moveStarShip, shootingBullet } from "./extensions/move.extensions";
+import { SingletonStarShip } from "./design/singleton/SingletonStarShip";
 
 
 let score = 0;
@@ -23,7 +24,7 @@ function setGameWin(view: CanvasView) {
   view.drawInfo("Game Won!");
 }
 
-function gameLoop(view: CanvasView, chickens: Chicken[], starShip: StarShip, conlision: Collision) {
+function gameLoop(view: CanvasView, chickens: Chicken[], starShip: SingletonStarShip, conlision: Collision) {
 
   view.clear();
 
@@ -62,7 +63,8 @@ function startGame(view: CanvasView) {
   const collision = new Collision();
   const chickens = createChickens(LEVEL1);
   sumEnergy = sumEnergyChicken(chickens);
-  const startShip = new StarShip(PADDLE_SPEED, PADDLE_WIDTH, PADDLE_HEIGHT, {x: PADDLE_STARTX, y: view.canvas.height - PADDLE_HEIGHT - 5}, STARSHIP_IMAGE, 3, -1);
+  const startShip = SingletonStarShip.getInstance(view);
+  const startShip1 = new StarShip(PADDLE_SPEED, PADDLE_WIDTH, PADDLE_HEIGHT, {x: PADDLE_STARTX, y: view.canvas.height - PADDLE_HEIGHT - 5}, STARSHIP_IMAGE, 3, -1);
   gameLoop(view, chickens, startShip, collision);
 }
 

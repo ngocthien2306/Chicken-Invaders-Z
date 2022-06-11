@@ -7,6 +7,7 @@ import { ItemSupport } from "./services/Item";
 import { getItemSupport, getRandomInt, listCategoryItem } from "./extensions/helper";
 import { ItemModel } from "./model/Item.model";
 import { Egg } from "./services/Egg";
+import { SingletonStarShip } from "./design/singleton/SingletonStarShip";
 export class Collision {
 
   gifts: ItemSupport[] = [];
@@ -19,7 +20,7 @@ export class Collision {
   get typeItem():number {
     return this.typeNumberItem;
   }
-  checkStarshipColliding(chickens: Chicken[], starShip: StarShip): boolean {
+  checkStarshipColliding(chickens: Chicken[], starShip: SingletonStarShip): boolean {
     let colliding = false;
     chickens.forEach((chicken, i) => {
 
@@ -57,18 +58,7 @@ export class Collision {
   }
 
   isChickenConfictWalls(chickens: Chicken[], view: CanvasView) {
-    let colliding = false;
-    chickens.forEach(c => {
-      view.drawSprite(c);
-      c.moveDownChicken();
-      if(this.isChickenConfictWall(c, view)) {
-        c.moveUpChicken();
-        colliding = true;
-      }
-
-
-    })
-    return colliding;
+    
   }
 
   // Check bullet collision with chicken
@@ -102,7 +92,7 @@ export class Collision {
     return colliding;
   }
 
-  checkCollidingStarshipWithChicken(chicken: Chicken, starShip: StarShip): boolean {
+  checkCollidingStarshipWithChicken(chicken: Chicken, starShip: SingletonStarShip): boolean {
     if (
       chicken.pos.x + chicken.width > starShip.pos.x &&
       chicken.pos.x < starShip.pos.x + starShip.width &&
@@ -114,7 +104,7 @@ export class Collision {
     return false;
   }
 
-  checkCollidingStarshipWithChickens(chickens: Chicken[], starShip: StarShip): boolean {
+  checkCollidingStarshipWithChickens(chickens: Chicken[], starShip: SingletonStarShip): boolean {
     let colliding = false;
 
     chickens.forEach((chicken, i) => {
@@ -133,7 +123,7 @@ export class Collision {
     })
     return colliding;
   }
-  checkCollidingEgg(egg: Egg, starShip: StarShip): void {
+  checkCollidingEgg(egg: Egg, starShip: SingletonStarShip): void {
     if(
       egg.pos.x + egg.width > starShip.pos.x &&
       egg.pos.x < starShip.pos.x + starShip.width &&
@@ -147,7 +137,7 @@ export class Collision {
         starShip.level--;
       }
   }
-  checkCollidingItem(item: ItemSupport, starShip: StarShip): boolean {
+  checkCollidingItem(item: ItemSupport, starShip: SingletonStarShip): boolean {
     let isConflicking = false;
     if(
       item.pos.x + item.width > starShip.pos.x &&
