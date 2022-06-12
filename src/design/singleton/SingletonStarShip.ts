@@ -1,7 +1,7 @@
 import { BulletModel } from "~/model/Bullet.model";
 import { Bullet } from "~/services/Bullet";
 import { BALL_SIZE, BALL_SPEED, PADDLE_HEIGHT, PADDLE_SPEED, PADDLE_STARTX, PADDLE_WIDTH } from "~/setup";
-import { Vector } from "~/types";
+
 import { CanvasView } from "~/view/CanvasView";
 import { Context } from "../strategy/context";
 import { FireStrategy } from "../strategy/FireStrategy";
@@ -12,6 +12,7 @@ import { Nomaltrategy } from "../strategy/NomalStrategy";
 import { StoneStrategy } from "../strategy/StoneStrategy";
 import STARSHIP_IMAGE from '/images/spaceship.png';
 import BALL_IMAGE from '/images/ball.png';
+import { Vector } from "~/model/types";
 
 export class SingletonStarShip {
     private static instance: SingletonStarShip;

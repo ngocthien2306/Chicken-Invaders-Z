@@ -1,5 +1,6 @@
 import { getRandomInt, getRandomSpeed } from "~/extensions/helper";
-import { Vector } from "~/types";
+import { Vector } from "~/model/types";
+
 export class Bullet {
   private speed: Vector;
   damage: number;

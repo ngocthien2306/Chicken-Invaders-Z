@@ -18,7 +18,6 @@ import {
   
 } from '../setup';
 import { ItemSupport } from '../services/Item';
-import { Vector } from '../types';
 
 import { CanvasView } from '../view/CanvasView';
 import { Context } from '~/design/strategy/context';
@@ -29,6 +28,7 @@ import { LeafStrategy } from '~/design/strategy/LeafStrategy';
 import { StoneStrategy } from '~/design/strategy/StoneStrategy';
 import { ChickenMeatStrategy } from '~/design/strategy/ChickenMeatStrategy';
 import { OtherItemStrategy } from '~/design/strategy/OtherItemStrategy';
+import { Vector } from '~/model/types';
 
 export function createChickens(level: number[]): Chicken[] {
 

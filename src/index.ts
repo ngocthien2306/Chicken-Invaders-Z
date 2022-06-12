@@ -2,6 +2,7 @@ import { CanvasView } from "./view/CanvasView";
 import { Chicken } from "./services/Chicken";
 import { StarShip } from "./services/StarShip";
 import { Collision } from "./Colision";
+
 // Image
 import STARSHIP_IMAGE from '/images/spaceship.png';
 // Level and colors
@@ -11,9 +12,13 @@ import { drawAndMoveChicken, drawAndMoveEgg, drawAndMoveGift, moveStarShip, shoo
 import { SingletonStarShip } from "./design/singleton/SingletonStarShip";
 
 
+
+
 let score = 0;
 let gameOver = false;
 let sumEnergy = 0;
+
+
 
 function setGameOver(view: CanvasView) {
   view.drawInfo("Game Over!");
@@ -33,7 +38,6 @@ function gameLoop(view: CanvasView, chickens: Chicken[], starShip: SingletonStar
   moveStarShip(starShip, view);
   shootingBullet(starShip, view, conlision, chickens);
   drawAndMoveGift(conlision, view, starShip);
-
 
 
   view.drawSprite(starShip);
@@ -57,6 +61,10 @@ function gameLoop(view: CanvasView, chickens: Chicken[], starShip: SingletonStar
 
 
 function startGame(view: CanvasView) {
+
+  // const users = userServices.getListUser();
+  // console.log(users);
+
   score = 0;
   view.drawInfo('');
   view.drawScore("Score: 0");
@@ -64,7 +72,7 @@ function startGame(view: CanvasView) {
   const chickens = createChickens(LEVEL1);
   sumEnergy = sumEnergyChicken(chickens);
   const startShip = SingletonStarShip.getInstance(view);
-  const startShip1 = new StarShip(PADDLE_SPEED, PADDLE_WIDTH, PADDLE_HEIGHT, {x: PADDLE_STARTX, y: view.canvas.height - PADDLE_HEIGHT - 5}, STARSHIP_IMAGE, 3, -1);
+  //const startShip1 = new StarShip(PADDLE_SPEED, PADDLE_WIDTH, PADDLE_HEIGHT, {x: PADDLE_STARTX, y: view.canvas.height - PADDLE_HEIGHT - 5}, STARSHIP_IMAGE, 3, -1);
   gameLoop(view, chickens, startShip, collision);
 }
 

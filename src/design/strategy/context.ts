@@ -2,10 +2,11 @@
 import { IStrategy } from "~/interface/Stategy.interface";
 import { BulletModel } from "~/model/Bullet.model";
 import { ItemModel } from "~/model/Item.model";
+import { Vector } from "~/model/types";
 import { Bullet } from "~/services/Bullet";
 import { ItemSupport } from "~/services/Item";
 import { StarShip } from "~/services/StarShip";
-import { Vector } from "~/types";
+
 
 export class Context {
 

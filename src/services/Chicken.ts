@@ -1,4 +1,5 @@
-import { Vector } from "~/types";
+
+import { Vector } from "~/model/types";
 import { CanvasView } from "~/view/CanvasView";
 import { Egg } from "./Egg";
 

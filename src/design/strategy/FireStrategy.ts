@@ -2,15 +2,17 @@
 import { BulletModel } from "~/model/Bullet.model";
 import { PADDLE_WIDTH } from "~/setup";
 import { Bullet } from "~/services/Bullet";
-import { Vector } from "~/types";
-import { Strategy } from "./context";
+
+
 import { ItemModel } from "~/model/Item.model";
 import { ItemSupport } from "~/services/Item";
 import GIFT_RED from '/images/gift-fire.png';
 import FIRE_BULLET from '/images/fire-bullet.png';
 import { randomIntFromInterval } from "~/extensions/helper";
+import { Vector } from "~/model/types";
+import { IStrategy } from "~/interface/Stategy.interface";
 
-export class FireStrategy implements Strategy {
+export class FireStrategy implements IStrategy {
   public doChangeInfoBullet(data: BulletModel, pos: Vector): Bullet {
     const fireBullet: BulletModel = {
       speed: data.speed - 4,

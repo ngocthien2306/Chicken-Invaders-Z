@@ -2,14 +2,15 @@
 import { BulletModel } from "~/model/Bullet.model";
 import { PADDLE_WIDTH } from "~/setup";
 import { Bullet } from "~/services/Bullet";
-import { Vector } from "~/types";
-import { Strategy } from "./context";
+
 import { ItemSupport } from "~/services/Item";
 import { ItemModel } from "~/model/Item.model";
 import GIFT_BOX01 from '/images/gift-fire.png';
 import { randomIntFromInterval } from "~/extensions/helper";
+import { Vector } from "~/model/types";
+import { IStrategy } from "~/interface/Stategy.interface";
 
-export class Nomaltrategy implements Strategy {
+export class Nomaltrategy implements IStrategy {
   public doChangeInfoBullet(data: BulletModel, pos: Vector): Bullet {
     const nomalBullet: BulletModel = data
     const bullet = new Bullet(

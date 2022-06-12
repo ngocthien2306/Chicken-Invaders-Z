@@ -1,6 +1,7 @@
-import { IAbstrackAdvancedMode, IAbstractBasicMode } from "~/interface/AbstractFactory.interface";
+import { IAbstrackAdvancedMode } from "~/interface/AbstractFactory.interface";
+import { Vector } from "~/model/types";
 import { Chicken } from "~/services/Chicken";
-import { Vector } from "~/types";
+
 import { CanvasView } from "~/view/CanvasView";
 
 export class SuperHardMode implements IAbstrackAdvancedMode {

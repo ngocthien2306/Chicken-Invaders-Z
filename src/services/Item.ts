@@ -1,4 +1,5 @@
-import { Vector } from "~/types";
+import { Vector } from "~/model/types";
+
 export class ItemSupport {
   private speed: Vector;
   private itemImage: HTMLImageElement = new Image();
