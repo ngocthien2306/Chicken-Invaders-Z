@@ -5,7 +5,7 @@ import { Collision } from "./Colision";
 // Image
 import STARSHIP_IMAGE from '/images/spaceship.png';
 // Level and colors
-import { PADDLE_WIDTH, PADDLE_HEIGHT, BALL_SPEED, PADDLE_SPEED, BALL_STARTX, BALL_STARTY, BRICK_HEIGHT, BALL_SIZE, PADDLE_STARTX, LEVEL1, LEVEL2 } from "./setup";
+import { PADDLE_WIDTH, PADDLE_HEIGHT, BALL_SPEED, PADDLE_SPEED, BALL_STARTX, BALL_STARTY, BRICK_HEIGHT, BALL_SIZE, PADDLE_STARTX, LEVEL1, LEVEL2, LEVEL3, LEVEL4, LEVEL5,LEVEL6,LEVEL7,LEVEL8,LEVEL9,LEVEL10,LEVEL11,LEVEL12 } from "./setup";
 import { createBoss, createChickens, createHeart, hpRemaining, sumEnergyChicken } from "./extensions/helper";
 import { drawAndMoveChicken, drawAndMoveEgg, drawAndMoveGift, moveStarShip, shootingBullet } from "./extensions/move.extensions";
 import { SingletonStarShip } from "./design/singleton/SingletonStarShip";
@@ -45,6 +45,7 @@ function gameLoop(view: CanvasView, chickens: Chicken[], starShip: SingletonStar
 
   if(starShip.level === 0) return setGameOver(view);
   if(conlision.checkCollidingStarshipWithChickens(chickens, starShip)) return setGameOver(view);
+  
   if(chickens.length === 0) {
     chickens = createBoss(LEVEL2);
     sumEnergy = sumEnergyChicken(chickens);

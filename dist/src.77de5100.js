@@ -261,7 +261,7 @@ module.exports = "/chicken06.2e9b5305.png";
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.LEVEL2 = exports.LEVEL1 = exports.CHICKEN_ENERGY = exports.CHICKEN_IMAGES = exports.BALL_STARTY = exports.BALL_STARTX = exports.BALL_SIZE = exports.BALL_SPEED = exports.PADDLE_SPEED = exports.PADDLE_STARTX = exports.PADDLE_HEIGHT = exports.PADDLE_WIDTH = exports.BRICK_HEIGHT = exports.BRICK_WIDTH = exports.BRICK_PADDING = exports.STAGE_COLS = exports.STAGE_ROWS = exports.STAGE_PADDING = void 0;
+exports.LEVEL18 = exports.LEVEL17 = exports.LEVEL16 = exports.LEVEL15 = exports.LEVEL14 = exports.LEVEL13 = exports.LEVEL12 = exports.LEVEL11 = exports.LEVEL10 = exports.LEVEL9 = exports.LEVEL8 = exports.LEVEL7 = exports.LEVEL6 = exports.LEVEL5 = exports.LEVEL4 = exports.LEVEL3 = exports.LEVEL2 = exports.LEVEL1 = exports.CHICKEN_ENERGY = exports.CHICKEN_IMAGES = exports.BALL_STARTY = exports.BALL_STARTX = exports.BALL_SIZE = exports.BALL_SPEED = exports.PADDLE_SPEED = exports.PADDLE_STARTX = exports.PADDLE_HEIGHT = exports.PADDLE_WIDTH = exports.BRICK_HEIGHT = exports.BRICK_WIDTH = exports.BRICK_PADDING = exports.STAGE_COLS = exports.STAGE_ROWS = exports.STAGE_PADDING = void 0;
 
 var _chick = _interopRequireDefault(require("./images/chick.png"));
 
@@ -328,10 +328,42 @@ var CHICKEN_ENERGY = {
 }; // prettier-ignore
 
 exports.CHICKEN_ENERGY = CHICKEN_ENERGY;
-var LEVEL1 = [0, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0, 0, 0, 2, 2, 2, 4, 5, 5, 5, 4, 2, 2, 2, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0]; // prettier-ignore
+var LEVEL1 = [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 1, 0, 0, 0, 0, 1, 1, 5, 5, 5, 5, 4, 4, 4, 4, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0]; // prettier-ignore
 
 exports.LEVEL1 = LEVEL1;
-var LEVEL2 = [0, 0, 0, 0, 6, 0, 0, 0]; // export const LEVEL = [
+var LEVEL2 = [0, 0, 0, 0, 6, 0, 0, 0];
+exports.LEVEL2 = LEVEL2;
+var LEVEL3 = [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0];
+exports.LEVEL3 = LEVEL3;
+var LEVEL4 = [0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0];
+exports.LEVEL4 = LEVEL4;
+var LEVEL5 = [0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0];
+exports.LEVEL5 = LEVEL5;
+var LEVEL6 = [0, 0, 0, 0, 7, 0, 0, 0, 0];
+exports.LEVEL6 = LEVEL6;
+var LEVEL7 = [0, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0];
+exports.LEVEL7 = LEVEL7;
+var LEVEL8 = [0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0];
+exports.LEVEL8 = LEVEL8;
+var LEVEL9 = [0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0];
+exports.LEVEL9 = LEVEL9;
+var LEVEL10 = [0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0];
+exports.LEVEL10 = LEVEL10;
+var LEVEL11 = [0, 0, 6, 0, 0, 0, 7, 0, 0];
+exports.LEVEL11 = LEVEL11;
+var LEVEL12 = [0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0];
+exports.LEVEL12 = LEVEL12;
+var LEVEL13 = [0, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0];
+exports.LEVEL13 = LEVEL13;
+var LEVEL14 = [0, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0];
+exports.LEVEL14 = LEVEL14;
+var LEVEL15 = [1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0];
+exports.LEVEL15 = LEVEL15;
+var LEVEL16 = [0, 0, 6, 0, 6, 0, 7, 0, 0];
+exports.LEVEL16 = LEVEL16;
+var LEVEL17 = [0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0];
+exports.LEVEL17 = LEVEL17;
+var LEVEL18 = [6, 0, 6, 0, 0, 0, 7, 0, 7]; // export const LEVEL = [
 //   0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 //   0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 //   0, 0, 1, 1, 1, 1, 1, 1, 0, 0,
@@ -347,7 +379,7 @@ var LEVEL2 = [0, 0, 0, 0, 6, 0, 0, 0]; // export const LEVEL = [
 //   0, 0, 2, 2, 0, 2, 2, 0, 2, 2, 0, 2, 2, 0, 0,
 // ];
 
-exports.LEVEL2 = LEVEL2;
+exports.LEVEL18 = LEVEL18;
 },{"./images/chick.png":"images/chick.png","./images/chicken_blue.png":"images/chicken_blue.png","./images/chicken_red.png":"images/chicken_red.png","./images/chicken05.png":"images/chicken05.png","./images/chicken06.png":"images/chicken06.png"}],"services/Chicken.ts":[function(require,module,exports) {
 "use strict";
 
@@ -2358,7 +2390,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50498" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52538" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
