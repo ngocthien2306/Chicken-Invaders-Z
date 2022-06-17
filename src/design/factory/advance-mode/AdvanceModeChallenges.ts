@@ -1,14 +1,14 @@
-import { IAbstrackAdvancedMode, IAbstractBasicMode } from "~/interface/AbstractFactory.interface";
+import { IAbstractAdvancedMode } from "~/interface/AbstractFactory.interface";
 import { Chicken } from "~/services/Chicken";
 import { Vector } from "~/types";
 import { CanvasView } from "~/view/CanvasView";
 
-export class ChallengesMode implements IAbstrackAdvancedMode {
+export class ChallengesMode implements IAbstractAdvancedMode {
     private context: CanvasRenderingContext2D | null;
     private canvas: HTMLCanvasElement;
     private chickenImage: HTMLImageElement = new Image();
     private speed: Vector;
-
+    public angle: number = 0;
     constructor(
         canvasName: string,
         speed: number,
@@ -55,18 +55,18 @@ export class ChallengesMode implements IAbstrackAdvancedMode {
         this.chickenEnergy = energy;
       }
     
-    public drawChicken(frame: Chicken): void {
-        if (!frame) return;
+    public drawChicken(): void {
+        
         this.context?.drawImage(
-            frame.image,
-            frame.pos.x,
-            frame.pos.y,
-            frame.width,
-            frame.height 
+            this.chickenImage,
+            this.pos.x,
+            this.pos.y,
+            this.width,
+            this.height 
         );
     }
     
-    public moveChickenByElip(view: CanvasView): void {
+    public moveChickenByCross(view: CanvasView): void {
         if(this.pos.x < 0 || (this.pos.x + this.width) > view.canvas.width) {
             this.speed.x = - this.speed.x;
             }

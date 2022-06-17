@@ -35,16 +35,7 @@
                   <li class="nav-item" style="user-select: auto;">
                     <a class="nav-link" href="#" style="user-select: auto;">Logout</a>
                   </li>
-                  <li class="nav-item dropdown" style="user-select: auto;">
-                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" style="user-select: auto;">Dropdown</a>
-                    <div class="dropdown-menu" style="user-select: auto;">
-                      <a class="dropdown-item" href="#" style="user-select: auto;">Action</a>
-                      <a class="dropdown-item" href="#" style="user-select: auto;">Another action</a>
-                      <a class="dropdown-item" href="#" style="user-select: auto;">Something else here</a>
-                      <div class="dropdown-divider" style="user-select: auto;"></div>
-                      <a class="dropdown-item" href="#" style="user-select: auto;">Separated link</a>
-                    </div>
-                  </li>
+
                 </ul>
                 <form class="d-flex" style="user-select: auto;">
                   <input class="form-control me-sm-2" type="text" placeholder="Search" style="user-select: auto;">
@@ -57,7 +48,8 @@
       </div>
     </section>
     <section class="body_game">
-      
+      <span id="choose_starship" style="display: none">0</span>
+      <span id="choose_lv" style="display: none">0</span>
       <div class="row">
         <div class="col-8">
           <div id="main" class="main">
@@ -72,6 +64,11 @@
                 <div>
                   <img id="img-gift" width="35px" height="35px" src="/energy.758b191f.png">
                 </div>
+
+                <div>
+                  <span id="number-nuke">0</span> <img id="img-gift" width="40px" height="40px" src="/rocket.c09e3f8b.png">
+                </div>
+
               </div>
               <button id="start" class="btn btn-outline-info">Start</button>
               <div id="item">
@@ -90,13 +87,13 @@
             <div class="card-header" style="user-select: auto;">Modes</div>
             <div class="card-body" style="user-select: auto;">
               <div class="form-group">
-                <select class="form-control" style="width: 100%;" tabindex="-1" aria-hidden="true">
-                <option selected="selected">--Select--</option>
-                <option>Eazy</option>
-                <option>Medium</option>
-                <option>Hard</option>
-                <option>Supper Hard</option>
-                <option>Challenge</option>
+                <select class="form-control" id="select-mode" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                <option value="No" selected="selected">--Select--</option>
+                <option value="Eazy">Eazy</option>
+                <option value="Medium">Medium</option>
+                <option value="Hard">Hard</option>
+                <option value="Supper Hard">Super Hard</option>
+                <option value="Challenge">Challenge</option>
                 <option>Random</option>
             </select> </div> <!-- /.form-group -->
             </div>
@@ -105,30 +102,30 @@
             <div class="card-header" style="user-select: auto;">Levels</div>
             <div class="card-body" style="user-select: auto;">
               <div class="level-side lv1">
-                <button class="btn btn-primary lv-sizes" type="button">1-1</button>
-                <button class="btn btn-primary lv-sizes" type="button" disabled="true">1-2</button>
-                <button class="btn btn-primary lv-sizes" type="button" disabled="true">1-3</button>
-                <button class="btn btn-primary lv-sizes" type="button" disabled="true">1-4</button>
-                <button class="btn btn-primary lv-sizes" type="button" disabled="true">1-5</button>
-                <button class="btn btn-primary lv-sizes" type="button" disabled="true">1-6</button>
+                <button type="button" onClick="chooseLV1()" class="btn btn-primary lv-sizes" id="lv1-1">1-1</button>
+                <button type="button" onClick="chooseLV2()" class="btn btn-primary lv-sizes" id="lv1-2" disabled="true">1-2</button>
+                <button type="button" onClick="chooseLV3()" class="btn btn-primary lv-sizes" id="lv1-3" disabled="true">1-3</button>
+                <button type="button" onClick="chooseLV4()" class="btn btn-primary lv-sizes" id="lv1-4" disabled="true">1-4</button>
+                <button type="button" onClick="chooseLV5()" class="btn btn-primary lv-sizes" id="lv1-5" disabled="true">1-5</button>
+                <button type="button" onClick="chooseLV6()" class="btn btn-primary lv-sizes" id="lv1-6" disabled="true">1-6</button>
 
               </div>
               <div class="level-side lv2">
-                <button class="btn btn-primary lv-sizes" type="button" disabled="true">2-1</button>
-                <button class="btn btn-primary lv-sizes" type="button" disabled="true">2-2</button>
-                <button class="btn btn-primary lv-sizes" type="button" disabled="true">2-3</button>
-                <button class="btn btn-primary lv-sizes" type="button" disabled="true">2-4</button>
-                <button class="btn btn-primary lv-sizes" type="button" disabled="true">2-5</button>
-                <button class="btn btn-primary lv-sizes" type="button" disabled="true">2-6</button>
+                <button type="button" onClick="chooseLV7()" class="btn btn-primary lv-sizes" id="lv1-7" disabled="true">2-1</button>
+                <button type="button" onClick="chooseLV8()" class="btn btn-primary lv-sizes" id="lv1-8" disabled="true">2-2</button>
+                <button type="button" onClick="chooseLV9()" class="btn btn-primary lv-sizes" id="lv1-9" disabled="true">2-3</button>
+                <button type="button" onClick="chooseLV10()" class="btn btn-primary lv-sizes" id="lv1-10" disabled="true">2-4</button>
+                <button type="button" onClick="chooseLV11()" class="btn btn-primary lv-sizes" id="lv1-11" disabled="true">2-5</button>
+                <button type="button" onClick="chooseLV12()" class="btn btn-primary lv-sizes" id="lv1-12" disabled="true">2-6</button>
 
               </div>
               <div class="level-side lv3">
-                <button class="btn btn-primary lv-sizes" type="button" disabled="true">3-1</button>
-                <button class="btn btn-primary lv-sizes" type="button" disabled="true">3-2</button>
-                <button class="btn btn-primary lv-sizes" type="button" disabled="true">3-3</button>
-                <button class="btn btn-primary lv-sizes" type="button" disabled="true">3-4</button>
-                <button class="btn btn-primary lv-sizes" type="button" disabled="true">3-5</button>
-                <button class="btn btn-primary lv-sizes" type="button" disabled="true">3-6</button>
+                <button type="button" onClick="chooseLV13()" class="btn btn-primary lv-sizes" id="lv1-13" disabled="true">3-1</button>
+                <button type="button" onClick="chooseLV14()" class="btn btn-primary lv-sizes" id="lv1-14" disabled="true">3-2</button>
+                <button type="button" onClick="chooseLV15()" class="btn btn-primary lv-sizes" id="lv1-15" disabled="true">3-3</button>
+                <button type="button" onClick="chooseLV16()" class="btn btn-primary lv-sizes" id="lv1-16" disabled="true">3-4</button>
+                <button type="button" onClick="chooseLV17()" class="btn btn-primary lv-sizes" id="lv1-17" disabled="true">3-5</button>
+                <button type="button" onClick="chooseLV18()" class="btn btn-primary lv-sizes" id="lv1-18" disabled="true">3-6</button>
 
               </div>
             </div>
@@ -137,7 +134,7 @@
             <div class="card-header" style="user-select: auto;">Your Info</div>
             <div class="card-body" style="user-select: auto;">
               <div class="modal-body" style="user-select: auto;">
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" value="Thien Nguyen">
                 <div style="margin: 10px 0;">
                   <button type="button" class="btn btn-primary" style="user-select: auto;">Save changes</button>
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="user-select: auto;">Close</button>
@@ -152,26 +149,27 @@
             <div class="card-header" style="user-select: auto;">Pick your ship</div>
             <div class="card-body" style="user-select: auto;">
               <div class="level-side lv1">
-                <button class="btn btn-primary lv-sizes " type="image"><img src="/spaceship.d28724db.png" height="35px" width="35px"></button>
-                <button class="btn btn-primary lv-sizes" type="image"><img src="/spaceship01.3a855adf.png" height="35px" width="35px"></button>
-                <button class="btn btn-primary lv-sizes" type="image"><img src="/spaceship02.e30269a4.png" height="35px" width="35px"></button>
-                <button class="btn btn-primary lv-sizes" type="image"><img src="/spaceship03.e990f02c.PNG" height="35px" width="35px"></button>
-                <button class="btn btn-primary lv-sizes" type="image"><img src="/spaceship04.2edde01c.png" height="35px" width="35px"></button>
-                <button class="btn btn-primary lv-sizes" type="button" style="margin-top: 25%; margin-left: 44%; margin-right: 40%; margin-bottom: 0;">Buy</button>
+                <button type="button" onclick="chooseStarShip1()" class="btn btn-primary lv-sizes" id="starship01"><img src="/spaceship.d28724db.png" height="35px" width="35px"></button>
+                <button type="button" onclick="chooseStarShip2()" class="btn btn-primary lv-sizes" id="starship02"> <img src="/spaceship02.e30269a4.png" height="35px" width="35px"></button>
+                <button type="button" onclick="chooseStarShip3()" class="btn btn-primary lv-sizes" id="starship03"><img src="/spaceship04.2edde01c.png" height="35px" width="35px"></button>
+
+             
             </div>
+
           </div>
 
         </div>
       </div>
-      <div class="row" style="margin-top: 40px; margin-left: 0px" "="">
+      <div class="row" style="margin-top: 40px; margin-left: 50px" "="">
         <h1> <span>#TOP</span> Player </h1>
         <div class="col-8">
-          <table class="table table-hover" style="user-select: auto; width:100%; margin-left: 0px;">
+          <table class="table table-hover" id="table-record" style="user-select: auto; width:91%; margin-left: 0px;">
             <thead style="user-select: auto;">
               <tr style="user-select: auto;">
                 <th scope="col" style="user-select: auto;">#No</th>
                 <th scope="col" style="user-select: auto;">Player Name</th>
                 <th scope="col" style="user-select: auto;">#Level</th>
+                <th scope="col" style="user-select: auto;">Scores</th>
                 <th scope="col" style="user-select: auto;">Times</th>
                 <th scope="col" style="user-select: auto;">Mode</th>
   
@@ -180,95 +178,211 @@
             <tbody style="user-select: auto;">
               <tr class="table-active" style="user-select: auto;">
                 <th scope="row" style="user-select: auto;">1</th>
-                <td style="user-select: auto;">Column content</td>
-                <td style="user-select: auto;">Column content</td>
-                <td style="user-select: auto;">Column content</td>
-                <td style="user-select: auto;">Medium</td>
+                <td style="user-select: auto;">Thien Nguyen</td>
+                <td style="user-select: auto;">3-3</td>
+                <td style="user-select: auto;">10034</td>
+                <td style="user-select: auto;">3m35s</td>
+                <td style="user-select: auto;">Super Hard</td>
   
               </tr>
               <tr style="user-select: auto;">
                 <th scope="row" style="user-select: auto;">2</th>
-                <td style="user-select: auto;">Column content</td>
-                <td style="user-select: auto;">Column content</td>
-                <td style="user-select: auto;">Column content</td>
-                <td style="user-select: auto;">Medium</td>
+                <td style="user-select: auto;">Thien Nguyen</td>
+                <td style="user-select: auto;">2-5</td>
+                <td style="user-select: auto;">8004</td>
+                <td style="user-select: auto;">2m35s</td>
+                <td style="user-select: auto;">Hard</td>
   
               </tr>
               <tr class="table-primary" style="user-select: auto;">
                 <th scope="row" style="user-select: auto;">3</th>
-                <td style="user-select: auto;">Column content</td>
-                <td style="user-select: auto;">Column content</td>
-                <td style="user-select: auto;">Column content</td>
+                <td style="user-select: auto;">Anh Duc</td>
+                <td style="user-select: auto;">2-2</td>
+                <td style="user-select: auto;">9000</td>
+                <td style="user-select: auto;">3m35s</td>
                 <td style="user-select: auto;">Medium</td>
   
               </tr>
               <tr class="table-secondary" style="user-select: auto;">
                 <th scope="row" style="user-select: auto;">4</th>
-                <td style="user-select: auto;">Column content</td>
-                <td style="user-select: auto;">Column content</td>
-                <td style="user-select: auto;">Column content</td>
-                <td style="user-select: auto;">Medium</td>
+                <td style="user-select: auto;">Khoi Nguyen</td>
+                <td style="user-select: auto;">1-5</td>
+                <td style="user-select: auto;">5000</td>
+                <td style="user-select: auto;">2m35s</td>
+                <td style="user-select: auto;">Hard</td>
   
               </tr>
               <tr class="table-success" style="user-select: auto;">
                 <th scope="row" style="user-select: auto;">5</th>
-                <td style="user-select: auto;">Column content</td>
-                <td style="user-select: auto;">Column content</td>
-                <td style="user-select: auto;">Column content</td>
+                <td style="user-select: auto;">Quang Mai</td>
+                <td style="user-select: auto;">1-5</td>
+                <td style="user-select: auto;">5543</td>
+                <td style="user-select: auto;">2m35s</td>
                 <td style="user-select: auto;">Medium</td>
   
               </tr>
               <tr class="table-danger" style="user-select: auto;">
                 <th scope="row" style="user-select: auto;">6</th>
-                <td style="user-select: auto;">Column content</td>
-                <td style="user-select: auto;">Column content</td>
-                <td style="user-select: auto;">Column content</td>
-                <td style="user-select: auto;">Medium</td>
+                <td style="user-select: auto;">Nguyen Van A</td>
+                <td style="user-select: auto;">2-6</td>
+                <td style="user-select: auto;">6001</td>
+                <td style="user-select: auto;">4m35s</td>
+                <td style="user-select: auto;">Eazy</td>
   
               </tr>
               <tr class="table-warning" style="user-select: auto;">
                 <th scope="row" style="user-select: auto;">7</th>
-                <td style="user-select: auto;">Column content</td>
-                <td style="user-select: auto;">Column content</td>
-                <td style="user-select: auto;">Column content</td>
-                <td style="user-select: auto;">Medium</td>
+                <td style="user-select: auto;">Nguyen Van B</td>
+                <td style="user-select: auto;">2-4</td>
+                <td style="user-select: auto;">5414</td>
+                <td style="user-select: auto;">3m55s</td>
+                <td style="user-select: auto;">Eazy</td>
   
               </tr>
               <tr class="table-info" style="user-select: auto;">
                 <th scope="row" style="user-select: auto;">8</th>
-                <td style="user-select: auto;">Column content</td>
-                <td style="user-select: auto;">Column content</td>
-                <td style="user-select: auto;">Column content</td>
-                <td style="user-select: auto;">Medium</td>
+                <td style="user-select: auto;">Khoi Nguyen</td>
+                <td style="user-select: auto;">1-5</td>
+                <td style="user-select: auto;">4443</td>
+                <td style="user-select: auto;">2m35s</td>
+                <td style="user-select: auto;">Eazy</td>
   
               </tr>
               <tr class="table-light" style="user-select: auto;">
                 <th scope="row" style="user-select: auto;">9</th>
-                <td style="user-select: auto;">Column content</td>
-                <td style="user-select: auto;">Column content</td>
-                <td style="user-select: auto;">Column content</td>
-                <td style="user-select: auto;">Medium</td>
+                <td style="user-select: auto;">Anh Duc</td>
+                <td style="user-select: auto;">2-2</td>
+                <td style="user-select: auto;">3743</td>
+                <td style="user-select: auto;">2m45s</td>
+                <td style="user-select: auto;">Eazy</td>
   
               </tr>
               <tr class="table-dark" style="user-select: auto;">
                 <th scope="row" style="user-select: auto;">10</th>
-                <td style="user-select: auto;">Column content</td>
-                <td style="user-select: auto;">Column content</td>
-                <td style="user-select: auto;">Column content</td>
+                <td style="user-select: auto;">Mai Quang</td>
+                <td style="user-select: auto;">1-4</td>
+                <td style="user-select: auto;">3000</td>
+                <td style="user-select: auto;">2m25s</td>
                 <td style="user-select: auto;">Medium</td>
   
               </tr>
             </tbody>
+
           </table>
         </div>
-        
+        <div class="col-4" style="margin-left: -50px">
+          <div class="card text-white bg-secondary mb-3 col-12" style="max-width: 30rem; user-select: auto;">
+            <div class="card-header" style="user-select: auto;">Pick your ship</div>
+            <div class="card-body" style="user-select: auto;">
+              <div class="level-side lv1">
+                <button class="btn btn-primary lv-sizes" type="image"><img src="/spaceship.d28724db.png" height="35px" width="35px"></button>
+                <button class="btn btn-primary lv-sizes" type="image"><img src="/spaceship01.3a855adf.png" height="35px" width="35px"></button>
+                <button class="btn btn-primary lv-sizes" type="image"><img src="/spaceship02.e30269a4.png" height="35px" width="35px"></button>
+                <button class="btn btn-primary lv-sizes" type="image"><img src="/spaceship03.e990f02c.PNG" height="35px" width="35px"></button>
+                <button class="btn btn-primary lv-sizes" type="image"><img src="/spaceship04.2edde01c.png" height="35px" width="35px"></button>
+                <button class="btn btn-primary lv-sizes_choose" type="image"> <span id="coin_sumary">0</span> <img width="35px" height="35px" src="/coin.f3955474.png"></button>
+            </div>
+            <div class="level-side lv1">
+              <button class="btn btn-primary lv-sizes" type="image"><span>30</span></button>
+              <button class="btn btn-primary lv-sizes" type="image"><span>50</span></button>
+              <button class="btn btn-primary lv-sizes" type="image"><span>70</span></button>
+              <button class="btn btn-primary lv-sizes" type="image"><span>100</span></button>
+              <button class="btn btn-primary lv-sizes" type="image"><span>200</span></button>
+              <button class="btn btn-primary lv-sizes_choose" type="image">Buy</button>
+          </div>
+        </div>
       </div>
-    </div></section>
+    </div></div></div></section>
     <section class="footer">
 
     </section>
     <script src="/src.77de5100.js"></script>
+    <script>function chooseStarShip1() {
+  console.log("1");
+  document.getElementById("choose_starship").innerHTML = 1;
+}
 
+function chooseStarShip2() {
+  console.log("2");
+  document.getElementById("choose_starship").innerHTML = 2;
+}
+
+function chooseStarShip3() {
+  console.log("3");
+  document.getElementById("choose_starship").innerHTML = 3;
+}
+
+function chooseLV1() {
+  document.getElementById("choose_lv").innerHTML = 1;
+}
+
+function chooseLV2() {
+  document.getElementById("choose_lv").innerHTML = 2;
+}
+
+function chooseLV3() {
+  document.getElementById("choose_lv").innerHTML = 3;
+}
+
+function chooseLV4() {
+  document.getElementById("choose_lv").innerHTML = 4;
+}
+
+function chooseLV5() {
+  document.getElementById("choose_lv").innerHTML = 5;
+}
+
+function chooseLV6() {
+  document.getElementById("choose_lv").innerHTML = 6;
+}
+
+function chooseLV7() {
+  document.getElementById("choose_lv").innerHTML = 7;
+}
+
+function chooseLV8() {
+  document.getElementById("choose_lv").innerHTML = 8;
+}
+
+function chooseLV9() {
+  document.getElementById("choose_lv").innerHTML = 9;
+}
+
+function chooseLV10() {
+  document.getElementById("choose_lv").innerHTML = 10;
+}
+
+function chooseLV11() {
+  document.getElementById("choose_lv").innerHTML = 11;
+}
+
+function chooseLV12() {
+  document.getElementById("choose_lv").innerHTML = 12;
+}
+
+function chooseLV13() {
+  document.getElementById("choose_lv").innerHTML = 13;
+}
+
+function chooseLV14() {
+  document.getElementById("choose_lv").innerHTML = 14;
+}
+
+function chooseLV15() {
+  document.getElementById("choose_lv").innerHTML = 15;
+}
+
+function chooseLV16() {
+  document.getElementById("choose_lv").innerHTML = 16;
+}
+
+function chooseLV17() {
+  document.getElementById("choose_lv").innerHTML = 17;
+}
+
+function chooseLV18() {
+  document.getElementById("choose_lv").innerHTML = 18;
+}</script>
   </body>
   <style>:root {
       --width: 1000px;
@@ -283,6 +397,12 @@
     }
     .lv-sizes {
       width: 60px;
+      height: 50px;
+      border-radius: 3px;
+      box-shadow: #212F3C;
+    }
+    .lv-sizes_choose {
+      width: 100px;
       height: 50px;
       border-radius: 3px;
       box-shadow: #212F3C;

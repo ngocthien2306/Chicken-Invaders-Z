@@ -4,10 +4,12 @@ import { StarShip } from "~/services/StarShip";
 import { ItemSupport } from "~/services/Item";
 import { Egg } from "~/services/Egg";
 import { SingletonStarShip } from "~/design/singleton/SingletonStarShip";
+import { EazyMode } from "~/design/factory/basic-mode/BasicModeEazy";
+import { Nuke } from "~/services/Nuke";
 
 export class CanvasView {
   canvas: HTMLCanvasElement;
-  private context: CanvasRenderingContext2D | null;
+  public context: CanvasRenderingContext2D | null;
   private scoreDisplay: HTMLObjectElement | null;
   private start: HTMLObjectElement | null;
   private info: HTMLObjectElement | null;
@@ -16,6 +18,13 @@ export class CanvasView {
   private coin: HTMLObjectElement | null;
   private gift: HTMLImageElement | null;
   private hp: HTMLObjectElement | null;
+  private mode: HTMLSelectElement | null;
+  public btn_lv: HTMLButtonElement | null;
+  public table_record: HTMLTableElement | null;
+  public nuke: HTMLObjectElement | null;
+  public starShip: HTMLButtonElement | null;
+  public choose_starship: HTMLObjectElement | null;
+  public choose_lv: HTMLObjectElement | null;
 
 
   constructor(canvasName: string) {
@@ -29,6 +38,29 @@ export class CanvasView {
     this.coin = document.querySelector("#coin");
     this.gift = document.querySelector("#img-gift");
     this.hp = document.querySelector("#progress");
+    this.mode = document.querySelector("#select-mode");
+    this.btn_lv = document.querySelector("#lv1-1");
+    this.table_record  = document.querySelector("#table-record")
+    this.nuke = document.querySelector("#number-nuke");
+    this.starShip = document.querySelector("#starship03");
+    this.choose_starship = document.querySelector("#choose_starship");
+    this.choose_lv = document.querySelector("#choose_lv");
+
+  }
+  getStarShip(): any {
+    if(this.choose_starship) 
+    return this.choose_starship.textContent?.toString();
+  }
+  getLV(): any {
+    if(this.choose_lv) 
+    return this.choose_lv.textContent?.toString();
+  }
+  getBtnLv(lv: string) {
+    this.btn_lv = document.querySelector(lv);
+  }
+  
+  setEnableLV() {
+    if(this.btn_lv) this.btn_lv.disabled = false; 
   }
 
   clear():void {
@@ -57,6 +89,9 @@ export class CanvasView {
     if(this.coin) this.coin.innerHTML = txt;
   }
 
+  drawNuke(txt: string): void {
+    if(this.nuke) this.nuke.innerHTML = txt;
+  }
   drawGift(txt: string): void {
     if(this.gift) this.gift.src = txt;
   }
@@ -65,7 +100,11 @@ export class CanvasView {
     if(this.hp) this.hp.innerHTML = txt;
   }
 
-  drawSprite(frame: Chicken | SingletonStarShip | Bullet | ItemSupport | Egg): void {
+  getMode(): any {
+    if(this.mode) return this.mode.value;
+  }
+
+  drawSprite(frame: Chicken | SingletonStarShip | Bullet | ItemSupport | Egg | EazyMode | Nuke): void {
     if(!frame) return;
     this.context?.drawImage(
       frame.image,

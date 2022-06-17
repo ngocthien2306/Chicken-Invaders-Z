@@ -11,17 +11,25 @@ import { LightStrategy } from "../strategy/LightningStrategy";
 import { Nomaltrategy } from "../strategy/NomalStrategy";
 import { StoneStrategy } from "../strategy/StoneStrategy";
 import STARSHIP_IMAGE from '/images/spaceship.png';
+import STARSHIP_IMAGE1 from '/images/spaceship02.png';
+import STARSHIP_IMAGE4 from '/images/spaceship04.png';
+
 import BALL_IMAGE from '/images/ball.png';
+import { Nuke } from "~/services/Nuke";
+import ROCKET_IMAGE from '/images/rocket.png';
 
 export class SingletonStarShip {
+    public score = 0;
     private static instance: SingletonStarShip;
     bullets: Bullet[] = [];
+    nukes: Nuke[] = []
     private paddleImage: HTMLImageElement = new Image();
     private moveLeft: boolean;
     private moveRight: boolean;
     private moveUp: boolean;
     private moveDown:  boolean;
-    private shooting: boolean;
+    public shooting: boolean;
+    public nuking: boolean;
     level: number;
     typeBullet: number;
 
@@ -43,6 +51,7 @@ export class SingletonStarShip {
         this.moveDown = false;
         this.moveUp = false;
         this.shooting = false;
+        this.nuking = false;
         this.paddleImage.src = image;
         this.level = level;
         this.typeBullet = typeBullet;
@@ -50,9 +59,21 @@ export class SingletonStarShip {
         document.addEventListener('keydown', this.handleKeyRight);
         document.addEventListener('keyup', this.handleKeyLeft);
     }
-    public static getInstance(view: CanvasView): SingletonStarShip {
+    public static getInstance(view: CanvasView, startShip: string): SingletonStarShip {
+
         if (!SingletonStarShip.instance) {
-            SingletonStarShip.instance = new SingletonStarShip(PADDLE_SPEED, PADDLE_WIDTH, PADDLE_HEIGHT, {x: PADDLE_STARTX, y: view.canvas.height - PADDLE_HEIGHT - 5}, STARSHIP_IMAGE, 3, -1);
+            if(startShip === "1") {
+              SingletonStarShip.instance = new SingletonStarShip(PADDLE_SPEED, PADDLE_WIDTH, PADDLE_HEIGHT, {x: PADDLE_STARTX, y: view.canvas.height - PADDLE_HEIGHT - 5}, STARSHIP_IMAGE, 3, -1);
+            }
+            else if(startShip === "2") {
+              SingletonStarShip.instance = new SingletonStarShip(PADDLE_SPEED + 5, PADDLE_WIDTH - 10, PADDLE_HEIGHT - 15, {x: PADDLE_STARTX, y: view.canvas.height - PADDLE_HEIGHT - 5}, STARSHIP_IMAGE1, 4, -1);
+            }
+            else if(startShip === "3") {
+            SingletonStarShip.instance = new SingletonStarShip(PADDLE_SPEED - 2, PADDLE_WIDTH - 3, PADDLE_HEIGHT - 3, {x: PADDLE_STARTX, y: view.canvas.height - PADDLE_HEIGHT - 5}, STARSHIP_IMAGE4, 6, 2);
+            }
+            else {
+              SingletonStarShip.instance = new SingletonStarShip(PADDLE_SPEED, PADDLE_WIDTH, PADDLE_HEIGHT, {x: PADDLE_STARTX, y: view.canvas.height - PADDLE_HEIGHT - 5}, STARSHIP_IMAGE, 3, -1);
+            }
         }
 
         return SingletonStarShip.instance;
@@ -61,6 +82,10 @@ export class SingletonStarShip {
     // Getters
     get width(): number {
         return this.paddleWidth;
+    }
+
+    get scoreGame():number {
+      return this.score;
     }
 
     get height(): number {
@@ -127,6 +152,9 @@ export class SingletonStarShip {
             case 'j':
               this.shooting = false;
               break;
+            case 'k':
+              this.nuking = false;
+              break;
             default:
               break;
           }
@@ -150,6 +178,10 @@ export class SingletonStarShip {
               this.StrategyBullet();
               this.shooting = true;
               break;
+            case 'k':
+              const nuke = new Nuke(3, 120, 110, {x: this.pos.x, y: this.pos.y}, ROCKET_IMAGE);
+              this.nukes.push(nuke);
+              this.nuking = true;
             default:
                 break;
           }

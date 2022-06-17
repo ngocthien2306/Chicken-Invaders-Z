@@ -3,14 +3,16 @@ import { BulletModel } from "~/model/Bullet.model";
 import { PADDLE_WIDTH } from "~/setup";
 import { Bullet } from "~/services/Bullet";
 import { Vector } from "~/types";
-import { Strategy } from "./context";
+
 import { ItemSupport } from "~/services/Item";
 import { ItemModel } from "~/model/Item.model";
 import GIFT_STONE from '/images/gift-stone.png';
 import STONE_BULLET from '/images/stone-bullet.png';
-import { randomIntFromInterval } from "~/extensions/helper";
 
-export class StoneStrategy implements Strategy {
+import { IStrategy } from "~/interface/Stategy.interface";
+import { randomIntFromInterval } from "~/extensions/helper.extension";
+
+export class StoneStrategy implements IStrategy {
   public doChangeInfoBullet(data: BulletModel, pos: Vector): Bullet {
     const iceBullet: BulletModel = {
       speed: data.speed + 5,

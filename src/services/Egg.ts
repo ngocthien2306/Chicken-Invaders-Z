@@ -1,5 +1,5 @@
 import { Vector } from "~/types";
-import { CanvasView } from "~/view/CanvasView";
+
 
 export class Egg {
   private eggImage: HTMLImageElement = new Image();

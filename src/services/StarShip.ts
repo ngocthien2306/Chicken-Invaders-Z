@@ -6,10 +6,11 @@ import { LightStrategy } from "~/design/strategy/LightningStrategy";
 import { Nomaltrategy } from "~/design/strategy/NomalStrategy";
 import { StoneStrategy } from "~/design/strategy/StoneStrategy";
 import { BulletModel } from "~/model/Bullet.model";
-import { BALL_SIZE, BALL_SPEED, BALL_STARTX, BALL_STARTY, PADDLE_WIDTH } from "~/setup";
-
+import { BALL_SIZE, BALL_SPEED, BALL_STARTX, BALL_STARTY, PADDLE_HEIGHT, PADDLE_WIDTH } from "~/setup";
+import ROCKET_IMAGE from '/images/rocket.png';
 import { Vector } from "~/types";
 import { Bullet } from "./Bullet";
+import { Nuke } from "./Nuke";
 import BALL_IMAGE from '/images/ball.png';
 export class StarShip {
   private paddleImage: HTMLImageElement = new Image();
@@ -17,11 +18,13 @@ export class StarShip {
   private moveRight: boolean;
   private moveUp: boolean;
   private moveDown:  boolean;
-  private shooting: boolean;
+  public shooting: boolean;
+  public nuking: boolean;
   level: number;
   typeBullet: number;
   
   bullets: Bullet[] = [];
+  nukes: Nuke[] = []
   constructor(
     private speed: number,
     private paddleWidth: number,
@@ -43,6 +46,7 @@ export class StarShip {
     this.paddleImage.src = image;
     this.level = level;
     this.typeBullet = typeBullet;
+    this.nuking = false;
     // Event Listeners
     document.addEventListener('keydown', this.handleKeyRight);
     document.addEventListener('keyup', this.handleKeyLeft);
@@ -119,6 +123,9 @@ export class StarShip {
       case 'j':
         this.shooting = false;
         break;
+      case 'k':
+        this.nuking = false;
+        break;
       default:
         break;
     }
@@ -143,6 +150,10 @@ export class StarShip {
         this.StrategyBullet();
         this.shooting = true;
         break;
+      case 'k':
+        const nuke = new Nuke(5, PADDLE_WIDTH, PADDLE_HEIGHT, {x: this.pos.x, y: this.pos.y}, ROCKET_IMAGE);
+        this.nukes.push(nuke);
+        this.nuking = true;
       default:
           break;
     }

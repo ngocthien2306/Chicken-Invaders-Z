@@ -1,4 +1,5 @@
-import { getRandomInt, getRandomSpeed } from "~/extensions/helper";
+
+import { getRandomSpeed } from "~/extensions/helper.extension";
 import { Vector } from "~/types";
 export class Bullet {
   private speed: Vector;

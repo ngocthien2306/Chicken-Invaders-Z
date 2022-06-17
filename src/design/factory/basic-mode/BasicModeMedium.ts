@@ -8,7 +8,7 @@ export class MediumMode implements IAbstractBasicMode {
     private canvas: HTMLCanvasElement;
     private chickenImage: HTMLImageElement = new Image();
     private speed: Vector;
-
+    public angle: number = 0;
     constructor(
         canvasName: string,
         speed: number,
@@ -55,14 +55,14 @@ export class MediumMode implements IAbstractBasicMode {
         this.chickenEnergy = energy;
       }
     
-    public drawChicken(frame: Chicken): void {
-        if (!frame) return;
+    public drawChicken(): void {
+      
         this.context?.drawImage(
-            frame.image,
-            frame.pos.x,
-            frame.pos.y,
-            frame.width,
-            frame.height 
+            this.chickenImage,
+            this.pos.x,
+            this.pos.y,
+            this.width,
+            this.height 
         );
     }
     public moveChickenByCross(view: CanvasView): void {
@@ -70,7 +70,7 @@ export class MediumMode implements IAbstractBasicMode {
             this.speed.x = - this.speed.x;
           }
       
-          if (this.pos.y < 0 || (this.pos.y + this.height) > view.canvas.height/1.5) {
+          if (this.pos.y < 0 || (this.pos.y + this.height) > view.canvas.height) {
             this.speed.y = - this.speed.y;
           }
           this.pos.x += this.speed.x

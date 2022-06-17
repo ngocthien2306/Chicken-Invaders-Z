@@ -9,6 +9,7 @@ export class EazyMode implements IAbstractBasicMode {
     private canvas: HTMLCanvasElement;
     private chickenImage: HTMLImageElement = new Image();
     private speed: Vector;
+    public angle: number = 0;
 
     constructor(
         canvasName: string,
@@ -31,7 +32,9 @@ export class EazyMode implements IAbstractBasicMode {
           this.chickenEnergy = chickenEnergy;
           this.chickenImage.src = image;
     }
-
+    get angleMove(): number {
+      return this.angle;
+    }
     get width(): number {
         return this.chickenWidth;
       }
@@ -56,14 +59,14 @@ export class EazyMode implements IAbstractBasicMode {
         this.chickenEnergy = energy;
       }
     
-    public drawChicken(frame: Chicken): void {
-        if (!frame) return;
+    public drawChicken(): void {
+  
         this.context?.drawImage(
-            frame.image,
-            frame.pos.x,
-            frame.pos.y,
-            frame.width,
-            frame.height 
+            this.chickenImage,
+            this.pos.x,
+            this.pos.y,
+            this.width,
+            this.height 
         );
     }
     public moveChickenByCross(view: CanvasView): void {
@@ -71,9 +74,10 @@ export class EazyMode implements IAbstractBasicMode {
             this.speed.x = - this.speed.x;
           }
       
-          if (this.pos.y < 0 || (this.pos.y + this.height) > view.canvas.height/1.5) {
+          if (this.pos.y < 0 || (this.pos.y + this.height) > view.canvas.height/2) {
             this.speed.y = - this.speed.y;
           }
+          view.context?.rotate(this.angle)
           this.pos.x += this.speed.x
           this.pos.y += this.speed.y;
     }

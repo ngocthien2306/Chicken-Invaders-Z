@@ -8,7 +8,7 @@ export class HardMode implements IAbstractBasicMode {
     private canvas: HTMLCanvasElement;
     private chickenImage: HTMLImageElement = new Image();
     private speed: Vector;
-
+    public angle: number = 0;
     constructor(
         canvasName: string,
         speed: number,
@@ -55,14 +55,14 @@ export class HardMode implements IAbstractBasicMode {
         this.chickenEnergy = energy;
       }
     
-    public drawChicken(frame: Chicken): void {
-        if (!frame) return;
+    public drawChicken(): void {
+
         this.context?.drawImage(
-            frame.image,
-            frame.pos.x,
-            frame.pos.y,
-            frame.width,
-            frame.height 
+            this.chickenImage,
+            this.pos.x,
+            this.pos.y,
+            this.width,
+            this.height 
         );
     }
     public moveChickenByCross(view: CanvasView): void {

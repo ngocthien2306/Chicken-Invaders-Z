@@ -29,6 +29,11 @@ import { LeafStrategy } from '~/design/strategy/LeafStrategy';
 import { StoneStrategy } from '~/design/strategy/StoneStrategy';
 import { ChickenMeatStrategy } from '~/design/strategy/ChickenMeatStrategy';
 import { OtherItemStrategy } from '~/design/strategy/OtherItemStrategy';
+import { EazyMode } from '~/design/factory/basic-mode/BasicModeEazy';
+import { MediumMode } from '~/design/factory/basic-mode/BasicModeMedium';
+import { HardMode } from '~/design/factory/basic-mode/BasicModeHard';
+import { ChallengesMode } from '~/design/factory/advance-mode/AdvanceModeChallenges';
+import { SuperHardMode } from '~/design/factory/advance-mode/AdvanceModeSuperHard';
 
 export function createChickens(level: number[]): Chicken[] {
 
@@ -44,7 +49,7 @@ export function createChickens(level: number[]): Chicken[] {
     return [
       ...ack,
       new Chicken(
-        0.8,
+        10,
         BRICK_WIDTH,
         BRICK_HEIGHT,
         { x, y },
@@ -55,7 +60,7 @@ export function createChickens(level: number[]): Chicken[] {
     ];
   }, [] as Chicken[]);
 }
-export function sumEnergyChicken(chickens: Chicken[]): number {
+export function sumEnergyChicken(chickens: EazyMode[] | MediumMode[] | HardMode[] | ChallengesMode[] | SuperHardMode[]): number {
   var count = 0;
   chickens.forEach(c => {
     count += c.energy;
@@ -90,7 +95,7 @@ export function createBoss(level: number[]): Chicken[] {
         
       )
     ];
-  }, [] as Chicken[]);
+  }, [] as any);
 }
 export function createEgg(view: CanvasView, chicken: Chicken) :void {
   const egg = new ItemSupport(1, 30, {x: chicken.pos.x , y: chicken.pos.y}, EGG_IMAGE, 1);

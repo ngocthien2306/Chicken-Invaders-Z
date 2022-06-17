@@ -4,7 +4,6 @@ import { BulletModel } from "~/model/Bullet.model";
 import { ItemModel } from "~/model/Item.model";
 import { Bullet } from "~/services/Bullet";
 import { ItemSupport } from "~/services/Item";
-import { StarShip } from "~/services/StarShip";
 import { Vector } from "~/types";
 
 export class Context {

@@ -1,10 +1,15 @@
 import { Collision } from "~/Colision";
+import { ChallengesMode } from "~/design/factory/advance-mode/AdvanceModeChallenges";
+import { SuperHardMode } from "~/design/factory/advance-mode/AdvanceModeSuperHard";
+import { EazyMode } from "~/design/factory/basic-mode/BasicModeEazy";
+import { HardMode } from "~/design/factory/basic-mode/BasicModeHard";
+import { MediumMode } from "~/design/factory/basic-mode/BasicModeMedium";
 import { SingletonStarShip } from "~/design/singleton/SingletonStarShip";
-import { Chicken } from "~/services/Chicken";
+
 import { Egg } from "~/services/Egg";
-import { StarShip } from "~/services/StarShip";
 import { CanvasView } from "~/view/CanvasView";
-import { changeGiftBoxesInUI, getRandomInt } from "./helper";
+import { getRandomInt } from "./helper.extension";
+
 import EGG_IMAGE from "/images/egg.png";
 let score = 0;
 
@@ -22,16 +27,27 @@ export function moveStarShip(starShip: SingletonStarShip, view: CanvasView): voi
 
 
 
-export function shootingBullet(starShip: SingletonStarShip, view: CanvasView, conlision: Collision, chickens: Chicken[]): void {
+export function shootingBullet(starShip: SingletonStarShip, view: CanvasView, conlision: Collision, chickens: EazyMode[] 
+  | MediumMode[] | HardMode[] | ChallengesMode[] | SuperHardMode[]): void {
   starShip.bullets.forEach(b => {
     view.drawSprite(b);
     b.moveBullet();
     const collidingChicken = conlision.isCollidingChickens(b, chickens);
     if (collidingChicken) {
       score += b.damage;
-      view.drawScore("Score: " + score.toString());
+      view.drawScore("Score: " + (score + starShip.score).toString() );
     }
   })
+  starShip.nukes.forEach(n => {
+    view.drawSprite(n);
+    n.moveNuke();
+    const collidingChicken = conlision.isCollidingNukes(n, chickens);
+    if (collidingChicken) {
+      score += 100;
+      view.drawScore("Score: " + (score + starShip.score).toString() );
+    }
+  })
+  starShip.score = score;
 }
 
 export function drawAndMoveGift(conlision: Collision, view: CanvasView, starShip: SingletonStarShip): void {
@@ -46,7 +62,8 @@ export function drawAndMoveGift(conlision: Collision, view: CanvasView, starShip
   })
 }
 
-export function drawAndMoveEgg(starShip: SingletonStarShip,conlision: Collision, chickens: Chicken[], view: CanvasView): void {
+export function drawAndMoveEgg(starShip: SingletonStarShip,conlision: Collision, chickens: EazyMode[] 
+  | HardMode[] | MediumMode[] | ChallengesMode[] | SuperHardMode[], view: CanvasView): void {
   var number = getRandomInt(150);
   if(number === 50) {
     var index = getRandomInt(chickens.length);
@@ -60,10 +77,12 @@ export function drawAndMoveEgg(starShip: SingletonStarShip,conlision: Collision,
   })
 }
 
-export function drawAndMoveChicken(chickens: Chicken[], view: CanvasView): void {
+export function drawAndMoveChicken(chickens: EazyMode[] | MediumMode[] | HardMode[] | ChallengesMode[] | SuperHardMode[], view: CanvasView): void {
+  
   chickens.forEach((chicken, i) => {
-    chicken.moveChicken(view);
-    view.drawSprite(chicken);
+  
+    chicken.moveChickenByCross(view);
+    chicken.drawChicken();
   }) 
 }
   
