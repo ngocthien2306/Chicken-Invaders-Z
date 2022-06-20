@@ -441,7 +441,12 @@ var CHICKEN_ENERGY = {
   7: 1400
 };
 exports.CHICKEN_ENERGY = CHICKEN_ENERGY;
-var LEVEL1 = [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 1, 0, 0, 0, 0, 1, 1, 5, 5, 5, 5, 4, 4, 4, 4, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0]; // prettier-ignore
+var LEVEL1 = [1]; // 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0,
+// 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0,
+// 0, 0, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 1, 0, 0,
+// 0, 0, 1, 1, 5, 5, 5, 5, 4, 4, 4, 4, 1, 0, 0,
+// 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0,
+// prettier-ignore
 
 exports.LEVEL1 = LEVEL1;
 var LEVEL3 = [0, 0, 0, 0, 6, 0, 0, 0, 0];
@@ -3202,6 +3207,7 @@ function gameLoop(view, chickens, starShip, conlision, nuke) {
     // sumEnergy = sumEnergyChicken(chickens);
     // view.drawChicken(chickens);
 
+    sumEnergy = (0, _helper.sumEnergyChicken)(chickens);
     view.getBtnLv("#lv1-" + (count + 1).toString());
     view.setEnableLV();
     chickens = (0, _mode.setModeGame)(view, _setup.LV[count]);
@@ -3270,7 +3276,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "19150" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "9979" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

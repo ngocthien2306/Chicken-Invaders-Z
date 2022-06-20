@@ -53,6 +53,7 @@ function gameLoop(view: CanvasView, chickens: EazyMode[] | MediumMode[] | HardMo
     // chickens = createBoss(LEVEL2);
     // sumEnergy = sumEnergyChicken(chickens);
     // view.drawChicken(chickens);
+    sumEnergy = sumEnergyChicken(chickens as EazyMode[] | MediumMode[] | HardMode[] | ChallengesMode[] | SuperHardMode[]);
     view.getBtnLv("#lv1-" + (count + 1).toString())
     view.setEnableLV();
     chickens = setModeGame(view, LV[count]);

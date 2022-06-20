@@ -69,7 +69,8 @@ export class SingletonStarShip {
               SingletonStarShip.instance = new SingletonStarShip(PADDLE_SPEED + 5, PADDLE_WIDTH - 10, PADDLE_HEIGHT - 15, {x: PADDLE_STARTX, y: view.canvas.height - PADDLE_HEIGHT - 5}, STARSHIP_IMAGE1, 4, -1);
             }
             else if(startShip === "3") {
-            SingletonStarShip.instance = new SingletonStarShip(PADDLE_SPEED - 2, PADDLE_WIDTH - 3, PADDLE_HEIGHT - 3, {x: PADDLE_STARTX, y: view.canvas.height - PADDLE_HEIGHT - 5}, STARSHIP_IMAGE4, 6, 2);
+            SingletonStarShip.instance = new SingletonStarShip(PADDLE_SPEED - 2, PADDLE_WIDTH - 3, PADDLE_HEIGHT - 3, {x: PADDLE_STARTX, y: view.canvas.height - PADDLE_HEIGHT - 5}, STARSHIP_IMAGE4, 6, 2
+              );
             }
             else {
               SingletonStarShip.instance = new SingletonStarShip(PADDLE_SPEED, PADDLE_WIDTH, PADDLE_HEIGHT, {x: PADDLE_STARTX, y: view.canvas.height - PADDLE_HEIGHT - 5}, STARSHIP_IMAGE, 3, -1);
